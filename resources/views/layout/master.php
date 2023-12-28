@@ -18,23 +18,20 @@ if (!isset($config)) {
         ->setMeta('description', $config->get('description', 'Stream Free Movies, TV Shows, Anime, and Drama Online with HD Quality. Watch Anywhere Anytime in CoPlay.'))
         ->siteMeta()
     ?>
-
+    <link rel="icon" type="image/x-icon" href="<?= resource_url('assets/favicon.png') ?>">
     <style>
         [x-cloak] {
             display: none !important;
         }
     </style>
-
     <?= mixer()
         ->enque('css', resource_url('assets/dist/bundle.min.css'))
         ->deque('css')
     ?>
-
     <?= mixer()
         ->enque('js', resource_url('assets/dist/bundle.min.js'))
         ->deque('js')
     ?>
-
     <?= $config->get('head', '') ?>
 </head>
 

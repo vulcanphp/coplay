@@ -14,6 +14,7 @@ use App\Core\Configurator;
             display: none !important;
         }
     </style>
+    <link rel="icon" type="image/x-icon" href="<?= resource_url('assets/favicon.png') ?>">
     <?= mixer()
         ->enque('css', resource_url('assets/dist/bundle.min.css'))
         ->deque('css')
