@@ -1,0 +1,125 @@
+{
+    "playtaku": {
+        "source": "https://goone.pro/streaming.php?id={crawler()}",
+        "when": {
+            "type": ["tv", "movie"],
+            "genres": [16],
+            "countries": ["KR", "JP", "CN", "TH", "TW", "PH"]
+        },
+        "priority": 80,
+        "name": "PlayTaku",
+        "quality": "Eng Sub",
+        "id": "playtaku"
+    },
+    "dradplay": {
+        "source": "https://draplay2.pro/play.php?id={crawler()}",
+        "when": {
+            "type": ["tv", "movie"],
+            "!genres": [16],
+            "countries": ["KR", "JP", "CN", "TH", "TW", "PH"]
+        },
+        "priority": 80,
+        "name": "DradPlay",
+        "quality": "Eng Sub",
+        "id": "dradplay"
+    },
+    "vidcloudhd": {
+        "source": {
+            "url": "https://vidsrc.to/embed/",
+            "movie": "movie/{tmdb}",
+            "tv": "tv/{tmdb}/{season}/{episode}"
+        },
+        "priority": 80,
+        "name": "VidCloud HD",
+        "quality": "1080p (HD)",
+        "id": "vidcloudhd"
+    },
+    "vidpro": {
+        "source": {
+            "url": "https://2embed.me/player/",
+            "movie": "movie/{imdb}",
+            "tv": "tv/{tmdb}/S{season}/E{episode}"
+        },
+        "priority": 70,
+        "name": "VidPro",
+        "quality": "1080p (HD)",
+        "id": "vidpro"
+    },
+    "vidsrc": {
+        "source": {
+            "url": "https://vidsrc.xyz/embed/",
+            "movie": "movie?tmdb={tmdb}&imdb={imdb}",
+            "tv": "tv?tmdb={tmdb}&imdb={imdb}&season={season}&episode={episode}"
+        },
+        "priority": 65,
+        "name": "VidSrc",
+        "quality": "720p",
+        "id": "vidsrc"
+    },
+    "mirrorvip": {
+        "source": {
+            "url": "https://multiembed.mov/directstream.php",
+            "movie": "?video_id={imdb}",
+            "tv": "?video_id={imdb}&s={season}&e={episode}"
+        },
+        "priority": 55,
+        "name": "Mirror-VIP",
+        "quality": "1080p",
+        "id": "mirrorvip"
+    },
+    "mirror": {
+        "source": {
+            "url": "https://multiembed.mov/",
+            "movie": "?video_id={imdb}",
+            "tv": "?video_id={imdb}&s={season}&e={episode}"
+        },
+        "priority": 55,
+        "name": "Mirror",
+        "quality": "720p",
+        "id": "mirror"
+    },
+    "embed2": {
+        "source": {
+            "url": "https://www.2embed.cc/",
+            "movie": "embed/{tmdb}",
+            "tv": "embedtv/{tmdb}&s={season}&e={episode}"
+        },
+        "priority": 55,
+        "name": "Embed2",
+        "quality": "720p",
+        "id": "embed2"
+    },
+    "gdrive": {
+        "source": {
+            "url": "https://databasegdriveplayer.xyz/",
+            "movie": "player.php?imdb={imdb}&tmdb={tmdb}",
+            "tv": "player.php?type=series&imdb={imdb}&tmdb={tmdb}&season={season}&episode={episode}"
+        },
+        "priority": 55,
+        "name": "G-Drive",
+        "quality": "720p",
+        "id": "gdrive"
+    },
+    "gomo": {
+        "source": {
+            "url": "https://gomo.to/",
+            "movie": "movie/{imdb}",
+            "tv": "show/{imdb}/{zero|season}-{zero|episode}"
+        },
+        "priority": 50,
+        "name": "GoMo",
+        "quality": "720p",
+        "id": "gomo"
+    },
+    "fsapi": {
+        "source": {
+            "url": "https://show2embed.web.app/watch/",
+            "movie": "{tmdb}",
+            "tv": "{tmdb}/{season}/{episode}"
+        },
+        "priority": 45,
+        "name": "FS-Api",
+        "quality": "720p",
+        "id": "fsapi"
+    }
+}

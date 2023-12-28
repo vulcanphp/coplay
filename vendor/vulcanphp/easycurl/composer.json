@@ -1,0 +1,20 @@
+{
+    "name": "vulcanphp/easycurl",
+    "description": "Easy Curl is a helper class for PHP that make the HTTP requests easier",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "VulcanPhp\\EasyCurl\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Shahin Moyshan",
+            "email": "freelance.shain@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "ext-curl": ">=7.4"
+    }
+}

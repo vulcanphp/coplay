@@ -1,0 +1,22 @@
+{
+    "name": "vulcanphp/filesystem",
+    "description": "PHP Simple File Management System Helper Class that can manage files and folders easily",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "VulcanPhp\\FileSystem\\": "src/"
+        },
+        "files": [
+            "src/Includes/helpers.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Shahin Moyshan",
+            "email": "freelance.shain@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4"
+    }
+}

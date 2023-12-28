@@ -1,0 +1,22 @@
+{
+    "name": "vulcanphp/core",
+    "description": "Vulcan PHP MVC Core functionalities",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "VulcanPhp\\Core\\": "src/"
+        },
+        "files": [
+            "src/functions.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Shahin Moyshan",
+            "email": "freelance.shain@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.0"
+    }
+}

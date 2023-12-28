@@ -1,0 +1,18 @@
+{
+    "scripts": {
+        "dev-css": "npx tailwindcss -i ./resources/assets/css/app.css -o ./resources/assets/dist/bundle.min.css --watch",
+        "build-css": "npx tailwindcss -i ./resources/assets/css/app.css -o ./resources/assets/dist/bundle.min.css --minify",
+        "dev-alpinejs": "npx esbuild ./resources/assets/js/app.js --outfile=./resources/assets/dist/bundle.min.js --bundle --watch",
+        "build-alpinejs": "npx esbuild ./resources/assets/js/app.js --outfile=./resources/assets/dist/bundle.min.js --bundle --minify"
+    },
+    "dependencies": {
+        "@alpinejs/persist": "^3.13.3",
+        "alpinejs": "^3.13.3",
+        "esbuild": "^0.19.8"
+    },
+    "devDependencies": {
+        "autoprefixer": "^10.4.16",
+        "postcss": "^8.4.31",
+        "tailwindcss": "^3.3.5"
+    }
+}

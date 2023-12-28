@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    .bx-shadow {
+        box-shadow: rgba(0, 0, 0, 0.25) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.25) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.25) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.25) 0px 2px 1px, rgba(0, 0, 0, 0.1) 0px 4px 2px, rgba(0, 0, 0, 0.1) 0px 8px 4px, rgba(0, 0, 0, 0.1) 0px 16px 8px, rgba(0, 0, 0, 0.1) 0px 32px 15px;
+    }
+
+    .h-100{
+        @apply h-[30rem]; /* 480px */
+    }
+
+    .h-110{
+        @apply h-[32rem]; /* 512px */
+    }
+
+    .position-center{
+        @apply absolute inset-0 m-auto w-max h-max;
+    }
+}
+
+.pagination{
+    @apply flex items-center;
+}
+
+.pagination .page-item .page-link{
+    @apply text-gray-200 font-semibold text-lg hover:text-amber-400 inline-block p-2 m-1;
+}
+
+.pagination .page-item.active .page-link{
+    @apply text-amber-400;
+}

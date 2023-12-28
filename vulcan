@@ -1,0 +1,28 @@
+<?php
+
+use VulcanPhp\Core\Console\Console;
+use VulcanPhp\PrettyError\PrettyError;
+use VulcanPhp\SimpleDb\Database;
+
+// define root directory for this application
+define('ROOT_DIR', __DIR__);
+
+// register the composer auto loader
+require_once __DIR__ . '/vendor/autoload.php';
+
+// register pretty error
+PrettyError::register(
+    PrettyError::ENV_DEVELOPMENT
+);
+
+// initialize database
+Database::init(config('database'));
+
+// create console instance
+$console = new Console;
+
+// run the current console
+$console->run();
+
+// exit from app
+exit;

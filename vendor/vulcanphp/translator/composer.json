@@ -1,0 +1,22 @@
+{
+    "name": "vulcanphp/translator",
+    "description": "Simple Translator is for PHP Application to translate texts with many local languages",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "VulcanPhp\\Translator\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Shahin Moyshan",
+            "email": "freelance.shain@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4"
+    }
+}

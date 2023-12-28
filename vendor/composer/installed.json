@@ -1,0 +1,412 @@
+{
+    "packages": [
+        {
+            "name": "vulcanphp/core",
+            "version": "v1.0",
+            "version_normalized": "1.0.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vulcanphp/core.git",
+                "reference": "a8bbcbc891a1ec427f6b3d800b7e547f31b3f1df"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vulcanphp/core/zipball/a8bbcbc891a1ec427f6b3d800b7e547f31b3f1df",
+                "reference": "a8bbcbc891a1ec427f6b3d800b7e547f31b3f1df",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0"
+            },
+            "time": "2023-12-03T10:42:21+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "src/functions.php"
+                ],
+                "psr-4": {
+                    "VulcanPhp\\Core\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Shahin Moyshan",
+                    "email": "freelance.shain@gmail.com"
+                }
+            ],
+            "description": "Vulcan PHP MVC Core functionalities",
+            "support": {
+                "issues": "https://github.com/vulcanphp/core/issues",
+                "source": "https://github.com/vulcanphp/core/tree/v1.0"
+            },
+            "install-path": "../vulcanphp/core"
+        },
+        {
+            "name": "vulcanphp/easycurl",
+            "version": "v1.0",
+            "version_normalized": "1.0.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vulcanphp/easycurl.git",
+                "reference": "dcff64cbc75b807ee552fb55f1cc2c8a1da256d5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vulcanphp/easycurl/zipball/dcff64cbc75b807ee552fb55f1cc2c8a1da256d5",
+                "reference": "dcff64cbc75b807ee552fb55f1cc2c8a1da256d5",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": ">=7.4",
+                "php": ">=7.4"
+            },
+            "time": "2023-11-26T10:50:15+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "VulcanPhp\\EasyCurl\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Shahin Moyshan",
+                    "email": "freelance.shain@gmail.com"
+                }
+            ],
+            "description": "Easy Curl is a helper class for PHP that make the HTTP requests easier",
+            "support": {
+                "issues": "https://github.com/vulcanphp/easycurl/issues",
+                "source": "https://github.com/vulcanphp/easycurl/tree/v1.0"
+            },
+            "install-path": "../vulcanphp/easycurl"
+        },
+        {
+            "name": "vulcanphp/fastcache",
+            "version": "v1.0",
+            "version_normalized": "1.0.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vulcanphp/fastcache.git",
+                "reference": "f310fd81f153ad989d03dbcb3fbafd05fe735deb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vulcanphp/fastcache/zipball/f310fd81f153ad989d03dbcb3fbafd05fe735deb",
+                "reference": "f310fd81f153ad989d03dbcb3fbafd05fe735deb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4"
+            },
+            "time": "2023-12-28T15:49:59+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "VulcanPhp\\FastCache\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Shahin Moyshan",
+                    "email": "freelance.shain@gmail.com"
+                }
+            ],
+            "description": "Fast Cache is a PHP simple and super fast caching system which make PHP Application faster",
+            "support": {
+                "issues": "https://github.com/vulcanphp/fastcache/issues",
+                "source": "https://github.com/vulcanphp/fastcache/tree/v1.0"
+            },
+            "install-path": "../vulcanphp/fastcache"
+        },
+        {
+            "name": "vulcanphp/filesystem",
+            "version": "v1.0",
+            "version_normalized": "1.0.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vulcanphp/filesystem.git",
+                "reference": "4b4d4050fecd8302c0791c002ab4532a814442ab"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vulcanphp/filesystem/zipball/4b4d4050fecd8302c0791c002ab4532a814442ab",
+                "reference": "4b4d4050fecd8302c0791c002ab4532a814442ab",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4"
+            },
+            "time": "2023-12-01T12:20:08+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "src/Includes/helpers.php"
+                ],
+                "psr-4": {
+                    "VulcanPhp\\FileSystem\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Shahin Moyshan",
+                    "email": "freelance.shain@gmail.com"
+                }
+            ],
+            "description": "PHP Simple File Management System Helper Class that can manage files and folders easily",
+            "support": {
+                "issues": "https://github.com/vulcanphp/filesystem/issues",
+                "source": "https://github.com/vulcanphp/filesystem/tree/v1.0"
+            },
+            "install-path": "../vulcanphp/filesystem"
+        },
+        {
+            "name": "vulcanphp/phprouter",
+            "version": "v1.0",
+            "version_normalized": "1.0.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vulcanphp/phprouter.git",
+                "reference": "5f6ae2034b8c1ebdaf1913861981a9b4b9882a9e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vulcanphp/phprouter/zipball/5f6ae2034b8c1ebdaf1913861981a9b4b9882a9e",
+                "reference": "5f6ae2034b8c1ebdaf1913861981a9b4b9882a9e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4"
+            },
+            "time": "2023-12-01T13:23:28+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "VulcanPhp\\PhpRouter\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Shahin Moyshan",
+                    "email": "freelance.shain@gmail.com"
+                }
+            ],
+            "description": "PHP Router is a powerful, secure, simple, and quick routing system for PHP Application or REST APIs",
+            "support": {
+                "issues": "https://github.com/vulcanphp/phprouter/issues",
+                "source": "https://github.com/vulcanphp/phprouter/tree/v1.0"
+            },
+            "install-path": "../vulcanphp/phprouter"
+        },
+        {
+            "name": "vulcanphp/prettyerror",
+            "version": "v1.0",
+            "version_normalized": "1.0.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vulcanphp/prettyerror.git",
+                "reference": "423169b4f6cdb2e0cfc5326bf84f38c267f5b172"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vulcanphp/prettyerror/zipball/423169b4f6cdb2e0cfc5326bf84f38c267f5b172",
+                "reference": "423169b4f6cdb2e0cfc5326bf84f38c267f5b172",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4"
+            },
+            "time": "2023-11-24T13:24:21+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "VulcanPhp\\PrettyError\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Shahin Moyshan",
+                    "email": "freelance.shain@gmail.com"
+                }
+            ],
+            "description": "Pretty Error is a simplified way to handle PHP errors with a pretty interface",
+            "support": {
+                "issues": "https://github.com/vulcanphp/prettyerror/issues",
+                "source": "https://github.com/vulcanphp/prettyerror/tree/v1.0"
+            },
+            "install-path": "../vulcanphp/prettyerror"
+        },
+        {
+            "name": "vulcanphp/simpledb",
+            "version": "v1.0",
+            "version_normalized": "1.0.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vulcanphp/simpledb.git",
+                "reference": "b2a71769cdbec9b0a22671b9ae72d9f6f564e9ac"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vulcanphp/simpledb/zipball/b2a71769cdbec9b0a22671b9ae72d9f6f564e9ac",
+                "reference": "b2a71769cdbec9b0a22671b9ae72d9f6f564e9ac",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4"
+            },
+            "time": "2023-12-01T19:47:49+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "src/Includes/helpers.php"
+                ],
+                "psr-4": {
+                    "VulcanPhp\\SimpleDb\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Shahin Moyshan",
+                    "email": "freelance.shain@gmail.com"
+                }
+            ],
+            "description": "Simple DB is a lightweight and easy SQL Query Builder with many common features in PHP Database Management",
+            "support": {
+                "issues": "https://github.com/vulcanphp/simpledb/issues",
+                "source": "https://github.com/vulcanphp/simpledb/tree/v1.0"
+            },
+            "install-path": "../vulcanphp/simpledb"
+        },
+        {
+            "name": "vulcanphp/sweetview",
+            "version": "v1.0",
+            "version_normalized": "1.0.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vulcanphp/sweetview.git",
+                "reference": "fbc52552def590a1bfb50d493984e9f647cb7207"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vulcanphp/sweetview/zipball/fbc52552def590a1bfb50d493984e9f647cb7207",
+                "reference": "fbc52552def590a1bfb50d493984e9f647cb7207",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4"
+            },
+            "time": "2023-11-24T13:45:40+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "VulcanPhp\\SweetView\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Shahin Moyshan",
+                    "email": "freelance.shain@gmail.com"
+                }
+            ],
+            "description": "Sweet View is a lightweight and powerful PHP template engine that unblocks all the most common features in handling a View in PHP.",
+            "support": {
+                "issues": "https://github.com/vulcanphp/sweetview/issues",
+                "source": "https://github.com/vulcanphp/sweetview/tree/v1.0"
+            },
+            "install-path": "../vulcanphp/sweetview"
+        },
+        {
+            "name": "vulcanphp/translator",
+            "version": "v1.0",
+            "version_normalized": "1.0.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vulcanphp/translator.git",
+                "reference": "08efb353ac77d4dde93915a96798e60a348409e0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vulcanphp/translator/zipball/08efb353ac77d4dde93915a96798e60a348409e0",
+                "reference": "08efb353ac77d4dde93915a96798e60a348409e0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4"
+            },
+            "time": "2023-12-12T07:16:27+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "VulcanPhp\\Translator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Shahin Moyshan",
+                    "email": "freelance.shain@gmail.com"
+                }
+            ],
+            "description": "Simple Translator is for PHP Application to translate texts with many local languages",
+            "support": {
+                "issues": "https://github.com/vulcanphp/translator/issues",
+                "source": "https://github.com/vulcanphp/translator/tree/v1.0"
+            },
+            "install-path": "../vulcanphp/translator"
+        }
+    ],
+    "dev": true,
+    "dev-package-names": []
+}
