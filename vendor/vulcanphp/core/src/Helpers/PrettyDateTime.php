@@ -86,7 +86,7 @@ class PrettyDateTime
     protected static function translate(string $text = ''): string
     {
         if (function_exists('translate')) {
-            translate($text);
+            return translate($text);
         }
 
         return $text;

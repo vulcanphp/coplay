@@ -28,7 +28,7 @@
     $update = $config->get('update');
     if ($update !== null) : ?>
         <p class="mt-1 flex items-center text-gray-300">
-            <span>Checked: </span>
+            <span><?= translate('Checked') ?>: </span>
             <span class="ml-1"><?= PrettyDateTime::parse(new DateTime($time = date('Y-m-d H:i:s', $update['checked']))) ?> <small class="ml-1 text-gray-200">(<?= $time ?>)</small></span>
         </p>
     <?php endif ?>
