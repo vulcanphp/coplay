@@ -3,18 +3,18 @@ CoPlay is a Free Movie and TV Series Online Streaming PHP Application
 
 // images
 
-# What is CoPlay?
+## What is CoPlay?
 
-# How CoPlay Works?
+## How CoPlay Works?
 
-# PHP Requirements
+## PHP Requirements
 
-# Download
+## Download
 
-# Installation
+## Installation
 
-# Quick Start
+## Quick Start
 
-# Updates
+## Updates
 
-# Report a Issue
+## Report a Issue
