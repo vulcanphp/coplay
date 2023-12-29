@@ -3,14 +3,18 @@
 namespace App\Core;
 
 use Exception;
+use PharData;
 use VulcanPhp\EasyCurl\EasyCurl;
+use VulcanPhp\FileSystem\Folder;
+use VulcanPhp\FileSystem\Handler\FileHandler;
+use VulcanPhp\FileSystem\Handler\FolderHandler;
 use ZipArchive;
 
 class UpdateManager
 {
     public static function check(): void
     {
-        $result = EasyCurl::get('https://github.com/vulcanphp/fastcache/releases/latest');
+        $result = EasyCurl::get('https://github.com/vulcanphp/coplay/releases/latest');
 
         if ($result->getStatus() == 200) {
             $version = substr($result->lastUrl(), strrpos($result->lastUrl(), '/') + 1);
@@ -19,7 +23,7 @@ class UpdateManager
             Configurator::$instance->set('update', [
                 'checked'   => time(),
                 'version'   => $version,
-                'download'  => "https://github.com/vulcanphp/fastcache/archive/refs/tags/{$version}.zip"
+                'download'  => "https://github.com/vulcanphp/coplay/archive/refs/tags/{$version}.tar.gz"
             ]);
         }
     }
@@ -36,20 +40,45 @@ class UpdateManager
                 $manager->takeBackup($update);
 
                 // replace application files with updated zip
-                $zip = new ZipArchive;
 
-                if ($zip->open($filepath) !== true) {
-                    throw new Exception('Failed to open Zip file');
-                }
+                $phar = new PharData($filepath);
 
-                $zip->extractTo(root_dir());
-                $zip->close();
+                $phar->extractTo(root_dir());
+
+                $folder = root_dir(
+                    $phar
+                        ->current()
+                        ->getFileName()
+                );
+
+                $manager->moveFolder($folder, root_dir());
+
+                unset($phar);
 
                 // Restore app configuration files
                 $manager->restoreBackup($update);
 
                 // Post Update
                 $manager->postUpdate($update);
+
+                // Remove Current Folder
+                Folder::remove($folder);
+
+                // Remove Zip file
+                unlink($filepath);
+            }
+        }
+    }
+
+    protected function moveFolder($from, $to)
+    {
+        foreach (Folder::scan($from) as $resource) {
+            if ($resource instanceof FolderHandler) {
+                $this->moveFolder($resource->getPath(), str_replace($from, $to, $resource->getPath()));
+            }
+
+            if ($resource instanceof FileHandler) {
+                $resource->move(str_replace($from, $to, $resource->getPath()));
             }
         }
     }
