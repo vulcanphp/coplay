@@ -1,9 +1,14 @@
 {
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "a60ab76fcd326e653cf7201dceea23f8",
     "packages": [
         {
             "name": "vulcanphp/core",
             "version": "v1.0",
-            "version_normalized": "1.0.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vulcanphp/core.git",
@@ -18,9 +23,7 @@
             "require": {
                 "php": ">=8.0"
             },
-            "time": "2023-12-03T10:42:21+00:00",
             "type": "library",
-            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "src/functions.php"
@@ -44,12 +47,11 @@
                 "issues": "https://github.com/vulcanphp/core/issues",
                 "source": "https://github.com/vulcanphp/core/tree/v1.0"
             },
-            "install-path": "../vulcanphp/core"
+            "time": "2023-12-03T10:42:21+00:00"
         },
         {
             "name": "vulcanphp/easycurl",
             "version": "v1.0",
-            "version_normalized": "1.0.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vulcanphp/easycurl.git",
@@ -65,9 +67,7 @@
                 "ext-curl": ">=7.4",
                 "php": ">=7.4"
             },
-            "time": "2023-11-26T10:50:15+00:00",
             "type": "library",
-            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "VulcanPhp\\EasyCurl\\": "src/"
@@ -88,12 +88,11 @@
                 "issues": "https://github.com/vulcanphp/easycurl/issues",
                 "source": "https://github.com/vulcanphp/easycurl/tree/v1.0"
             },
-            "install-path": "../vulcanphp/easycurl"
+            "time": "2023-11-26T10:50:15+00:00"
         },
         {
             "name": "vulcanphp/fastcache",
             "version": "v1.0",
-            "version_normalized": "1.0.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vulcanphp/fastcache.git",
@@ -108,9 +107,7 @@
             "require": {
                 "php": ">=7.4"
             },
-            "time": "2023-12-29T14:59:15+00:00",
             "type": "library",
-            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "src/helpers.php"
@@ -134,12 +131,11 @@
                 "issues": "https://github.com/vulcanphp/fastcache/issues",
                 "source": "https://github.com/vulcanphp/fastcache/tree/v1.0"
             },
-            "install-path": "../vulcanphp/fastcache"
+            "time": "2023-12-29T14:59:15+00:00"
         },
         {
             "name": "vulcanphp/filesystem",
             "version": "v1.0",
-            "version_normalized": "1.0.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vulcanphp/filesystem.git",
@@ -154,9 +150,7 @@
             "require": {
                 "php": ">=7.4"
             },
-            "time": "2023-12-01T12:20:08+00:00",
             "type": "library",
-            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "src/Includes/helpers.php"
@@ -180,12 +174,11 @@
                 "issues": "https://github.com/vulcanphp/filesystem/issues",
                 "source": "https://github.com/vulcanphp/filesystem/tree/v1.0"
             },
-            "install-path": "../vulcanphp/filesystem"
+            "time": "2023-12-01T12:20:08+00:00"
         },
         {
             "name": "vulcanphp/phprouter",
             "version": "v1.0",
-            "version_normalized": "1.0.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vulcanphp/phprouter.git",
@@ -200,9 +193,7 @@
             "require": {
                 "php": ">=7.4"
             },
-            "time": "2023-12-01T13:23:28+00:00",
             "type": "library",
-            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "VulcanPhp\\PhpRouter\\": "src/"
@@ -223,12 +214,11 @@
                 "issues": "https://github.com/vulcanphp/phprouter/issues",
                 "source": "https://github.com/vulcanphp/phprouter/tree/v1.0"
             },
-            "install-path": "../vulcanphp/phprouter"
+            "time": "2023-12-01T13:23:28+00:00"
         },
         {
             "name": "vulcanphp/prettyerror",
             "version": "v1.0",
-            "version_normalized": "1.0.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vulcanphp/prettyerror.git",
@@ -243,9 +233,7 @@
             "require": {
                 "php": ">=7.4"
             },
-            "time": "2023-11-24T13:24:21+00:00",
             "type": "library",
-            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "VulcanPhp\\PrettyError\\": "src/"
@@ -266,12 +254,11 @@
                 "issues": "https://github.com/vulcanphp/prettyerror/issues",
                 "source": "https://github.com/vulcanphp/prettyerror/tree/v1.0"
             },
-            "install-path": "../vulcanphp/prettyerror"
+            "time": "2023-11-24T13:24:21+00:00"
         },
         {
             "name": "vulcanphp/simpledb",
             "version": "v1.0",
-            "version_normalized": "1.0.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vulcanphp/simpledb.git",
@@ -286,9 +273,7 @@
             "require": {
                 "php": ">=7.4"
             },
-            "time": "2023-12-01T19:47:49+00:00",
             "type": "library",
-            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "src/Includes/helpers.php"
@@ -312,12 +297,11 @@
                 "issues": "https://github.com/vulcanphp/simpledb/issues",
                 "source": "https://github.com/vulcanphp/simpledb/tree/v1.0"
             },
-            "install-path": "../vulcanphp/simpledb"
+            "time": "2023-12-01T19:47:49+00:00"
         },
         {
             "name": "vulcanphp/sweetview",
             "version": "v1.0",
-            "version_normalized": "1.0.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vulcanphp/sweetview.git",
@@ -332,9 +316,7 @@
             "require": {
                 "php": ">=7.4"
             },
-            "time": "2023-11-24T13:45:40+00:00",
             "type": "library",
-            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "src/helpers.php"
@@ -358,12 +340,11 @@
                 "issues": "https://github.com/vulcanphp/sweetview/issues",
                 "source": "https://github.com/vulcanphp/sweetview/tree/v1.0"
             },
-            "install-path": "../vulcanphp/sweetview"
+            "time": "2023-11-24T13:45:40+00:00"
         },
         {
             "name": "vulcanphp/translator",
             "version": "v1.0",
-            "version_normalized": "1.0.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vulcanphp/translator.git",
@@ -378,9 +359,7 @@
             "require": {
                 "php": ">=7.4"
             },
-            "time": "2023-12-12T07:16:27+00:00",
             "type": "library",
-            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "src/helpers.php"
@@ -404,9 +383,18 @@
                 "issues": "https://github.com/vulcanphp/translator/issues",
                 "source": "https://github.com/vulcanphp/translator/tree/v1.0"
             },
-            "install-path": "../vulcanphp/translator"
+            "time": "2023-12-12T07:16:27+00:00"
         }
     ],
-    "dev": true,
-    "dev-package-names": []
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=8.0"
+    },
+    "platform-dev": [],
+    "plugin-api-version": "2.6.0"
 }

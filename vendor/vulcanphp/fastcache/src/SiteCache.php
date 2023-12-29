@@ -89,7 +89,7 @@ class SiteCache implements ISiteCache
             }
 
             // create cache file
-            if (!empty($output)) {
+            if (!empty($output) && !preg_match('/\[lazy:.*?\]|<!-- no-cache -->/i', $output)) {
                 file_put_contents($this->getCacheFile(), $output);
             }
 
