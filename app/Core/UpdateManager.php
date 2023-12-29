@@ -142,7 +142,7 @@ class UpdateManager
         // remove update from coplay.json
         Configurator::$instance->remove('update');
 
-        // remive config backup.zip
+        // remove config backup.zip
         unlink(storage_dir('um_backup.zip')));
     }
 }
