@@ -27,7 +27,7 @@ class Configurator
 
     public function has(string $key): bool
     {
-        return isset($this->data[$key]);
+        return isset($this->data[$key]) && !empty($this->data[$key]);
     }
 
     public function is(string $key): bool
@@ -37,7 +37,7 @@ class Configurator
 
     public function get(string $key, $default = null)
     {
-        return $this->data[$key] ?? $default;
+        return $this->has($key) ? $this->data[$key] : $default;
     }
 
     public function set(string $key, $value): self
