@@ -143,6 +143,6 @@ class UpdateManager
         Configurator::$instance->remove('update');
 
         // remove config backup.zip
-        unlink(storage_dir('um_backup.zip')));
+        unlink(storage_dir('um_backup.zip'));
     }
 }
