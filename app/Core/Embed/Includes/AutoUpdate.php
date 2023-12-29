@@ -18,10 +18,10 @@ class AutoUpdate implements IAutoUpdate
     public function check(bool $force = false): void
     {
         if ($force || !file_exists($this->getSchemaLocation()) || $this->isExpired()) {
-            // file_put_contents(
-            //     $this->getSchemaLocation(),
-            //     file_get_contents('https://drive.google.com/uc?id=1LkhqW8Ot1ibSk2V5qRcZt4uLw68LljyE&export=download')
-            // );
+            file_put_contents(
+                $this->getSchemaLocation(),
+                file_get_contents('https://raw.githubusercontent.com/vulcanphp/coplay/main/app/Core/Embed/schema.json')
+            );
         }
     }
 
