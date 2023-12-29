@@ -45,4 +45,7 @@
             <a href="?action=update-download" class="bg-amber-500 hover:bg-amber-600 px-2 py-1 text-sm inline-block rounded"><?= translate('Download Update') ?></a>
         </div>
     <?php endif ?>
+    <div class="mt-8">
+        <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="vulcandev" data-color="#FFDD00" data-emoji="" data-font="Comic" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff"></script>
+    </div>
 </section>

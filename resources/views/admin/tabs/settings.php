@@ -24,7 +24,6 @@
             <select name="language" id="language" class="w-full md:w-9/12 px-4 py-2 outline-none focus:outline-amber-400 rounded bg-primary-900">
                 <?php foreach ([
                     'en' => 'English',
-                    'zh' => 'Chines',
                     'hi' => 'Hindi',
                     'es' => 'Spanish',
                     'fr' => 'French',
@@ -35,7 +34,6 @@
                     'ur' => 'Urdu',
                     'id' => 'Indonesian',
                     'de' => 'German',
-                    'ja' => 'Japanese',
                     'sw' => 'Swahili',
                     'te' => 'Telugu',
                     'mr' => 'Marathi',
