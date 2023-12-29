@@ -21,6 +21,7 @@
 
     <h2 class="text-2xl font-semibold mt-8 mb-2"><?= translate('Update Manager') ?></h2>
     <p class="italic text-gray-200"><?= translate('Current') ?>: <b><?= config('app.version') ?></b></p>
+    <a href="?action=update-check" class="bg-amber-500 hover:bg-amber-600 px-2 py-1 text-sm inline-block mt-4 rounded"><?= translate('Check for Update') ?></a>
     <?php
 
     use VulcanPhp\Core\Helpers\PrettyDateTime;
@@ -31,7 +32,6 @@
             <span>Checked: </span>
             <span class="ml-1"><?= PrettyDateTime::parse(new DateTime($time = date('Y-m-d H:i:s', $update['checked']))) ?> <small class="ml-1 text-gray-200">(<?= $time ?>)</small></span>
         </p>
-        <a href="?action=update-check" class="bg-amber-500 hover:bg-amber-600 px-2 py-1 text-sm inline-block mt-4 rounded"><?= translate('Check for Update') ?></a>
         <?php if (version_compare($update['version'], config('app.version'), '>')) : ?>
             <div class="mt-6">
                 <p class="mt-2 mb-1 flex items-center">
