@@ -97,18 +97,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/vulcanphp/fastcache.git",
-                "reference": "f9640ef49e76f680ce90fd6ddd6facb024b19581"
+                "reference": "b70cb0626c85dcf6d753bfd05acf4fefd3ae6f1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vulcanphp/fastcache/zipball/f9640ef49e76f680ce90fd6ddd6facb024b19581",
-                "reference": "f9640ef49e76f680ce90fd6ddd6facb024b19581",
+                "url": "https://api.github.com/repos/vulcanphp/fastcache/zipball/b70cb0626c85dcf6d753bfd05acf4fefd3ae6f1d",
+                "reference": "b70cb0626c85dcf6d753bfd05acf4fefd3ae6f1d",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.4"
             },
-            "time": "2023-12-29T14:59:15+00:00",
+            "time": "2023-12-30T16:29:18+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {

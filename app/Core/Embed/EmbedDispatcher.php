@@ -159,10 +159,10 @@ class EmbedDispatcher implements IEmbedController
                     ->all() as $link) {
                     array_push($links, $link);
                 }
+            }
 
-                if ($this->config->is('embeds')) {
-                    $links = array_merge($links, $embed->getLinks());
-                }
+            if ($this->config->is('embeds')) {
+                $links = array_merge($links, $embed->getLinks());
             }
 
             $video->links = $links;

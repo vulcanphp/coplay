@@ -181,7 +181,7 @@ class SiteCache implements ISiteCache
         // check with accepted path
         foreach ((array) $this->config['except'] as $url) {
 
-            $path   = $this->parsePath($_SERVER['PATH_INFO'] ?? '/');
+            $path   = $this->parsePath($_SERVER['REQUEST_URI']);
             $url    = rtrim($url, '/');
 
             if ($url[strlen($url) - 1] === '*') {
@@ -253,15 +253,25 @@ class SiteCache implements ISiteCache
         return $this->valid = true;
     }
 
-    protected function parsePath(string $path): string
+    protected function parsePath(string $path, bool $removeParams = true): string
     {
+        if ($removeParams) {
+            if (strpos($path, '#') !== false) {
+                $path = substr($path, 0, strpos($path, '#'));
+            }
+
+            if (strpos($path, '?') !== false) {
+                $path = substr($path, 0, strpos($path, '?'));
+            }
+        }
+
         return preg_replace('~/+~', '/', '/' . trim(str_replace('*', '', $path), '/') . '/');
     }
 
     protected function getCacheFile(): string
     {
         return $this->getTmpDir()
-            . sha1($this->parsePath($_SERVER['REQUEST_URI'] ?? '/'))
+            . sha1($this->parsePath($_SERVER['REQUEST_URI'], false))
             . $this->config['extension'];
     }
 
@@ -291,16 +301,13 @@ class SiteCache implements ISiteCache
 
     protected function cacheHeaders(string $filepath): void
     {
-        $timestamp  = filemtime($filepath);
-        $maxAge     = $timestamp - strtotime("-{$this->config['expire']}");
-
-        $IsModifiedSince  = true;
-        $allHeaders       = getallheaders();
+        $timestamp          = filemtime($filepath);
+        $maxAge             = $timestamp - strtotime("-{$this->config['expire']}");
+        $IsModifiedSince    = true;
 
         // check last modified header..
-        if (array_key_exists("If-Modified-Since", $allHeaders)) {
-            $gmtSinceDate   = $allHeaders["If-Modified-Since"];
-            $sinceTimestamp = strtotime($gmtSinceDate);
+        if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
+            $sinceTimestamp = strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']);
 
             // Can the browser get it from the cache?
             if ($sinceTimestamp != false && $timestamp <= $sinceTimestamp) {
