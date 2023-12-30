@@ -33,7 +33,7 @@ class UpdateManager
         if (Configurator::$instance->has('update')) {
             $manager    = new UpdateManager;
             $update     = Configurator::$instance->get('update');
-            $filepath   = storage()->uploadFromUrl($update['download']);
+            $filepath   = storage()->uploadFromUrl($update['download'], true);
 
             if (!empty($filepath)) {
                 // Take Backup of app configuration files
