@@ -19,6 +19,10 @@
             <label for="description" class="md:w-3/12 mb-2 md:mb-0 block"><?= translate('Site Description') ?></label>
             <textarea name="description" id="description" class="w-full md:w-9/12 px-4 py-2 outline-none focus:outline-amber-400 rounded bg-primary-900" placeholder="Stream Free Movies, TV Shows, Anime, and Drama Online with HD Quality. Watch Anywhere Anytime in CoPlay."><?= $config->get('description', '') ?></textarea>
         </div>
+        <div class="md:flex items-start mb-4">
+            <label for="disclaimer" class="md:w-3/12 mb-2 md:mb-0 block"><?= translate('Disclaimer') ?></label>
+            <textarea name="disclaimer" id="disclaimer" class="w-full md:w-9/12 px-4 py-2 outline-none focus:outline-amber-400 rounded bg-primary-900" placeholder="We does not host any files, it merely links to 3rd party services. CoPlay is not responsible for any media files shown by the video providers"><?= $config->get('disclaimer', '') ?></textarea>
+        </div>
         <div class="md:flex items-center mb-4">
             <label for="language" class="md:w-3/12 mb-2 md:mb-0 block"><?= translate('Site Language') ?></label>
             <select name="language" id="language" class="w-full md:w-9/12 px-4 py-2 outline-none focus:outline-amber-400 rounded bg-primary-900">

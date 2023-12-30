@@ -95,7 +95,7 @@ class Admin
             'update-check' => fn () => UpdateManager::check(),
             'update-download' => fn () => UpdateManager::download(),
             'remove-donate' => fn () => $this->config->set('remove-donate', true),
-            'settings' => fn () => $this->config->setup(input()->all(['title', 'tagline', 'intro', 'description', 'copyright', 'language'])),
+            'settings' => fn () => $this->config->setup(input()->all(['title', 'tagline', 'intro', 'description', 'disclaimer', 'copyright', 'language'])),
             'scripts' => fn () => $this->config->setup(input()->all(['head', 'body', 'footer'])),
             default => fn () => null
         };

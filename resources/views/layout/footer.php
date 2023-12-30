@@ -12,4 +12,7 @@
             <?= str_replace(['<#>', '<##>'], ['<a href="https://www.themoviedb.org/" class="underline hover:text-gray-300">TMDb API</a>', '<a href="https://github.com/vulcanphp" class="underline hover:text-gray-300">VulcanPhp</a>'], translate('Powered by <#> & <##>')) ?>
         </p>
     </div>
+    <div class="text-center mb-6">
+        <p class="text-sm text-gray-400"><?= $config->get('disclaimer', 'We does not host any files, it merely links to 3rd party services. CoPlay is not responsible for any media files shown by the video providers') ?></p>
+    </div>
 </footer>
