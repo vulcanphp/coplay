@@ -5,6 +5,7 @@ namespace App\Core;
 use Exception;
 use PharData;
 use VulcanPhp\EasyCurl\EasyCurl;
+use VulcanPhp\FileSystem\File;
 use VulcanPhp\FileSystem\Folder;
 use VulcanPhp\FileSystem\Handler\FileHandler;
 use VulcanPhp\FileSystem\Handler\FolderHandler;
@@ -33,14 +34,17 @@ class UpdateManager
         if (Configurator::$instance->has('update')) {
             $manager    = new UpdateManager;
             $update     = Configurator::$instance->get('update');
-            $filepath   = storage()->uploadFromUrl($update['download'], true);
+            $download   = storage()->uploadFromUrl($update['download'], true);
+            $filepath   = sys_get_temp_dir() . '/coplay-update.tar.gz';
+
+            // move download file 
+            File::move($download, $filepath);
 
             if (!empty($filepath)) {
                 // Take Backup of app configuration files
                 $manager->takeBackup($update);
 
                 // replace application files with updated zip
-
                 $phar = new PharData($filepath);
 
                 $phar->extractTo(root_dir());
@@ -102,11 +106,11 @@ class UpdateManager
 
         $zip->close();
 
-        if (file_exists(storage_dir($zipName))) {
-            unlink(storage_dir($zipName));
+        if (file_exists(sys_get_temp_dir() . '/' . $zipName)) {
+            unlink(sys_get_temp_dir() . '/' . $zipName);
         }
 
-        copy($zipName, storage_dir($zipName));
+        copy($zipName, sys_get_temp_dir() . '/' . $zipName);
 
         unlink($zipName);
     }
@@ -115,7 +119,7 @@ class UpdateManager
     {
         $zip = new ZipArchive;
 
-        if ($zip->open(storage_dir('um_backup.zip')) !== true) {
+        if ($zip->open(sys_get_temp_dir() . '/' . 'um_backup.zip') !== true) {
             throw new Exception('Failed to open Zip file');
         }
 
@@ -146,6 +150,6 @@ class UpdateManager
         Configurator::$instance->remove('update');
 
         // remove config backup.zip
-        unlink(storage_dir('um_backup.zip'));
+        unlink(sys_get_temp_dir() . '/' . 'um_backup.zip');
     }
 }

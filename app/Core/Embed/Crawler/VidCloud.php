@@ -559,7 +559,7 @@ class VidCloud
             $relevant   = 10;
             $title      = $title['title'];
 
-            if (strlen($this->cleanUtf8Text($title)) <= (strlen($title) / 2)) {
+            if (!$this->isEnglish($title)) {
                 return null;
             }
 
@@ -641,8 +641,12 @@ class VidCloud
         return trim(
             join(
                 ' ',
-                translator_engine()
-                    ->translateFromGoogle($text, 'auto', 'en')[0][1],
+                array_unique(
+                    array_filter(
+                        translator_engine()
+                            ->translateFromGoogle($text, 'auto', 'en')[0][1] ?? (array) $text
+                    )
+                ),
             ),
         );
     }
@@ -650,6 +654,12 @@ class VidCloud
     protected function getOriginalTitle(): string
     {
         $title = $this->config->get('original_title');
-        return $this->data['original_title'] ??= (strlen($this->cleanUtf8Text($title)) <= (strlen($title) / 2) ? $this->translateToEnglish($title) : $title);
+
+        return $this->data['original_title'] ??= (!$this->isEnglish($title) ? $this->translateToEnglish($title) : $title);
+    }
+
+    protected function isEnglish($text): bool
+    {
+        return mb_strlen($text, 'utf-8') >= (strlen($text) / 2);
     }
 }
