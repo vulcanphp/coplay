@@ -94,6 +94,7 @@ class Admin
             'delete' => fn () => Links::erase(['id' => input('id')]),
             'update-check' => fn () => UpdateManager::check(),
             'update-download' => fn () => UpdateManager::download(),
+            'remove-donate' => fn () => $this->config->set('remove-donate', true),
             'settings' => fn () => $this->config->setup(input()->all(['title', 'tagline', 'intro', 'description', 'copyright', 'language'])),
             'scripts' => fn () => $this->config->setup(input()->all(['head', 'body', 'footer'])),
             default => fn () => null

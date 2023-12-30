@@ -136,6 +136,9 @@ class UpdateManager
             )
         );
 
+        // update coplay.json
+        Configurator::$instance->set('remove-donate', false);
+
         // reload config/app.php file
         config('app', null, true);
 
