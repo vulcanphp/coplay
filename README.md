@@ -63,7 +63,7 @@ Before you get started with CoPlay, ensure that your system meets the following 
    [learn more](https://github.com/vulcanphp/vulcanphp)
 5. **CoPlay Setup:** When you Start the Application a Configuration Page will Appear.
     - create a password for your admin panel to login
-    - set TMDd [TMDb](https://www.themoviedb.org/signup) Access Token (Api/API Read Access Token)
+    - set [TMDb](https://www.themoviedb.org/signup) Access Token (Api/API Read Access Token)
 
 **Note:** For Non-Apache Production Server Make Sure Your Server Redirect all Http Request to index.php file.
 
