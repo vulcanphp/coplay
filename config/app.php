@@ -26,5 +26,5 @@ return [
     'tmp_dir' => root_dir('/storage/tmp'),
 
     // application version
-    'version' => 'v1.0.0'
+    'version' => 'v1.0.1'
 ];
