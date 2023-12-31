@@ -18,7 +18,7 @@ $this->layout('admin.layout')
         <?= csrf() ?>
         <input type="password" required class="w-full px-4 py-2 mb-4 outline-none text-center focus:outline-amber-400 rounded bg-primary-900" placeholder="<?= translate('New Password') ?>" name="password">
         <input type="password" required class="w-full px-4 py-2 mb-4 outline-none text-center focus:outline-amber-400 rounded bg-primary-900" placeholder="<?= translate('Confirm Password') ?>" name="confirm">
-        <input type="text" required class="w-full px-4 py-2 mb-4 outline-none text-center focus:outline-amber-400 rounded bg-primary-900" placeholder="<?= translate('TMDb Api Key') ?>" value="<?= Configurator::$instance->get('tmdb', '')?>" name="tmdb">
+        <input type="text" required class="w-full px-4 py-2 mb-4 outline-none text-center focus:outline-amber-400 rounded bg-primary-900" placeholder="<?= translate('TMDb API Read Access Token') ?>" value="<?= Configurator::$instance->get('tmdb', '') ?>" name="tmdb">
         <button class="bg-amber-500 hover:bg-amber-600 px-4 py-2 inline-block mt-4 rounded"><?= translate('Configure') ?></button>
     </form>
 </div>

@@ -3,7 +3,7 @@
         'name' => 'vulcanphp/vulcanphp',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '28309769104d10cbe8bd7c50a60703551f134d03',
+        'reference' => '24e228ea59c7ac8ae08f46040e0afa6bc0c60e00',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -31,7 +31,7 @@
         'vulcanphp/fastcache' => array(
             'pretty_version' => 'v1.0',
             'version' => '1.0.0.0',
-            'reference' => 'b70cb0626c85dcf6d753bfd05acf4fefd3ae6f1d',
+            'reference' => '5471d9bd8edada0dfc3ddc55dcf49dc265a2f091',
             'type' => 'library',
             'install_path' => __DIR__ . '/../vulcanphp/fastcache',
             'aliases' => array(),
@@ -94,7 +94,7 @@
         'vulcanphp/vulcanphp' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '28309769104d10cbe8bd7c50a60703551f134d03',
+            'reference' => '24e228ea59c7ac8ae08f46040e0afa6bc0c60e00',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

@@ -253,16 +253,14 @@ class SiteCache implements ISiteCache
         return $this->valid = true;
     }
 
-    protected function parsePath(string $path, bool $removeParams = true): string
+    protected function parsePath(string $path): string
     {
-        if ($removeParams) {
-            if (strpos($path, '#') !== false) {
-                $path = substr($path, 0, strpos($path, '#'));
-            }
+        if (strpos($path, '#') !== false) {
+            $path = substr($path, 0, strpos($path, '#'));
+        }
 
-            if (strpos($path, '?') !== false) {
-                $path = substr($path, 0, strpos($path, '?'));
-            }
+        if (strpos($path, '?') !== false) {
+            $path = substr($path, 0, strpos($path, '?'));
         }
 
         return preg_replace('~/+~', '/', '/' . trim(str_replace('*', '', $path), '/') . '/');
@@ -271,7 +269,7 @@ class SiteCache implements ISiteCache
     protected function getCacheFile(): string
     {
         return $this->getTmpDir()
-            . sha1($this->parsePath($_SERVER['REQUEST_URI'], false))
+            . sha1($_SERVER['REQUEST_URI'])
             . $this->config['extension'];
     }
 

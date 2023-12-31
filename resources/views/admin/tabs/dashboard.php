@@ -16,6 +16,14 @@
             <input type="checkbox" name="api" id="api" <?= $config->is('api') ? 'checked' : '' ?>>
             <label for="api" class="ml-2"><?= translate($config->is('api') ? 'Disable Api' : 'Enable Api') ?></label>
         </div>
+        <div class="mb-2">
+            <label for="tmdb" class="mb-2 block"><?= translate('TMDb API') ?></label>
+            <input type="text" name="tmdb" value="<?= $config->get('tmdb') ?>" id="tmdb" class="w-full md:w-9/12 px-4 py-2 outline-none focus:outline-amber-400 rounded bg-primary-900" placeholder="<?= translate('TMDb Access Token') ?>">
+        </div>
+        <div class="mb-2">
+            <label for="password" class="mb-2 block"><?= translate('Change Password') ?></label>
+            <input type="password" name="password" id="password" class="w-full md:w-9/12 px-4 py-2 outline-none focus:outline-amber-400 rounded bg-primary-900" placeholder="<?= translate('New Password')?>">
+        </div>
         <button class="bg-amber-500 hover:bg-amber-600 px-2 py-1 text-sm inline-block mt-2 rounded"><?= translate('Save Changes') ?></button>
     </form>
 

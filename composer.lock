@@ -96,12 +96,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/vulcanphp/fastcache.git",
-                "reference": "b70cb0626c85dcf6d753bfd05acf4fefd3ae6f1d"
+                "reference": "5471d9bd8edada0dfc3ddc55dcf49dc265a2f091"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vulcanphp/fastcache/zipball/b70cb0626c85dcf6d753bfd05acf4fefd3ae6f1d",
-                "reference": "b70cb0626c85dcf6d753bfd05acf4fefd3ae6f1d",
+                "url": "https://api.github.com/repos/vulcanphp/fastcache/zipball/5471d9bd8edada0dfc3ddc55dcf49dc265a2f091",
+                "reference": "5471d9bd8edada0dfc3ddc55dcf49dc265a2f091",
                 "shasum": ""
             },
             "require": {
@@ -131,7 +131,7 @@
                 "issues": "https://github.com/vulcanphp/fastcache/issues",
                 "source": "https://github.com/vulcanphp/fastcache/tree/v1.0"
             },
-            "time": "2023-12-30T16:29:18+00:00"
+            "time": "2023-12-31T12:20:08+00:00"
         },
         {
             "name": "vulcanphp/filesystem",

@@ -88,7 +88,9 @@ class Admin
             'feature' => fn () => $this->config->setup([
                 'links' => input('links') == 'on',
                 'embeds' => input('embeds') == 'on',
-                'api' => input('api') == 'on'
+                'api' => input('api') == 'on',
+                'tmdb' => input('tmdb'),
+                'password' => !empty(trim(input('password', ''))) ? password(input('password')) : $this->config->get('password')
             ]),
             'link' => fn () => (new Links)->input()->save(),
             'delete' => fn () => Links::erase(['id' => input('id')]),
