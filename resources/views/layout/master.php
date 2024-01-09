@@ -28,10 +28,7 @@ if (!isset($config)) {
         ->enque('css', resource_url('assets/dist/bundle.min.css'))
         ->deque('css')
     ?>
-    <?= mixer()
-        ->enque('js', resource_url('assets/dist/bundle.min.js'))
-        ->deque('js')
-    ?>
+    <script defer src="<?= resource_url('assets/dist/bundle.min.js') ?>"></script>
     <?= $config->get('head', '') ?>
 </head>
 

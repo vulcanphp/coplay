@@ -19,10 +19,7 @@ use App\Core\Configurator;
         ->enque('css', resource_url('assets/dist/bundle.min.css'))
         ->deque('css')
     ?>
-    <?= mixer()
-        ->enque('js', resource_url('assets/dist/bundle.min.js'))
-        ->deque('js')
-    ?>
+    <script defer src="<?= resource_url('assets/dist/bundle.min.js') ?>"></script>
 </head>
 
 <body class="bg-primary-800 font-sans text-white">

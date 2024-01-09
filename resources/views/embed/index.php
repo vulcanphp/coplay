@@ -17,13 +17,11 @@ $year = date('Y', strtotime($video->release_date ?? $video->first_air_date));
             display: none !important;
         }
     </style>
-    <?php
-    echo mixer()
+    <?= mixer()
         ->enque('css', resource_url('assets/dist/bundle.min.css'))
-        ->enque('js', resource_url('assets/dist/bundle.min.js'))
         ->deque('css');
-    echo mixer()->deque('js');
     ?>
+    <script defer src="<?= resource_url('assets/dist/bundle.min.js') ?>"></script>
 </head>
 
 <body class="bg-primary-800 group font-sans text-white relative w-full min-h-screen" x-data='{
