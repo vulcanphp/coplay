@@ -13,6 +13,6 @@
         </p>
     </div>
     <div class="text-center mb-6">
-        <p class="text-sm text-gray-400"><?= $config->get('disclaimer', 'We does not host any files, it merely links to 3rd party services. CoPlay is not responsible for any media files shown by the video providers') ?></p>
+        <p class="text-xs text-gray-400 opacity-75"><?= $config->get('disclaimer', 'We does not host any files, it merely links to 3rd party services. CoPlay is not responsible for any media files shown by the video providers') ?></p>
     </div>
 </footer>

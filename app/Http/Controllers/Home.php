@@ -150,10 +150,10 @@ class Home
         return view('api');
     }
 
-    public function search($keyword)
+    public function search()
     {
         $results = [];
-        $keyword = trim(strval($keyword ?? ''));
+        $keyword = trim(input('keyword', ''));
 
         if (strlen($keyword) >= 2) {
             // check if keyword endswith year

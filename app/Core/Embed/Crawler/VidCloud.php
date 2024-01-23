@@ -448,10 +448,9 @@ class VidCloud
 
     protected function getTotalEpisodes(): ?int
     {
-        $current = $this->config->getContent()->next_episode_to_air;
+        $current = $this->config->getContent()->last_episode_to_air ?? $this->config->getContent()->next_episode_to_air;
         $season  = collect($this->config->getContent()->seasons ?? [])
             ->find(['season_number' => (int)$this->config->get('season')]) ?? null;
-
 
         if ($season !== null && $current !== null && $season['season_number'] == $current['season_number']) {
             return $current['episode_number'] ?? ($this->config->get('number_of_episodes'));

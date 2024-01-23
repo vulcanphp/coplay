@@ -3,7 +3,7 @@
 use App\Core\Configurator;
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?= __lang() ?>">
 
 <head>
     <meta charset="UTF-8">

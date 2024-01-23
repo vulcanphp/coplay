@@ -3,7 +3,7 @@
         'name' => 'vulcanphp/vulcanphp',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '24e228ea59c7ac8ae08f46040e0afa6bc0c60e00',
+        'reference' => '4b5768d8cddc66c619e7e37fd610d6a299d7e8c2',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -94,7 +94,7 @@
         'vulcanphp/vulcanphp' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '24e228ea59c7ac8ae08f46040e0afa6bc0c60e00',
+            'reference' => '4b5768d8cddc66c619e7e37fd610d6a299d7e8c2',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

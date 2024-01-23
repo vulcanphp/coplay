@@ -20,5 +20,5 @@ Route::get('/movie/{slug?}', [Home::class, 'movie']);
 Route::get('/tv/{slug?}', [Home::class, 'tv']);
 Route::get('/watchlist', [Home::class, 'watchlater']);
 Route::get('/api', [Home::class, 'api']);
-Route::form('/search/{keyword?}', [Home::class, 'search']);
+Route::get('/search', [Home::class, 'search']);
 Route::get('/embed/{type}/{id}', [Home::class, 'embed'])->name('embed');

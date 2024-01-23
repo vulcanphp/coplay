@@ -28,7 +28,7 @@ if ($config->is('api')) {
             </div>
             <div class="relative mt-3 md:mt-0" x-data="{search: '', isOpen: true, isLoading: false, fetchResult(){
                     this.isLoading = true
-                    fetch('/search/' + this.search).then(res => res.text()).then(html => {
+                    fetch('/search?keyword=' + this.search).then(res => res.text()).then(html => {
                         document.querySelector('#searchResult').innerHTML = html, this.isLoading = false
                     });
                 }}" @click.away="isOpen = false">

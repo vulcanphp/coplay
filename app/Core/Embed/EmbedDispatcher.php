@@ -55,7 +55,7 @@ class EmbedDispatcher implements IEmbedController
 
         if ($this->type == 'tv') {
 
-            $video->current_episode = $video->next_episode_to_air['episode_number'] ?? null;
+            $video->current_episode = $video->last_episode_to_air['episode_number'] ?? ($video->next_episode_to_air['episode_number'] ?? null);
 
             // get season number from client or set latest
             $video->seasons = collect($video->seasons)
