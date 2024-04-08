@@ -72,7 +72,7 @@ class Auth implements IAuth
 
     public function attemptLogout(): self
     {
-        $this->getDriver()->removeUser();
+        $this->isLogged() && $this->getDriver()->removeUser();
         return $this;
     }
 }

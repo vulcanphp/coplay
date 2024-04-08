@@ -3,6 +3,7 @@
 namespace VulcanPhp\Core\Foundation;
 
 use VulcanPhp\PhpRouter\Router;
+use VulcanPhp\InputMaster\Request;
 use VulcanPhp\Core\Foundation\Exceptions\AppException;
 use VulcanPhp\Core\Foundation\Exceptions\KernelException;
 use VulcanPhp\Core\Foundation\Interfaces\IKernel;
@@ -74,7 +75,9 @@ class Application
          * @since 1.0
          * @var Router $router
          */
-        self::$app->router = Router::init();
+        self::$app->router = new Router(
+            new Request()
+        );
     }
 
     /**
@@ -196,7 +199,7 @@ class Application
         }
 
         if ($code !== null) {
-            self::$app->router->response->httpCode($code);
+            self::$app->router->getRequest()->getResponse()->httpCode($code);
         }
 
         echo view($type);

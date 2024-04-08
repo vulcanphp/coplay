@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/./app" isTestSource="false" packagePrefix="App\" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/vulcanphp/core" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/vulcanphp/easycurl" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/vulcanphp/fastcache" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/vulcanphp/filesystem" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/vulcanphp/phprouter" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/vulcanphp/prettyerror" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/vulcanphp/simpledb" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/vulcanphp/sweetview" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/vulcanphp/translator" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

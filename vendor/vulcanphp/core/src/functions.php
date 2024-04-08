@@ -7,9 +7,9 @@ use VulcanPhp\Core\Helpers\Mixer;
 use VulcanPhp\Core\Helpers\Bucket;
 use VulcanPhp\Core\Helpers\Cookie;
 use VulcanPhp\Core\Helpers\Session;
-use VulcanPhp\PhpRouter\Http\Request;
+use VulcanPhp\InputMaster\Request;
 use VulcanPhp\Core\Helpers\Collection;
-use VulcanPhp\PhpRouter\Http\Response;
+use VulcanPhp\InputMaster\Response;
 use VulcanPhp\Core\Foundation\Application;
 use VulcanPhp\Core\Crypto\Password\Password;
 use VulcanPhp\Core\Crypto\Password\Drivers\PasswordHash;
@@ -167,14 +167,14 @@ if (!function_exists('router')) {
 if (!function_exists('response')) {
     function response(): Response
     {
-        return router()->response;
+        return request()->getResponse();
     }
 }
 
 if (!function_exists('request')) {
     function request(): Request
     {
-        return router()->request;
+        return router()->getRequest();
     }
 }
 
@@ -280,9 +280,7 @@ if (!function_exists('is_url')) {
             return true;
         }
 
-        return !empty($text)
-            && strpos($text, '://') !== false
-            && (strpos($text, 'http://') !== false || strpos($text, 'https://') !== false);
+        return preg_match('/(http|https):\/\/[a-z0-9]+[a-z0-9_\/]*/', $text ?? '') === 1;
     }
 }
 
@@ -309,26 +307,20 @@ if (!function_exists('encode_string')) {
 }
 
 if (!function_exists('decode_string')) {
-    function decode_string(?string $value)
+    function decode_string($value)
     {
-        if ($value === null) {
+        if (!is_string($value)) {
             return $value;
         }
 
-        $decoded = null;
+        $decoded = json_decode(
+            preg_replace(['/,+/', '/\[,/'], [',', '['], $value),
+            true,
+            JSON_UNESCAPED_UNICODE
+        );
 
-        if (strpos($value, '{') === 0 || strpos($value, '[{') === 0) {
-            $decoded = json_decode(
-                preg_replace(['/,+/', '/\[,/'], [',', '['], $value),
-                true,
-                JSON_UNESCAPED_UNICODE
-            );
-        } elseif (preg_match("#^((N;)|((a|O|s):[0-9]+:.*[;}])|((b|i|d):[0-9.E-]+;))$#um", $value)) {
-            if (function_exists('mb_unserialize')) {
-                $decoded = mb_unserialize($value);
-            } else {
-                $decoded = unserialize($value);
-            }
+        if (!is_array($decoded) && preg_match("#^((N;)|((a|O|s):[0-9]+:.*[;}])|((b|i|d):[0-9.E-]+;))$#um", $value)) {
+            $decoded = mb_unserialize($value);
         }
 
         if (in_array(gettype($decoded), ['object', 'array'])) {

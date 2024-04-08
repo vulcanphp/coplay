@@ -14,15 +14,19 @@ class HtmlDriver implements IViewDriver
     public function __construct()
     {
         $this->engine = new Html;
-        $this->engine->resourceDir(self::BASE_DIR)->extension(self::EXTENSION);
+        $this->engine
+            ->resourceDir(self::BASE_DIR)
+            ->extension(self::EXTENSION);
     }
 
-    public function dispatchView(string $template, array $paramiters = []): string
+    public function dispatchView(string $template, array $parameters = []): string
     {
-        return $this->getEngine()->template($template)->render($paramiters);
+        return $this->getEngine()
+            ->template($template)
+            ->render($parameters);
     }
 
-    public function getEngine(): IEngine
+    public function getEngine(): Html
     {
         return $this->engine;
     }

@@ -67,6 +67,7 @@ $ composer require vulcanphp/core
 - vite_view()
 
 ### Required VulcanPhp Packages
+- vulcanphp/inputmaster
 - vulcanphp/easycurl
 - vulcanphp/fastcache
 - vulcanphp/filesystem

@@ -3,7 +3,7 @@
 namespace VulcanPhp\PhpRouter\Routing;
 
 use VulcanPhp\PhpRouter\Callback\CallbackHandler;
-use VulcanPhp\PhpRouter\Http\Request;
+use VulcanPhp\InputMaster\Request;
 use VulcanPhp\PhpRouter\Routing\IRoute;
 use VulcanPhp\PhpRouter\Router;
 use VulcanPhp\PhpRouter\Routing\Exceptions\RouterException;
@@ -83,7 +83,7 @@ class RouteDispatcher
                 );
             }
 
-            list($method, $params, $action, $call_method) = [$this->router->request->getMethod(), $route->getParameters(), $route->getAction(), 'index'];
+            list($method, $params, $action, $call_method) = [$this->router->getRequest()->getMethod(), $route->getParameters(), $route->getAction(), 'index'];
 
             // dispatch resource current method
             if ($method === Request::REQUEST_TYPE_OPTIONS && $params[$action] == 'options') {
@@ -114,9 +114,6 @@ class RouteDispatcher
         // trigger route middleware event
         $this->triggerEvent(IRoute::EVENTS['callback'], $route);
 
-        // set current route
-        $this->router->request->setRoute($route);
-
         // load router callback
         return CallbackHandler::load(
             $route->getCallback(),
@@ -137,7 +134,7 @@ class RouteDispatcher
                 throw new MiddlewareException($middleware . ' must be implement interface: ' . IMiddleware::class);
             }
 
-            CallbackHandler::load([$class, 'handle'], $this->router->request, $this->router->response);
+            CallbackHandler::load([$class, 'handle'], $this->router->getRequest(), $this->router->getRequest()->getResponse());
         }
     }
 
@@ -169,10 +166,10 @@ class RouteDispatcher
         return $this->router->applyFilters(
             $this->router::FILTER['reflection_parameters'],
             [
-                $this->router->request,
-                $this->router->request->getUrl(),
-                $this->router->request->inputHandler(),
-                $this->router->response,
+                $this->router->getRequest(),
+                $this->router->getRequest()->getUrl(),
+                $this->router->getRequest()->inputHandler(),
+                $this->router->getRequest()->getResponse(),
             ]
         );
     }

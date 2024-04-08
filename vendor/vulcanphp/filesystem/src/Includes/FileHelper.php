@@ -11,9 +11,8 @@ trait FileHelper
         return filter_var($this->getPath(), FILTER_VALIDATE_URL)
             ? $this->getPath()
             : sprintf(
-                "%s://%s/%s",
-                isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? 'https' : 'http',
-                $_SERVER['HTTP_HOST'],
+                "%s/%s",
+                function_exists('home_url') ? rtrim(home_url(), '/') : ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? 'https://' : 'http://') . $_SERVER['HTTP_HOST']),
                 trim(str_ireplace([$_SERVER['DOCUMENT_ROOT'], DIRECTORY_SEPARATOR], ['', '/'], $this->getPath()), '/')
             );
     }

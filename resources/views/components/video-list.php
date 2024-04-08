@@ -13,7 +13,7 @@ if ($isTv) {
 ?>
 
 <div class="flex group text-gray-400 mt-2">
-    <a href="<?= $slug ?>" class="w-3/12 md:w-2/12">
+    <a fire href="<?= $slug ?>" class="w-3/12 md:w-2/12">
         <?php if (isset($video->poster_path) && !empty($video->poster_path)) : ?>
             <img src="<?= $video->getImageUrl('w92') . $video->poster_path ?>" alt="poster" class="group-hover:opacity-75 rounded-md object-cover transition ease-in-out duration-150">
         <?php else : ?>
@@ -26,9 +26,9 @@ if ($isTv) {
     </a>
     <div class="w-9/12 md:w-10/12 px-3 md:px-4 flex flex-col justify-between text-sm">
         <div>
-            <a href="<?= $slug ?>" class="flex items-start text-gray-200 font-semibold"><?= $isTv ? $video->name : $video->title ?></a>
+            <a fire href="<?= $slug ?>" class="flex items-start text-gray-200 font-semibold"><?= $isTv ? $video->name : $video->title ?></a>
             <span class="text-gray-400 block my-[2px]"><?= Time::dateFormat($isTv ? $video->first_air_date : $video->release_date) ?></span>
-            <p class="text-xs"><?= $video->genres(fn ($genres) => join(', ', array_map(fn ($id, $title) => sprintf('<a href="%s">%s</a>', url('genre', ['type' => $isTv ? 'tv' : 'movie', 'slug' => Str::slugif($title ?? '') . '-' . $id]), $title), array_keys($genres), array_values($genres)))) ?></p>
+            <p class="text-xs"><?= $video->genres(fn ($genres) => join(', ', array_map(fn ($id, $title) => sprintf('<a fire href="%s">%s</a>', url('genre', ['type' => $isTv ? 'tv' : 'movie', 'slug' => Str::slugif($title ?? '') . '-' . $id]), $title), array_keys($genres), array_values($genres)))) ?></p>
         </div>
         <?php if (isset($key)) : ?>
             <span class="text-gray-400 text-2xl font-light mr-1"><?= $key ?></span>

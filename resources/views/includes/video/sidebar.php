@@ -38,24 +38,24 @@
     </div>
     <div class="border-t py-2 border-slate-800">
         <p class="mb-1 uppercase text-gray-400 font-semibold"><?= translate('Genres') ?></p>
-        <div class="text-gray-300 text-sm"><?= $video->genres(fn ($genres) => join(', ', array_map(fn ($id, $title) => sprintf('<a href="%s">%s</a>', url('genre', ['type' => $isTv ? 'tv' : 'movie', 'slug' => Str::slugif($title) . '-' . $id]), $title), array_column($genres, 'id'), array_column($genres, 'name')))) ?></div>
+        <div class="text-gray-300 text-sm"><?= $video->genres(fn ($genres) => join(', ', array_map(fn ($id, $title) => sprintf('<a fire href="%s">%s</a>', url('genre', ['type' => $isTv ? 'tv' : 'movie', 'slug' => Str::slugif($title) . '-' . $id]), $title), array_column($genres, 'id'), array_column($genres, 'name')))) ?></div>
     </div>
     <div class="border-t py-2 border-slate-800">
         <p class="mb-1 uppercase text-gray-400 font-semibold"><?= translate('Languages') ?></p>
-        <div class="text-gray-300 text-sm"><?= $video->spoken_languages(fn ($languages) => join(', ', array_map(fn ($lan, $title) => sprintf('<a href="%s">%s</a>', url('language', ['type' => $isTv ? 'tv' : 'movie', 'language' => Str::slugif($title) . '-' . $lan]), $title), array_column($languages, 'iso_639_1'), array_column($languages, 'name')))) ?></div>
+        <div class="text-gray-300 text-sm"><?= $video->spoken_languages(fn ($languages) => join(', ', array_map(fn ($lan, $title) => sprintf('<a fire href="%s">%s</a>', url('language', ['type' => $isTv ? 'tv' : 'movie', 'language' => Str::slugif($title) . '-' . $lan]), $title), array_column($languages, 'iso_639_1'), array_column($languages, 'name')))) ?></div>
     </div>
     <div class="border-t py-2 border-slate-800">
         <p class="mb-1 uppercase text-gray-400 font-semibold"><?= translate('Countries') ?></p>
-        <div class="text-gray-300 text-sm"><?= $video->production_countries(fn ($countries) => join(', ', array_map(fn ($country, $title) => sprintf('<a href="%s">%s</a>', url('country', ['type' => $isTv ? 'tv' : 'movie', 'country' => Str::slugif($title) . '-' . $country]), $title), array_column($countries, 'iso_3166_1'), array_column($countries, 'name')))) ?></div>
+        <div class="text-gray-300 text-sm"><?= $video->production_countries(fn ($countries) => join(', ', array_map(fn ($country, $title) => sprintf('<a fire href="%s">%s</a>', url('country', ['type' => $isTv ? 'tv' : 'movie', 'country' => Str::slugif($title) . '-' . $country]), $title), array_column($countries, 'iso_3166_1'), array_column($countries, 'name')))) ?></div>
     </div>
     <div class="border-t py-2 border-slate-800">
         <p class="mb-1 uppercase text-gray-400 font-semibold"><?= translate('Companies') ?></p>
-        <div class="text-gray-300 text-sm"><?= $video->production_companies(fn ($companies) => join(', ', array_map(fn ($id, $title) => sprintf('<a href="%s">%s</a>', url('company', ['type' => $isTv ? 'tv' : 'movie', 'slug' => Str::slugif($title) . '-' . $id]), $title), array_column($companies, 'id'), array_column($companies, 'name')))) ?></div>
+        <div class="text-gray-300 text-sm"><?= $video->production_companies(fn ($companies) => join(', ', array_map(fn ($id, $title) => sprintf('<a fire href="%s">%s</a>', url('company', ['type' => $isTv ? 'tv' : 'movie', 'slug' => Str::slugif($title) . '-' . $id]), $title), array_column($companies, 'id'), array_column($companies, 'name')))) ?></div>
     </div>
     <?php if (isset($video->networks)) : ?>
         <div class="border-t py-2 border-slate-800">
             <p class="mb-1 uppercase text-gray-400 font-semibold"><?= translate('Networks') ?></p>
-            <div class="text-gray-300 text-sm"><?= $video->networks(fn ($networks) => join(', ', array_map(fn ($id, $title) => sprintf('<a href="%s">%s</a>', url('network', ['type' => $isTv ? 'tv' : 'movie', 'slug' => Str::slugif($title) . '-' . $id]), $title), array_column($networks, 'id'), array_column($networks, 'name')))) ?></div>
+            <div class="text-gray-300 text-sm"><?= $video->networks(fn ($networks) => join(', ', array_map(fn ($id, $title) => sprintf('<a fire href="%s">%s</a>', url('network', ['type' => $isTv ? 'tv' : 'movie', 'slug' => Str::slugif($title) . '-' . $id]), $title), array_column($networks, 'id'), array_column($networks, 'name')))) ?></div>
         </div>
     <?php endif ?>
 </div>

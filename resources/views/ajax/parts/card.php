@@ -4,7 +4,7 @@ use VulcanPhp\Core\Helpers\Str;
 
 $slug = home_url((isset($video['title']) ? 'movie' : 'tv') . '/' . Str::slugif($video['title'] ?? $video['name']) . '-' . $video['id']);
 ?>
-<a href="<?= $slug ?>" class="rounded hover:text-gray-300 px-1 py-2 <?= $index > 0 ? 'border-t border-slate-700' : '' ?> flex items-center">
+<a fire href="<?= $slug ?>" @click="isOpen = false" class="rounded hover:text-gray-300 px-1 py-2 <?= $index > 0 ? 'border-t border-slate-700' : '' ?> flex items-center">
     <?php if (isset($video['poster_path'])) : ?>
         <img src="https://image.tmdb.org/t/p/w92<?= $video['poster_path'] ?>" class="w-3/12 object-cover rounded" alt="poster">
     <?php else : ?>

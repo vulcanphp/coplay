@@ -97,7 +97,12 @@ class ImageHandler implements IImageHandler
             unlink($destination);
         }
 
-        return imagejpeg($image, $destination, $quality);
+        if ($this->getInfo('mime') == 'image/png') {
+            imagesavealpha($image, true);
+            return imagepng($image, $destination, $quality);
+        } else {
+            return imagejpeg($image, $destination, $quality);
+        }
     }
 
     public function resize(int $img_width, int $img_height, ?string $destination = null): bool
@@ -105,7 +110,6 @@ class ImageHandler implements IImageHandler
         if ($destination === null) {
             $destination = $this->getSource();
         }
-
 
         list($width, $height) = $this->getInfo();
 
@@ -123,15 +127,42 @@ class ImageHandler implements IImageHandler
             $new_height = $height / ($width / $img_width);
         }
 
+        if ($this->getInfo('mime') == 'image/png') {
+            imagesavealpha($image, true);
+        }
+
         $photo = imagecreatetruecolor($img_width, $img_height);
+
+        if ($this->getInfo('mime') == 'image/png') {
+            imagealphablending($photo, false);
+            imagesavealpha($photo, true);
+
+            $transparent = imagecolorallocatealpha($photo, 255, 255, 255, 127);
+            imagefilledrectangle($photo, 0, 0, intval($new_width), intval($new_height), $transparent);
+        }
 
         if (file_exists($destination)) {
             unlink($destination);
         }
 
-        imagecopyresampled($photo, $image, 0 - ($new_width - $img_width) / 2, 0 - ($new_height - $img_height) / 2, 0, 0, $new_width, $new_height, $width, $height);
+        imagecopyresampled(
+            $photo,
+            $image,
+            intval(0 - ($new_width - $img_width) / 2),
+            intval(0 - ($new_height - $img_height) / 2),
+            0,
+            0,
+            intval($new_width),
+            intval($new_height),
+            intval($width),
+            intval($height)
+        );
 
-        return imagejpeg($photo, $destination);
+        if ($this->getInfo('mime') == 'image/png') {
+            return imagepng($photo, $destination);
+        } else {
+            return imagejpeg($photo, $destination);
+        }
     }
 
     public function bulkResize(array $sizes): array
@@ -149,10 +180,20 @@ class ImageHandler implements IImageHandler
 
     public function rotate(float $degrees): bool
     {
+        $image = $this->getImage();
+
+        if ($this->getInfo('mime') == 'image/png') {
+            imagesavealpha($image, true);
+        }
+
         // Rotate
-        $rotate = imagerotate($this->getImage(), $degrees, 0);
+        $rotate = imagerotate($image, $degrees, 0);
 
         //and save it on your server...
-        return imagejpeg($rotate, $this->getSource());
+        if ($this->getInfo('mime') == 'image/png') {
+            return imagepng($rotate, $this->getSource());
+        } else {
+            return imagejpeg($rotate, $this->getSource());
+        }
     }
 }

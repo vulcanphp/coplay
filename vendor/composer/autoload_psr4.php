@@ -11,6 +11,7 @@ return array(
     'VulcanPhp\\SimpleDb\\' => array($vendorDir . '/vulcanphp/simpledb/src'),
     'VulcanPhp\\PrettyError\\' => array($vendorDir . '/vulcanphp/prettyerror/src'),
     'VulcanPhp\\PhpRouter\\' => array($vendorDir . '/vulcanphp/phprouter/src'),
+    'VulcanPhp\\InputMaster\\' => array($vendorDir . '/vulcanphp/inputmaster/src'),
     'VulcanPhp\\FileSystem\\' => array($vendorDir . '/vulcanphp/filesystem/src'),
     'VulcanPhp\\FastCache\\' => array($vendorDir . '/vulcanphp/fastcache/src'),
     'VulcanPhp\\EasyCurl\\' => array($vendorDir . '/vulcanphp/easycurl/src'),

@@ -14,6 +14,18 @@ return [
         'callback' => [Callback::class, 'help']
     ],
     [
+        'command' => ['tailwind', 'tw'],
+        'action' => ['watch', '-w'],
+        'info'  => 'Run TailwindCss Compiler to Watch Css Changes',
+        'callback' => [Callback::class, 'tailwindWatch']
+    ],
+    [
+        'command' => ['tailwind', 'tw'],
+        'action' => ['minify', '-m'],
+        'info'  => 'Run TailwindCss Compiler to Minify dist/bundle.min.css',
+        'callback' => [Callback::class, 'tailwindMinify']
+    ],
+    [
         'command' => 'vite',
         'info'  => 'Initialize Vite Startup Application',
         'callback' => [Vite::class, 'generate']

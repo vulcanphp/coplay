@@ -35,6 +35,16 @@ class Callback
         }
     }
 
+    public function tailwindMinify()
+    {
+        exec('npx tailwindcss -i ./resources/assets/css/app.css -o ./resources/assets/dist/bundle.min.css --minify');
+    }
+
+    public function tailwindWatch()
+    {
+        exec('npx tailwindcss -i ./resources/assets/css/app.css -o ./resources/assets/dist/bundle.min.css --watch');
+    }
+
     public function table($args)
     {
         $flags = $args['flags'] ?? [];

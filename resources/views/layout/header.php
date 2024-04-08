@@ -14,7 +14,7 @@ if ($config->is('api')) {
 <header class="md:fixed z-40 bg-primary-800 inset-x-0 top-0 py-4 md:py-0">
     <div class="container">
         <div class="md:h-16 flex flex-col md:flex-row items-center justify-between">
-            <a href="<?= home_url() ?>" class="flex items-center text-amber-400">
+            <a fire href="<?= home_url() ?>" class="flex items-center text-amber-400">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
                     <path fill="currentColor" d="M20 3H4c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zm.001 6c-.001 0-.001 0 0 0h-.465l-2.667-4H20l.001 4zM9.536 9 6.869 5h2.596l2.667 4H9.536zm5 0-2.667-4h2.596l2.667 4h-2.596zM4 5h.465l2.667 4H4V5zm0 14v-8h16l.002 8H4z"></path>
                     <path fill="currentColor" d="m10 18 5.5-3-5.5-3z"></path>
@@ -23,13 +23,13 @@ if ($config->is('api')) {
             </a>
             <div class="hidden md:flex items-center">
                 <?php foreach ($menus as $url => $menu) : ?>
-                    <a href="<?= $url ?>" class="px-3 py-2 hover:text-gray-300"><?= translate($menu) ?></a>
+                    <a fire href="<?= $url ?>" class="px-3 py-2 hover:text-gray-300"><?= translate($menu) ?></a>
                 <?php endforeach ?>
             </div>
             <div class="relative mt-3 md:mt-0" x-data="{search: '', isOpen: true, isLoading: false, fetchResult(){
                     this.isLoading = true
                     fetch('/search?keyword=' + this.search).then(res => res.text()).then(html => {
-                        document.querySelector('#searchResult').innerHTML = html, this.isLoading = false
+                        document.querySelector('#searchResult').innerHTML = html, this.isLoading = false, window.fireView.checkFireLinks();
                     });
                 }}" @click.away="isOpen = false">
                 <input type="text" placeholder="<?= translate("Search (Press '/' to focus)") ?>" x-ref="search" @keydown.window="
@@ -68,6 +68,6 @@ if ($config->is('api')) {
         </svg>
     </button>
     <?php foreach ($menus as $url => $menu) : ?>
-        <a href="<?= $url ?>" class="hover:text-gray-300 text-lg px-4 py-2 mt-1 block"><?= translate($menu) ?></a>
+        <a fire href="<?= $url ?>" class="hover:text-gray-300 text-lg px-4 py-2 mt-1 block"><?= translate($menu) ?></a>
     <?php endforeach ?>
 </aside>

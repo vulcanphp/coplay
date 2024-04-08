@@ -3,7 +3,7 @@
 use VulcanPhp\Core\Helpers\Str;
 ?>
 <div class="mt-2 text-center">
-    <a href="<?= url('people', ['slug' => Str::slugif(($person->original_name ?? $person->name) . '-' . $person->id)]) ?>">
+    <a fire href="<?= url('people', ['slug' => Str::slugif(($person->original_name ?? $person->name) . '-' . $person->id)]) ?>">
         <?php if (isset($person->profile_path)) : ?>
             <img src="https://image.tmdb.org/t/p/w185<?= $person->profile_path ?>" alt="actor" class="mx-auto mb-1 hover:opacity-75 transition ease-in-out duration-150 rounded-full h-40 w-40 object-cover">
         <?php else : ?>

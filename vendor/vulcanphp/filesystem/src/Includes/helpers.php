@@ -3,7 +3,7 @@
 use VulcanPhp\FileSystem\Handler\FileHandler;
 use VulcanPhp\FileSystem\Handler\FolderHandler;
 use VulcanPhp\FileSystem\Handler\ImageHandler;
-use VulcanPhp\FileSystem\Interfaces\IStorageHandler;
+use VulcanPhp\FileSystem\Handler\StorageHandler;
 use VulcanPhp\FileSystem\Storage;
 
 if (!function_exists('storage_init')) {
@@ -14,7 +14,7 @@ if (!function_exists('storage_init')) {
 }
 
 if (!function_exists('storage')) {
-    function storage(): IStorageHandler
+    function storage(): StorageHandler
     {
         return Storage::$instance->getHandler();
     }

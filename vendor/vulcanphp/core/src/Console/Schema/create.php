@@ -107,8 +107,6 @@ use VulcanPhp\SimpleDb\Model;
 
 class {ModelName} extends Model
 {
-    public $id;
-
     public static function tableName(): string
     {
         return \'{TableName}\';
@@ -159,8 +157,8 @@ return new class implements IMigration
 
 namespace App\Http\Middlewares{Namespace};
 
-use VulcanPhp\PhpRouter\Http\Request;
-use VulcanPhp\PhpRouter\Http\Response;
+use VulcanPhp\InputMaster\Request;
+use VulcanPhp\InputMaster\Response;
 use VulcanPhp\PhpRouter\Security\Interfaces\IMiddleware;
 
 class {MiddlewareName} implements IMiddleware

@@ -1,0 +1,61 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "348d2e9a74c4e28892e8a10f66294857",
+    "packages": [
+        {
+            "name": "vulcanphp/inputmaster",
+            "version": "V1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vulcanphp/inputmaster.git",
+                "reference": "5f3e6a09f90be7491ad7071fdfe0f379372b0b60"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vulcanphp/inputmaster/zipball/5f3e6a09f90be7491ad7071fdfe0f379372b0b60",
+                "reference": "5f3e6a09f90be7491ad7071fdfe0f379372b0b60",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "VulcanPhp\\InputMaster\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Shahin Moyshan",
+                    "email": "freelance.shain@gmail.com"
+                }
+            ],
+            "description": "Input Master is a simple and easy PHP Input Data Manager",
+            "support": {
+                "issues": "https://github.com/vulcanphp/inputmaster/issues",
+                "source": "https://github.com/vulcanphp/inputmaster/tree/V1.0.0"
+            },
+            "time": "2024-03-03T09:03:13+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=7.4"
+    },
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
+}

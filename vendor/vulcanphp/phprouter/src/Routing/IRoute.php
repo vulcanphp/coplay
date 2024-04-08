@@ -3,7 +3,7 @@
 namespace VulcanPhp\PhpRouter\Routing;
 
 use VulcanPhp\PhpRouter\Callback\UniversalCall;
-use VulcanPhp\PhpRouter\Http\Url;
+use VulcanPhp\InputMaster\Url;
 
 abstract class IRoute
 {

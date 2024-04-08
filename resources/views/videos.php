@@ -2,7 +2,11 @@
 
 use App\Core\Configurator;
 
-$this->layout('layout.master') ?>
+$this->layout('layout.master')
+    ->setupMeta([
+        'title' => Configurator::$instance->get('title', 'CoPlay') . ' - ' . Configurator::$instance->get('tagline', 'Stream Free Movies & TV Series Online')
+    ])
+?>
 
 <main class="container my-5">
     <?php $this

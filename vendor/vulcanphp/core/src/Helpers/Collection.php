@@ -16,11 +16,6 @@ class Collection
         }
     }
 
-    public function clone(): self
-    {
-        return clone $this;
-    }
-
     public function count(): int
     {
         if (!isset($this->values) || !is_array($this->values) || empty($this->values)) {

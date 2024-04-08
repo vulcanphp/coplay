@@ -1,0 +1,19 @@
+{
+    "name": "vulcanphp/inputmaster",
+    "description": "Input Master is a simple and easy PHP Input Data Manager",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "VulcanPhp\\InputMaster\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Shahin Moyshan",
+            "email": "freelance.shain@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4"
+    }
+}

@@ -24,14 +24,14 @@ $this
         </div>
     </template>
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
-        <template x-for="video in watchlater">
-            <?php $this->include('components.alpine-card') ?>
+        <template x-for="(video, index) in watchlater">
+            <div x-cloak x-show="filter == 'all' || filter == video.type" x-init="(index + 1) == watchlater.length && window.fireView.checkFireLinks()" class="mt-8">
+                <?php $this->include('components.alpine-card') ?>
+            </div>
         </template>
     </div>
-    <template x-if="watchlater.length == 0">
-        <div class="text-center py-4">
-            <h2 class="text-gray-400 text-2xl mb-1"><?= translate('Watchlist is Empty') ?></h2>
-            <a class="text-amber-400" href="<?= home_url() ?>"><?= translate('&larr; Home') ?></a>
-        </div>
-    </template>
+    <div x-cloak x-show="watchlater.length == 0" class="text-center py-4">
+        <h2 class="text-gray-400 text-2xl mb-1"><?= translate('Watchlist is Empty') ?></h2>
+        <a fire class="text-amber-400" href="<?= home_url() ?>"><?= translate('&larr; Home') ?></a>
+    </div>
 </main>

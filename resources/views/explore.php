@@ -6,7 +6,7 @@ $this
     ->layout('layout.master')
     ->setupMeta([
         'title' => 'Explore: ' . Configurator::$instance->get('title', 'CoPlay') . ' - Stream Free Movies & TV Series Online'
-    ])
+    ]);
 ?>
 
 <main class="container my-5">
@@ -14,7 +14,7 @@ $this
     <h2 class="text-center text-3xl font-semibold text-gray-200 mb-1"><?= $heading ?></h2>
 
     <?php if ($paginator->hasLinks()) : ?>
-        <div class="flex justify-center"><?= $paginator->getLinks() ?></div>
+        <div class="flex justify-center"><?= str_replace('<a ', '<a fire ', $paginator->getLinks()) ?></div>
     <?php endif ?>
 
     <?php if ($paginator->hasData()) : ?>
@@ -26,7 +26,7 @@ $this
     <?php endif ?>
 
     <?php if ($paginator->hasLinks()) : ?>
-        <div class="flex justify-center mt-6"><?= $paginator->getLinks() ?></div>
+        <div class="flex justify-center mt-6"><?= str_replace('<a ', '<a fire ', $paginator->getLinks()) ?></div>
     <?php endif ?>
 
 </main>

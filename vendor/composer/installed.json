@@ -2,23 +2,23 @@
     "packages": [
         {
             "name": "vulcanphp/core",
-            "version": "v1.0",
-            "version_normalized": "1.0.0.0",
+            "version": "v1.1.1",
+            "version_normalized": "1.1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vulcanphp/core.git",
-                "reference": "5abae5cdc93a483a949a1fe9c8b7bc640766494b"
+                "reference": "1528853ac55109cfa65ee40a41cd4bcd29058516"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vulcanphp/core/zipball/5abae5cdc93a483a949a1fe9c8b7bc640766494b",
-                "reference": "5abae5cdc93a483a949a1fe9c8b7bc640766494b",
+                "url": "https://api.github.com/repos/vulcanphp/core/zipball/1528853ac55109cfa65ee40a41cd4bcd29058516",
+                "reference": "1528853ac55109cfa65ee40a41cd4bcd29058516",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.0"
             },
-            "time": "2023-12-29T15:16:02+00:00",
+            "time": "2024-04-02T08:05:58+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -42,7 +42,7 @@
             "description": "Vulcan PHP MVC Core functionalities",
             "support": {
                 "issues": "https://github.com/vulcanphp/core/issues",
-                "source": "https://github.com/vulcanphp/core/tree/v1.0"
+                "source": "https://github.com/vulcanphp/core/tree/v1.1.1"
             },
             "install-path": "../vulcanphp/core"
         },
@@ -138,23 +138,23 @@
         },
         {
             "name": "vulcanphp/filesystem",
-            "version": "v1.0",
-            "version_normalized": "1.0.0.0",
+            "version": "v1.0.1",
+            "version_normalized": "1.0.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vulcanphp/filesystem.git",
-                "reference": "4b4d4050fecd8302c0791c002ab4532a814442ab"
+                "reference": "b21b87709f02e2c1037c5c663dd53abd20842714"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vulcanphp/filesystem/zipball/4b4d4050fecd8302c0791c002ab4532a814442ab",
-                "reference": "4b4d4050fecd8302c0791c002ab4532a814442ab",
+                "url": "https://api.github.com/repos/vulcanphp/filesystem/zipball/b21b87709f02e2c1037c5c663dd53abd20842714",
+                "reference": "b21b87709f02e2c1037c5c663dd53abd20842714",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.4"
             },
-            "time": "2023-12-01T12:20:08+00:00",
+            "time": "2024-04-08T11:26:52+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -178,29 +178,73 @@
             "description": "PHP Simple File Management System Helper Class that can manage files and folders easily",
             "support": {
                 "issues": "https://github.com/vulcanphp/filesystem/issues",
-                "source": "https://github.com/vulcanphp/filesystem/tree/v1.0"
+                "source": "https://github.com/vulcanphp/filesystem/tree/v1.0.1"
             },
             "install-path": "../vulcanphp/filesystem"
         },
         {
-            "name": "vulcanphp/phprouter",
-            "version": "v1.0",
+            "name": "vulcanphp/inputmaster",
+            "version": "V1.0.0",
             "version_normalized": "1.0.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/vulcanphp/phprouter.git",
-                "reference": "5f6ae2034b8c1ebdaf1913861981a9b4b9882a9e"
+                "url": "https://github.com/vulcanphp/inputmaster.git",
+                "reference": "5f3e6a09f90be7491ad7071fdfe0f379372b0b60"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vulcanphp/phprouter/zipball/5f6ae2034b8c1ebdaf1913861981a9b4b9882a9e",
-                "reference": "5f6ae2034b8c1ebdaf1913861981a9b4b9882a9e",
+                "url": "https://api.github.com/repos/vulcanphp/inputmaster/zipball/5f3e6a09f90be7491ad7071fdfe0f379372b0b60",
+                "reference": "5f3e6a09f90be7491ad7071fdfe0f379372b0b60",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.4"
             },
-            "time": "2023-12-01T13:23:28+00:00",
+            "time": "2024-03-03T09:03:13+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "VulcanPhp\\InputMaster\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Shahin Moyshan",
+                    "email": "freelance.shain@gmail.com"
+                }
+            ],
+            "description": "Input Master is a simple and easy PHP Input Data Manager",
+            "support": {
+                "issues": "https://github.com/vulcanphp/inputmaster/issues",
+                "source": "https://github.com/vulcanphp/inputmaster/tree/V1.0.0"
+            },
+            "install-path": "../vulcanphp/inputmaster"
+        },
+        {
+            "name": "vulcanphp/phprouter",
+            "version": "V1.1.0",
+            "version_normalized": "1.1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vulcanphp/phprouter.git",
+                "reference": "ddc0ce1a95e01bd377edcd1180dbe484b9dd7562"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vulcanphp/phprouter/zipball/ddc0ce1a95e01bd377edcd1180dbe484b9dd7562",
+                "reference": "ddc0ce1a95e01bd377edcd1180dbe484b9dd7562",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4",
+                "vulcanphp/inputmaster": "^1.0"
+            },
+            "time": "2024-03-04T08:17:45+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -221,7 +265,7 @@
             "description": "PHP Router is a powerful, secure, simple, and quick routing system for PHP Application or REST APIs",
             "support": {
                 "issues": "https://github.com/vulcanphp/phprouter/issues",
-                "source": "https://github.com/vulcanphp/phprouter/tree/v1.0"
+                "source": "https://github.com/vulcanphp/phprouter/tree/V1.1.0"
             },
             "install-path": "../vulcanphp/phprouter"
         },
@@ -316,23 +360,23 @@
         },
         {
             "name": "vulcanphp/sweetview",
-            "version": "v1.0",
-            "version_normalized": "1.0.0.0",
+            "version": "v1.2.0",
+            "version_normalized": "1.2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vulcanphp/sweetview.git",
-                "reference": "fbc52552def590a1bfb50d493984e9f647cb7207"
+                "reference": "a4fbceb7c2b6abb7e007440794f55c41c5c600cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vulcanphp/sweetview/zipball/fbc52552def590a1bfb50d493984e9f647cb7207",
-                "reference": "fbc52552def590a1bfb50d493984e9f647cb7207",
+                "url": "https://api.github.com/repos/vulcanphp/sweetview/zipball/a4fbceb7c2b6abb7e007440794f55c41c5c600cc",
+                "reference": "a4fbceb7c2b6abb7e007440794f55c41c5c600cc",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.4"
             },
-            "time": "2023-11-24T13:45:40+00:00",
+            "time": "2024-04-03T14:24:12+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -356,7 +400,7 @@
             "description": "Sweet View is a lightweight and powerful PHP template engine that unblocks all the most common features in handling a View in PHP.",
             "support": {
                 "issues": "https://github.com/vulcanphp/sweetview/issues",
-                "source": "https://github.com/vulcanphp/sweetview/tree/v1.0"
+                "source": "https://github.com/vulcanphp/sweetview/tree/v1.2.0"
             },
             "install-path": "../vulcanphp/sweetview"
         },

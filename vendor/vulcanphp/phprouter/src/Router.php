@@ -3,9 +3,8 @@
 namespace VulcanPhp\PhpRouter;
 
 use VulcanPhp\PhpRouter\Callback\CallbackHandler;
-use VulcanPhp\PhpRouter\Http\Url;
-use VulcanPhp\PhpRouter\Http\Request;
-use VulcanPhp\PhpRouter\Http\Response;
+use VulcanPhp\InputMaster\Url;
+use VulcanPhp\InputMaster\Request;
 use VulcanPhp\PhpRouter\Routing\IRoute;
 use VulcanPhp\PhpRouter\Routing\Exceptions\NotFoundException;
 use VulcanPhp\PhpRouter\Routing\Exceptions\RouterException;
@@ -25,14 +24,13 @@ use VulcanPhp\PhpRouter\Security\Exceptions\MiddlewareException;
  */
 class Router
 {
+    public static Router $instance;
     public array $middlewares = [], $filters = [], $collection = [
         'routes' => [],
         'groups' => []
     ];
-    public static Router $instance;
-    public Request $request;
-    public Response $response;
-    public $fallback;
+    protected Request $request;
+    protected $fallback;
 
     /** 
      * Router Filter
@@ -46,12 +44,11 @@ class Router
         'reflection_parameters' => 5
     ];
 
-    public function __construct()
+    public function __construct(Request $request)
     {
         self::$instance = $this;
 
-        $this->request = Request::create();
-        $this->response = Response::create();
+        $this->request = $request;
     }
 
     public static function init(...$args): Router
@@ -74,7 +71,7 @@ class Router
         $method = $this->request->getMethod();
         $url    = $this->request->getUrl();
 
-        // loop all registared routes
+        // loop all registered routes
         foreach ($this->getRoutes() as $route) {
             // match current active route
             if (preg_match($route->getRegex(), $url->getPath(), $matches) === 1) {
@@ -84,14 +81,11 @@ class Router
 
                 // compare server request method with route's allowed http methods
                 if (!in_array($method, $route->getMethods(), true)) {
-                    $this->response->httpCode(405);
+                    $this->request->getResponse()->httpCode(405);
                     throw new UnsupportedMethodException(
                         sprintf('Unsupported Method %s, (%s) only supported for this route', $method, join(', ', $route->getMethods()))
                     );
                 }
-
-                // create route dispatcher
-                $dispatcher = new RouteDispatcher($this);
 
                 // utilize method required paramiters
                 $route->setParameters(
@@ -100,6 +94,9 @@ class Router
 
                 // set Url to route
                 $route->setUrl($url);
+
+                // create route dispatcher
+                $dispatcher = new RouteDispatcher($this);
 
                 // dispatch route callback
                 return $dispatcher->dispatch($route);
@@ -179,6 +176,11 @@ class Router
         return $this->applyFilters(self::FILTER['routes'], (array) $this->collection['routes'] ?? []);
     }
 
+    public function getRequest(): Request
+    {
+        return $this->request;
+    }
+
     public function __call($name, $arguments)
     {
         return call_user_func([Route::class, $name], ...$arguments);
@@ -192,7 +194,6 @@ class Router
     public function setMiddlewares($middlewares): self
     {
         $this->middlewares = (array) $middlewares;
-
         return $this;
     }
 
@@ -214,7 +215,6 @@ class Router
         }
 
         $this->filters[$filter] = array_merge($this->filters[$filter], [$callback]);
-
         return $this;
     }
 
@@ -225,7 +225,6 @@ class Router
                 $data = CallbackHandler::load($filter, $data);
             }
         }
-
         return $data;
     }
 
@@ -237,7 +236,6 @@ class Router
                 return $middleware->getTokenProvider()->getToken();
             }
         }
-
         return null;
     }
 

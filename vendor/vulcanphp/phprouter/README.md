@@ -17,11 +17,12 @@ After Installing PHP Router initialize it in your application then you can simpl
 
 use VulcanPhp\PhpRouter\Router;
 use VulcanPhp\PhpRouter\Route;
+use VulcanPhp\InputMaster\Request;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
 // initialize PHP Router
-$router = Router::init();
+$router = Router::init(new Request());
 
 // set default middleware to router
 $router->setMiddlewares([Csrf::class]);
@@ -124,9 +125,9 @@ Route::group(['prefix' => 'admin'], function(){
 
 use VulcanPhp\PhpRouter\Router;
 use VulcanPhp\PhpRouter\Route;
-use VulcanPhp\PhpRouter\Http\Request;
-use VulcanPhp\PhpRouter\Http\Response;
-use VulcanPhp\PhpRouter\Http\Input\InputHandler;
+use VulcanPhp\InputMaster\Request;
+use VulcanPhp\InputMaster\Response;
+use VulcanPhp\InputMaster\Input\InputHandler;
 
 /** 
  * usage of reflection parameters
@@ -179,8 +180,8 @@ Route::get('/user/{id}', function(User $user){
 
 namespace MyApp\Middlewares;
 
-use VulcanPhp\PhpRouter\Http\Request;
-use VulcanPhp\PhpRouter\Http\Response;
+use VulcanPhp\InputMaster\Request;
+use VulcanPhp\InputMaster\Response;
 use VulcanPhp\PhpRouter\Security\Interfaces\IMiddleware;
 
 class MyMiddleware implements IMiddleware
@@ -224,8 +225,8 @@ class Csrf extends IMiddleware
 
 namespace MyApp\Controller;
 
-use VulcanPhp\PhpRouter\Http\Request;
-use VulcanPhp\PhpRouter\Http\Response;
+use VulcanPhp\InputMaster\Request;
+use VulcanPhp\InputMaster\Response;
 use VulcanPhp\PhpRouter\Routing\Interfaces\IResource;
 
 class MyResourceController implements IResource
