@@ -110,16 +110,5 @@
         "name": "GoMo",
         "quality": "720p",
         "id": "gomo"
-    },
-    "fsapi": {
-        "source": {
-            "url": "https://show2embed.web.app/watch/",
-            "movie": "{tmdb}",
-            "tv": "{tmdb}/{season}/{episode}"
-        },
-        "priority": 45,
-        "name": "FS-Api",
-        "quality": "720p",
-        "id": "fsapi"
     }
 }

@@ -53,18 +53,15 @@ class VidCloud
 
         // Change Original Title to English Title and find anime
         if (in_array($this->type, ['anime'])) {
+            // alternative title for anime name
+            $altTitle = null;
             // search with translating original anime title
             if ($this->config->get('title') != $this->config->get('original_title')) {
                 $this->data['old_title'] = $this->config->get('title');
-                $this->config->push('title', $this->getAlternativeTitle());
+                $this->config->push('title', $altTitle = $this->getAlternativeTitle());
             }
 
             $id = $this->crawlForId();
-
-            // search again if the search keyword is too large
-            if ($id == null) {
-                $id = $this->searchIdWithShortKeyword();
-            }
 
             // search again if anime does not found with original title
             if ($id == null && isset($this->data['old_title'])) {
@@ -74,6 +71,13 @@ class VidCloud
 
                 // search again if the title is too large for title
                 if ($id == null) {
+                    $id = $this->searchIdWithShortKeyword();
+                }
+
+                // search again if the search keyword is too large
+                if ($id == null && !$altTitle !== null) {
+                    $this->data['old_title'] = $this->config->get('title');
+                    $this->config->push('title', $altTitle);
                     $id = $this->searchIdWithShortKeyword();
                 }
             }
@@ -121,15 +125,15 @@ class VidCloud
     {
         $keyword = explode(' ', $this->getSearchKeyword());
 
-        if (count($keyword) >= 4) {
+        if (count($keyword) >= 5) {
 
             $id = $this->crawlForId(
-                $this->getResults(join(' ', array_slice($keyword, 0, 3)))
+                $this->getResults(join(' ', array_slice($keyword, 0, 4)))
             );
 
             if ($id == null) {
                 $this->crawlForId(
-                    $this->getResults(join(' ', array_slice($keyword, 2, 3)))
+                    $this->getResults(join(' ', array_slice($keyword, 2, 4)))
                 );
             }
 
@@ -264,7 +268,7 @@ class VidCloud
                             || ($total_ep > 5 && $last_ep < ($total_ep - 5))
                             || ($total_ep >= $last_ep)
                         ) {
-                            $relevant += 5;
+                            $relevant +=  (5 + (($total_ep > $last_ep) ? round(($last_ep / $total_ep), 2) : round(($total_ep / $last_ep), 2)));
                         }
                     }
                 }
@@ -548,30 +552,27 @@ class VidCloud
 
     protected function getAlternativeTitle(): string
     {
-        $titles = collect($this->config->getContent()->alternative_titles['results'] ?? []);
+        $titles = collect(
+            $this->config->getContent()->alternative_titles['results'] ?? []
+        )
+            ->map(function ($title) {
+                $relevant   = 10;
+                $title      = $title['title'];
 
-        if (!empty($this->config->get('countries'))) {
-            $titles->filter(fn ($title) => in_array($title['iso_3166_1'], (array) $this->config->get('countries')));
-        }
+                if (!$this->isEnglish($title)) {
+                    return null;
+                }
 
-        $titles->map(function ($title) {
-            $relevant   = 10;
-            $title      = $title['title'];
+                if (strpos($this->config->get('title'), ' ') !== false && strpos($title, ' ') === false) {
+                    $relevant -= 5;
+                }
 
-            if (!$this->isEnglish($title)) {
-                return null;
-            }
+                if (like_match(Str::lowercase(Str::pure($title)) . '%', Str::lowercase(Str::pure($this->config->get('title'))))) {
+                    $relevant -= 5;
+                }
 
-            if (strpos($this->config->get('title'), ' ') !== false && strpos($title, ' ') === false) {
-                $relevant -= 5;
-            }
-
-            if (like_match(Str::lowercase(Str::pure($title)) . '%', Str::lowercase(Str::pure($this->config->get('title'))))) {
-                $relevant -= 5;
-            }
-
-            return ['title' => $title, 'word_count' => count(explode(' ', $title)), 'strlen' => strlen(Str::pure($title)), 'relevant' => $relevant];
-        })
+                return ['title' => $title, 'word_count' => count(explode(' ', $title)), 'strlen' => strlen(Str::pure($title)), 'relevant' => $relevant];
+            })
             ->filter();
 
         // fuzzy search title with original title

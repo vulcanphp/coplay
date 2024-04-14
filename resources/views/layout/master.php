@@ -36,7 +36,7 @@ if (!isset($config)) {
 
     <!-- Fire Loading Progressbar -->
     <div x-data="{width: 0, interval: null}" class="fixed top-0 inset-x-0 z-50">
-        <div x-cloak x-show="width > 0" class="bg-slate-800 h-[3px]" role="progressbar" :aria-valuenow="width" aria-valuemin="0" aria-valuemax="100">
+        <div x-cloak x-show="width > 0" class="h-[2px]" role="progressbar" :aria-valuenow="width" aria-valuemin="0" aria-valuemax="100">
             <div class="bg-amber-400 rounded-lg h-full" :style="`width: ${width}%; transition: width 0.5s;`"></div>
         </div>
         <div x-init="window.fireView.on('beforeLoad', () => (isFireError = false, width = 10, interval = setInterval(() => width = (width >= 80 ? 80 : width + 10), 25)))"></div>

@@ -12,7 +12,7 @@ $slug = home_url((isset($video['title']) ? 'movie' : 'tv') . '/' . Str::slugif($
             <path fill="currentColor" d="M20 3H4c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zm.001 6c-.001 0-.001 0 0 0h-.466l-2.667-4H20l.001 4zm-5.466 0-2.667-4h2.596l2.667 4h-2.596zm-2.404 0H9.535L6.869 5h2.596l2.666 4zM4 5h.465l2.667 4H4V5z"></path>
         </svg>
     <?php endif ?>
-    <div class="pl-3 w-9/12 text-sm">
+    <div class="pl-2 sm:pl-3 w-9/12 text-xs sm:text-sm">
         <p><?= $video['title'] ?? $video['name'] ?></p>
         <small class="block text-gray-300">(<?= date('Y', strtotime(strval($video['release_date'] ?? $video['first_air_date']))) ?>)</small>
         <small class="text-xs block"><?= isset($video['title']) ? 'Movie' : 'Tv' ?></small>
