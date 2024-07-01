@@ -161,7 +161,7 @@ class EasyCurlDriver implements ICurlDriver
     {
         return $this->setOptions([
             CURLOPT_POST        => 1,
-            CURLOPT_POSTFIELDS  => is_array($fields) ? http_build_query($fields) : $fields
+            CURLOPT_POSTFIELDS  => is_array($fields) ? json_encode($fields) : $fields
         ]);
     }
 

@@ -5,7 +5,7 @@ return [
     'timezone' => 'Asia/Dhaka',
 
     // enable/disable development mode
-    'development' => true,
+    'development' => false,
 
     // default application display language
     'language' => 'en',

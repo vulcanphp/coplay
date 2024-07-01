@@ -13,6 +13,8 @@ require_once __DIR__ . '/vendor/autoload.php';
 $siteCache = SiteCache::setup([
     'tmp_dir'   => config('app.tmp_dir'),
     'except'    => ['/admin/*', '/embed/*', '/search/*'],
+    'metadata'  => false,
+    'headers'   => false,
 ]);
 
 // serve from cache if production mode

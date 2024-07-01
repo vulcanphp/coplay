@@ -389,6 +389,26 @@ class Collection
         return $this;
     }
 
+    public function groupBy(string $g): self
+    {
+        $array = [];
+        foreach ($this->values as $k => $v) {
+            $array[$v[$g]][$k] = $v;
+        }
+        $this->values = $array;
+        return $this;
+    }
+
+    public function columnBy(string $c): self
+    {
+        $array = [];
+        foreach ($this->values as $k => $v) {
+            $array[$k] = array_column($v, $c);
+        }
+        $this->values = $array;
+        return $this;
+    }
+
     public function to(string $to = 'array')
     {
         switch ($to) {

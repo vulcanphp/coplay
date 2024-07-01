@@ -26,6 +26,12 @@ return [
         'callback' => [Callback::class, 'tailwindMinify']
     ],
     [
+        'command' => ['tailwind', 'tw'],
+        'action' => ['init', '-i'],
+        'info'  => 'Initialize TailwindCss on Project Root Directory',
+        'callback' => [Callback::class, 'tailwindInit']
+    ],
+    [
         'command' => 'vite',
         'info'  => 'Initialize Vite Startup Application',
         'callback' => [Vite::class, 'generate']

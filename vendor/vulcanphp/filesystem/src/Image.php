@@ -18,4 +18,10 @@ class Image extends BaseHandler implements IImage
     {
         $this->Handler = $Handler;
     }
+
+    public static function sizeText($image, int $width, int $height)
+    {
+        $ext = pathinfo($image, PATHINFO_EXTENSION);
+        return str_ireplace('.' . $ext, '-' . $width . 'x' . $height . '.' . $ext, $image);
+    }
 }

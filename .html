@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CoPlay - Stream Free Movies & TV Series Online</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="robots" content="all"/>
+	<meta name="description" content="Stream Free Movies, TV Shows, Anime, and Drama Online with HD Quality. Watch Anywhere Anytime in CoPlay."/>
+	<meta name="og:url" content="http://127.0.0.1:8080/"/>
+	<meta name="og:locale" content="en"/>
+	<meta name="og:title" content="CoPlay - Stream Free Movies & TV Series Online"/>
+	<meta name="og:description" content="Stream Free Movies, TV Shows, Anime, and Drama Online with HD Quality. Watch Anywhere Anytime in CoPlay."/>
+	<meta name="og:type" content="website"/>
+	<meta name="og:site_name" content="CoPlay"/>
+	<meta name="og:image" content=""/>
+	<meta name="twitter:url" content="http://127.0.0.1:8080/"/>
+	<meta name="twitter:title" content="CoPlay - Stream Free Movies & TV Series Online"/>
+	<meta name="twitter:description" content="Stream Free Movies, TV Shows, Anime, and Drama Online with HD Quality. Watch Anywhere Anytime in CoPlay."/>
+	<meta name="twitter:card" content="summary"/>
+	<meta name="twitter:image" content=""/>
+	<meta name="twitter:site" content="@coplay"/>
+	
+    <link rel="icon" type="image/x-icon" href="http://127.0.0.1:8080/resources/assets/favicon.png">
+    <script defer src="/vendor/vulcanphp/sweetview/src/Engine/Fire/fire.js"></script>    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+    </style>
+    <!-- Start Deque Mixer(css) -->
+	<link href="http://127.0.0.1:8080/resources/assets/dist/bundle.min.css" rel="stylesheet" type="text/css" >
+	<!-- End Deque Mixer(css) -->
+    <script defer src="http://127.0.0.1:8080/resources/assets/dist/bundle.min.js"></script>
+    </head>
+
+<body class="bg-primary-800 font-sans text-white" x-data="{mobileMenuOpen: false, isFireError: false}">
+
+    <!-- Fire Loading Progressbar -->
+    <div x-data="{width: 0, interval: null}" class="fixed top-0 inset-x-0 z-50">
+        <div x-cloak x-show="width > 0" class="h-[2px]" role="progressbar" :aria-valuenow="width" aria-valuemin="0" aria-valuemax="100">
+            <div class="bg-amber-400 rounded-lg h-full" :style="`width: ${width}%; transition: width 0.5s;`"></div>
+        </div>
+        <div x-init="window.fireView.on('beforeLoad', () => (isFireError = false, width = 10, interval = setInterval(() => width = (width >= 80 ? 80 : width + 10), 25)))"></div>
+        <div x-init="window.fireView.on('afterLoad', () => (clearInterval(interval), width = 100, window.scrollTo({top: 0, behavior: 'smooth'}), setTimeout(() => width = 0, 450)))"></div>
+        <div x-init="window.fireView.on('onError', () => isFireError = true)"></div>
+    </div>
+    <!-- Fire Loading Progressbar -->
+
+    
+    <header class="fixed z-40 bg-primary-800 inset-x-0 top-0">
+    <div class="container">
+        <div class="h-14 md:h-16 flex items-center justify-between">
+            <a fire href="http://127.0.0.1:8080/" class="flex items-center text-amber-400">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M20 3H4c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zm.001 6c-.001 0-.001 0 0 0h-.465l-2.667-4H20l.001 4zM9.536 9 6.869 5h2.596l2.667 4H9.536zm5 0-2.667-4h2.596l2.667 4h-2.596zM4 5h.465l2.667 4H4V5zm0 14v-8h16l.002 8H4z"></path>
+                    <path fill="currentColor" d="m10 18 5.5-3-5.5-3z"></path>
+                </svg>
+                <span class="font-semibold text-xl ml-3 hidden md:inline-block">CoPlay</span>
+            </a>
+            <div class="hidden md:flex items-center">
+                                    <a fire href="http://127.0.0.1:8080/movie" class="px-3 py-2 hover:text-gray-300">Movie</a>
+                                    <a fire href="http://127.0.0.1:8080/tv" class="px-3 py-2 hover:text-gray-300">Tv</a>
+                                    <a fire href="http://127.0.0.1:8080/watchlist" class="px-3 py-2 hover:text-gray-300">Watchlist</a>
+                            </div>
+            <div class="relative" x-data="{search: '', isOpen: true, isLoading: false, fetchResult(){
+                    this.isLoading = true
+                    fetch('/search?keyword=' + this.search).then(res => res.text()).then(html => {
+                        document.querySelector('#searchResult').innerHTML = html, this.isLoading = false, window.fireView.checkFireLinks();
+                    });
+                }}" @click.away="isOpen = false">
+                <input type="text" placeholder="Search (Press '/' to focus)" x-ref="search" @keydown.window="
+                    if(event.keyCode === 191){
+                        event.preventDefault();
+                        $refs.search.focus();
+                    }" @input.debounce.500ms="fetchResult" x-model="search" @focus="isOpen = true" @keydown="isOpen = true" @keydown.escape.window="isOpen = false" @keydown.shift.tab="isOpen = false" class="bg-gray-800 text-sm rounded-full w-48 sm:w-60 md:w-64 px-4 pl-9 py-[6px] focus:outline-none focus:ring-2 ring-amber-500/75" />
+                <div class="absolute top-0">
+                    <svg class="fill-current w-4 text-gray-500 mt-2 ml-3" viewBox="0 0 24 24">
+                        <path d="M16.32 14.9l5.39 5.4a1 1 0 01-1.42 1.4l-5.38-5.38a8 8 0 111.41-1.41zM10 16a6 6 0 100-12 6 6 0 000 12z"></path>
+                    </svg>
+                </div>
+                <div x-cloak x-show="isLoading" x-transition class="absolute top-0 right-0">
+                    <svg class="animate-spin fill-current w-4 text-gray-500 mt-2 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                </div>
+                <div x-cloak x-show="isOpen" x-transition id="searchResult" class="absolute z-40 top-full w-full h-max"></div>
+            </div>
+            <button @click="mobileMenuOpen = true" class="md:hidden p-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M4 6h16v2H4zm4 5h12v2H8zm5 5h7v2h-7z"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+</header>
+
+<div class="h-14 md:h-16"></div>
+
+<aside x-cloak x-show="mobileMenuOpen" x-transition class="md:hidden container p-0 fixed inset-0 z-40 h-full bg-gray-900 text-center">
+    <button class="mt-3 p-2 hover:text-gray-300" @click="mobileMenuOpen = false">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24">
+            <path fill="currentColor" d="m16.192 6.344-4.243 4.242-4.242-4.242-1.414 1.414L10.535 12l-4.242 4.242 1.414 1.414 4.242-4.242 4.243 4.242 1.414-1.414L13.364 12l4.242-4.242z"></path>
+        </svg>
+    </button>
+            <a @click="mobileMenuOpen = false" fire href="http://127.0.0.1:8080/movie" class="hover:text-gray-300 text-lg px-4 py-2 mt-1 block">Movie</a>
+            <a @click="mobileMenuOpen = false" fire href="http://127.0.0.1:8080/tv" class="hover:text-gray-300 text-lg px-4 py-2 mt-1 block">Tv</a>
+            <a @click="mobileMenuOpen = false" fire href="http://127.0.0.1:8080/watchlist" class="hover:text-gray-300 text-lg px-4 py-2 mt-1 block">Watchlist</a>
+    </aside>
+    <div x-cloak x-show="!isFireError" fire="content">
+        
+<main class="container my-5">
+    <section class="mb-6 text-center md:text-left">
+            <h2 class="font-semibold text-2xl mb-2">Welcome to CoPlay, Free Streaming Platform</h2>
+                <p>Stream Free Movies, TV Series, Anime, and Drama Online with HD Quality. Watch Anywhere Anytime in CoPlay.</p>
+    </section><section x-data="{tabOpen: 0}">
+    <div class="flex justify-center md:justify-start">
+                    <button @click="tabOpen = 0" :class="tabOpen == 0 ? 'text-white border-amber-400' : 'text-gray-400 hover:text-gray-200 border-transparent'" class="border-b-4 text-lg font-semibold ">Trending Movie</button>
+                    <button @click="tabOpen = 1" :class="tabOpen == 1 ? 'text-white border-amber-400' : 'text-gray-400 hover:text-gray-200 border-transparent'" class="border-b-4 text-lg font-semibold ml-4">Trending Tv Series</button>
+            </div>
+            <div  x-show="tabOpen == 0" x-transition class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
+            <div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/movie/furiosa-a-mad-max-saga-786892">
+                    <img src="https://image.tmdb.org/t/p/w185/iADOJ8Zymht2JPMoy3R7xceZprc.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/movie/furiosa-a-mad-max-saga-786892" class="mt-2 hover:text-gray-300">Furiosa: A Mad Max Saga</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">78%</span>
+            <span class="ml-1">(2024)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/movie/genre/action-28/">Action</a>, <a fire href="/movie/genre/adventure-12/">Adventure</a>, <a fire href="/movie/genre/science-fiction-878/">Science Fiction</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/movie/the-watchers-1086747">
+                    <img src="https://image.tmdb.org/t/p/w185/vZVEUPychdvZLrTNwWErr9xZFmu.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/movie/the-watchers-1086747" class="mt-2 hover:text-gray-300">The Watchers</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">66%</span>
+            <span class="ml-1">(2024)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/movie/genre/horror-27/">Horror</a>, <a fire href="/movie/genre/mystery-9648/">Mystery</a>, <a fire href="/movie/genre/fantasy-14/">Fantasy</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/movie/a-family-affair-987686">
+                    <img src="https://image.tmdb.org/t/p/w185/l0CaVyqnTsWwNd4hWsrLNEk1Wjd.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/movie/a-family-affair-987686" class="mt-2 hover:text-gray-300">A Family Affair</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">63%</span>
+            <span class="ml-1">(2024)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/movie/genre/romance-10749/">Romance</a>, <a fire href="/movie/genre/comedy-35/">Comedy</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/movie/inside-out-2-1022789">
+                    <img src="https://image.tmdb.org/t/p/w185/vpnVM9B6NMmQpWeZvzLvDESb2QY.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/movie/inside-out-2-1022789" class="mt-2 hover:text-gray-300">Inside Out 2</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">77%</span>
+            <span class="ml-1">(2024)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/movie/genre/animation-16/">Animation</a>, <a fire href="/movie/genre/family-10751/">Family</a>, <a fire href="/movie/genre/adventure-12/">Adventure</a>, <a fire href="/movie/genre/comedy-35/">Comedy</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/movie/A-Quiet-Place: Day-One-762441">
+                    <img src="https://image.tmdb.org/t/p/w185/yrpPYKijwdMHyTGIOd1iK1h0Xno.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/movie/A-Quiet-Place: Day-One-762441" class="mt-2 hover:text-gray-300">A Quiet Place: Day One</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">70%</span>
+            <span class="ml-1">(2024)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/movie/genre/horror-27/">Horror</a>, <a fire href="/movie/genre/science-fiction-878/">Science Fiction</a>, <a fire href="/movie/genre/thriller-53/">Thriller</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/movie/the-boy-and-the-heron-508883">
+                    <img src="https://image.tmdb.org/t/p/w185/jDQPkgzerGophKRRn7MKm071vCU.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/movie/the-boy-and-the-heron-508883" class="mt-2 hover:text-gray-300">The Boy and the Heron</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">75%</span>
+            <span class="ml-1">(2023)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/movie/genre/animation-16/">Animation</a>, <a fire href="/movie/genre/adventure-12/">Adventure</a>, <a fire href="/movie/genre/fantasy-14/">Fantasy</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/movie/in-a-violent-nature-1214509">
+                    <img src="https://image.tmdb.org/t/p/w185/o5pcDZaA9Up0X612os34JNCRX6j.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/movie/in-a-violent-nature-1214509" class="mt-2 hover:text-gray-300">In a Violent Nature</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">58%</span>
+            <span class="ml-1">(2024)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/movie/genre/horror-27/">Horror</a>, <a fire href="/movie/genre/thriller-53/">Thriller</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/movie/fancy-dance-1058617">
+                    <img src="https://image.tmdb.org/t/p/w185/uEiosO6QiXITDIMGf2JQ9tRkqyM.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/movie/fancy-dance-1058617" class="mt-2 hover:text-gray-300">Fancy Dance</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">74%</span>
+            <span class="ml-1">(2024)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/movie/genre/drama-18/">Drama</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/movie/despicable-me-4-519182">
+                    <img src="https://image.tmdb.org/t/p/w185/wWba3TaojhK7NdycRhoQpsG0FaH.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/movie/despicable-me-4-519182" class="mt-2 hover:text-gray-300">Despicable Me 4</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">86%</span>
+            <span class="ml-1">(2024)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/movie/genre/animation-16/">Animation</a>, <a fire href="/movie/genre/family-10751/">Family</a>, <a fire href="/movie/genre/comedy-35/">Comedy</a>, <a fire href="/movie/genre/action-28/">Action</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/movie/if-639720">
+                    <img src="https://image.tmdb.org/t/p/w185/xbKFv4KF3sVYuWKllLlwWDmuZP7.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/movie/if-639720" class="mt-2 hover:text-gray-300">IF</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">74%</span>
+            <span class="ml-1">(2024)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/movie/genre/comedy-35/">Comedy</a>, <a fire href="/movie/genre/fantasy-14/">Fantasy</a>, <a fire href="/movie/genre/family-10751/">Family</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/movie/the-roundup-punishment-1017163">
+                    <img src="https://image.tmdb.org/t/p/w185/r7LHM9MsPEipFCBPbsV6nHzSw3D.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/movie/the-roundup-punishment-1017163" class="mt-2 hover:text-gray-300">The Roundup: Punishment</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">74%</span>
+            <span class="ml-1">(2024)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/movie/genre/crime-80/">Crime</a>, <a fire href="/movie/genre/action-28/">Action</a>, <a fire href="/movie/genre/drama-18/">Drama</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/movie/godzilla-x-kong-the-new-empire-823464">
+                    <img src="https://image.tmdb.org/t/p/w185/z1p34vh7dEOnLDmyCrlUVLuoDzd.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/movie/godzilla-x-kong-the-new-empire-823464" class="mt-2 hover:text-gray-300">Godzilla x Kong: The New Empire</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">72%</span>
+            <span class="ml-1">(2024)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/movie/genre/science-fiction-878/">Science Fiction</a>, <a fire href="/movie/genre/action-28/">Action</a>, <a fire href="/movie/genre/adventure-12/">Adventure</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/movie/deadpool-and-wolverine-533535">
+                    <img src="https://image.tmdb.org/t/p/w185/jbwYaoYWZwxtPP76AZnfYKQjCEB.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/movie/deadpool-and-wolverine-533535" class="mt-2 hover:text-gray-300">Deadpool & Wolverine</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">0%</span>
+            <span class="ml-1">(2024)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/movie/genre/science-fiction-878/">Science Fiction</a>, <a fire href="/movie/genre/action-28/">Action</a>, <a fire href="/movie/genre/comedy-35/">Comedy</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/movie/dune-part-two-693134">
+                    <img src="https://image.tmdb.org/t/p/w185/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/movie/dune-part-two-693134" class="mt-2 hover:text-gray-300">Dune: Part Two</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">82%</span>
+            <span class="ml-1">(2024)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/movie/genre/science-fiction-878/">Science Fiction</a>, <a fire href="/movie/genre/adventure-12/">Adventure</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/movie/inside-out-150540">
+                    <img src="https://image.tmdb.org/t/p/w185/2H1TmgdfNtsKlU9jKdeNyYL5y8T.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/movie/inside-out-150540" class="mt-2 hover:text-gray-300">Inside Out</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">80%</span>
+            <span class="ml-1">(2015)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/movie/genre/animation-16/">Animation</a>, <a fire href="/movie/genre/family-10751/">Family</a>, <a fire href="/movie/genre/adventure-12/">Adventure</a>, <a fire href="/movie/genre/drama-18/">Drama</a>, <a fire href="/movie/genre/comedy-35/">Comedy</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/movie/drawing-closer-1291559">
+                    <img src="https://image.tmdb.org/t/p/w185/173FD4a0rpSF30z4CoWx6qdx8Ry.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/movie/drawing-closer-1291559" class="mt-2 hover:text-gray-300">Drawing Closer</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">82%</span>
+            <span class="ml-1">(2024)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/movie/genre/romance-10749/">Romance</a>, <a fire href="/movie/genre/drama-18/">Drama</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/movie/mad-max-fury-road-76341">
+                    <img src="https://image.tmdb.org/t/p/w185/hA2ple9q4qnwxp3hKVNhroipsir.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/movie/mad-max-fury-road-76341" class="mt-2 hover:text-gray-300">Mad Max: Fury Road</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">77%</span>
+            <span class="ml-1">(2015)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/movie/genre/action-28/">Action</a>, <a fire href="/movie/genre/adventure-12/">Adventure</a>, <a fire href="/movie/genre/science-fiction-878/">Science Fiction</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/movie/trigger-warning-704673">
+                    <img src="https://image.tmdb.org/t/p/w185/6XJM3C47iGOK9nFU6yLFCSf4U5c.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/movie/trigger-warning-704673" class="mt-2 hover:text-gray-300">Trigger Warning</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">58%</span>
+            <span class="ml-1">(2024)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/movie/genre/action-28/">Action</a>, <a fire href="/movie/genre/crime-80/">Crime</a>, <a fire href="/movie/genre/thriller-53/">Thriller</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/movie/kalki-2898-ad-801688">
+                    <img src="https://image.tmdb.org/t/p/w185/zNE88KjSX2nDSWjdsNqeIFGAXo8.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/movie/kalki-2898-ad-801688" class="mt-2 hover:text-gray-300">Kalki 2898 - AD</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">77%</span>
+            <span class="ml-1">(2024)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/movie/genre/drama-18/">Drama</a>, <a fire href="/movie/genre/action-28/">Action</a>, <a fire href="/movie/genre/fantasy-14/">Fantasy</a>, <a fire href="/movie/genre/science-fiction-878/">Science Fiction</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/movie/ghostbusters-frozen-empire-967847">
+                    <img src="https://image.tmdb.org/t/p/w185/e1J2oNzSBdou01sUvriVuoYp0pJ.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/movie/ghostbusters-frozen-empire-967847" class="mt-2 hover:text-gray-300">Ghostbusters: Frozen Empire</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">67%</span>
+            <span class="ml-1">(2024)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/movie/genre/fantasy-14/">Fantasy</a>, <a fire href="/movie/genre/adventure-12/">Adventure</a>, <a fire href="/movie/genre/comedy-35/">Comedy</a></div>
+    </div>
+</div>        </div>
+            <div x-cloak x-show="tabOpen == 1" x-transition class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
+            <div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/tv/house-of-the-dragon-94997">
+                    <img src="https://image.tmdb.org/t/p/w185/t9XkeE7HzOsdQcDDDapDYh8Rrmt.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/tv/house-of-the-dragon-94997" class="mt-2 hover:text-gray-300">House of the Dragon</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">85%</span>
+            <span class="ml-1">(2022)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/tv/genre/sci-fi-and-fantasy-10765/">Sci-Fi & Fantasy</a>, <a fire href="/tv/genre/drama-18/">Drama</a>, <a fire href="/tv/genre/action-and-adventure-10759/">Action & Adventure</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/tv/demon-slayer-kimetsu-no-yaiba-85937">
+                    <img src="https://image.tmdb.org/t/p/w185/xUfRZu2mi8jH6SzQEJGP6tjBuYj.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/tv/demon-slayer-kimetsu-no-yaiba-85937" class="mt-2 hover:text-gray-300">Demon Slayer: Kimetsu no Yaiba</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">87%</span>
+            <span class="ml-1">(2019)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/tv/genre/animation-16/">Animation</a>, <a fire href="/tv/genre/action-and-adventure-10759/">Action & Adventure</a>, <a fire href="/tv/genre/sci-fi-and-fantasy-10765/">Sci-Fi & Fantasy</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/tv/the-boys-76479">
+                    <img src="https://image.tmdb.org/t/p/w185/2zmTngn1tYC1AvfnrFLhxeD82hz.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/tv/the-boys-76479" class="mt-2 hover:text-gray-300">The Boys</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">85%</span>
+            <span class="ml-1">(2019)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/tv/genre/sci-fi-and-fantasy-10765/">Sci-Fi & Fantasy</a>, <a fire href="/tv/genre/action-and-adventure-10759/">Action & Adventure</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/tv/the-bear-136315">
+                    <img src="https://image.tmdb.org/t/p/w185/sHFlbKS3WLqMnp9t2ghADIJFnuQ.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/tv/the-bear-136315" class="mt-2 hover:text-gray-300">The Bear</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">83%</span>
+            <span class="ml-1">(2022)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/tv/genre/drama-18/">Drama</a>, <a fire href="/tv/genre/comedy-35/">Comedy</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/tv/supacell-158141">
+                    <img src="https://image.tmdb.org/t/p/w185/iZsQBIobC1oKSBEX0XoWF598j7F.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/tv/supacell-158141" class="mt-2 hover:text-gray-300">Supacell</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">64%</span>
+            <span class="ml-1">(2024)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/tv/genre/action-and-adventure-10759/">Action & Adventure</a>, <a fire href="/tv/genre/sci-fi-and-fantasy-10765/">Sci-Fi & Fantasy</a>, <a fire href="/tv/genre/drama-18/">Drama</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/tv/mushoku-tensei-jobless-reincarnation-94664">
+                    <img src="https://image.tmdb.org/t/p/w185/gLKOYIMyKlUHW0SVdskhgf9C0yy.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/tv/mushoku-tensei-jobless-reincarnation-94664" class="mt-2 hover:text-gray-300">Mushoku Tensei: Jobless Reincarnation</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">85%</span>
+            <span class="ml-1">(2021)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/tv/genre/animation-16/">Animation</a>, <a fire href="/tv/genre/action-and-adventure-10759/">Action & Adventure</a>, <a fire href="/tv/genre/sci-fi-and-fantasy-10765/">Sci-Fi & Fantasy</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/tv/the-whirlwind-223329">
+                    <img src="https://image.tmdb.org/t/p/w185/mPgTQpe4ExbfwKZ5JjKtlvW2D50.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/tv/the-whirlwind-223329" class="mt-2 hover:text-gray-300">The Whirlwind</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">70%</span>
+            <span class="ml-1">(2024)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/tv/genre/drama-18/">Drama</a>, <a fire href="/tv/genre/war-and-politics-10768/">War & Politics</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/tv/dark-matter-196322">
+                    <img src="https://image.tmdb.org/t/p/w185/c6MRUtPk0nEPQ9FBD9RdRKt2rIm.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/tv/dark-matter-196322" class="mt-2 hover:text-gray-300">Dark Matter</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">79%</span>
+            <span class="ml-1">(2024)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/tv/genre/sci-fi-and-fantasy-10765/">Sci-Fi & Fantasy</a>, <a fire href="/tv/genre/drama-18/">Drama</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/tv/my-lady-jane-203413">
+                    <img src="https://image.tmdb.org/t/p/w185/qX68uGVJwxQ0B0sPZBEGikWRmA6.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/tv/my-lady-jane-203413" class="mt-2 hover:text-gray-300">My Lady Jane</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">66%</span>
+            <span class="ml-1">(2024)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/tv/genre/drama-18/">Drama</a>, <a fire href="/tv/genre/comedy-35/">Comedy</a>, <a fire href="/tv/genre/sci-fi-and-fantasy-10765/">Sci-Fi & Fantasy</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/tv/wondla-237853">
+                    <img src="https://image.tmdb.org/t/p/w185/8kkrmc41lTk6eT2osAMzd4W0cSI.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/tv/wondla-237853" class="mt-2 hover:text-gray-300">WondLa</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">76%</span>
+            <span class="ml-1">(2024)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/tv/genre/sci-fi-and-fantasy-10765/">Sci-Fi & Fantasy</a>, <a fire href="/tv/genre/animation-16/">Animation</a>, <a fire href="/tv/genre/family-10751/">Family</a>, <a fire href="/tv/genre/kids-10762/">Kids</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/tv/kaiju-no-8-207468">
+                    <img src="https://image.tmdb.org/t/p/w185/hxP5zubomplKlOZaXmgHd1P9WsN.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/tv/kaiju-no-8-207468" class="mt-2 hover:text-gray-300">Kaiju No. 8</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">86%</span>
+            <span class="ml-1">(2024)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/tv/genre/animation-16/">Animation</a>, <a fire href="/tv/genre/action-and-adventure-10759/">Action & Adventure</a>, <a fire href="/tv/genre/sci-fi-and-fantasy-10765/">Sci-Fi & Fantasy</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/tv/one-piece-37854">
+                    <img src="https://image.tmdb.org/t/p/w185/cMD9Ygz11zjJzAovURpO75Qg7rT.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/tv/one-piece-37854" class="mt-2 hover:text-gray-300">One Piece</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">88%</span>
+            <span class="ml-1">(1999)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/tv/genre/action-and-adventure-10759/">Action & Adventure</a>, <a fire href="/tv/genre/comedy-35/">Comedy</a>, <a fire href="/tv/genre/animation-16/">Animation</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/tv/suicide-squad-isekai-229926">
+                    <img src="https://image.tmdb.org/t/p/w185/AbVwsBJnLoqJzPJn8dlGFSGfygy.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/tv/suicide-squad-isekai-229926" class="mt-2 hover:text-gray-300">Suicide Squad Isekai</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">74%</span>
+            <span class="ml-1">(2024)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/tv/genre/animation-16/">Animation</a>, <a fire href="/tv/genre/action-and-adventure-10759/">Action & Adventure</a>, <a fire href="/tv/genre/sci-fi-and-fantasy-10765/">Sci-Fi & Fantasy</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/tv/the-acolyte-114479">
+                    <img src="https://image.tmdb.org/t/p/w185/mztdt3y6GBsJR69zHtszFezTCLT.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/tv/the-acolyte-114479" class="mt-2 hover:text-gray-300">The Acolyte</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">55%</span>
+            <span class="ml-1">(2024)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/tv/genre/mystery-9648/">Mystery</a>, <a fire href="/tv/genre/sci-fi-and-fantasy-10765/">Sci-Fi & Fantasy</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/tv/game-of-thrones-1399">
+                    <img src="https://image.tmdb.org/t/p/w185/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/tv/game-of-thrones-1399" class="mt-2 hover:text-gray-300">Game of Thrones</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">85%</span>
+            <span class="ml-1">(2011)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/tv/genre/sci-fi-and-fantasy-10765/">Sci-Fi & Fantasy</a>, <a fire href="/tv/genre/drama-18/">Drama</a>, <a fire href="/tv/genre/action-and-adventure-10759/">Action & Adventure</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/tv/doctor-who-239770">
+                    <img src="https://image.tmdb.org/t/p/w185/8FHthx4Vu81J4X5BTLhJYK9Gtbs.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/tv/doctor-who-239770" class="mt-2 hover:text-gray-300">Doctor Who</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">65%</span>
+            <span class="ml-1">(2024)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/tv/genre/action-and-adventure-10759/">Action & Adventure</a>, <a fire href="/tv/genre/drama-18/">Drama</a>, <a fire href="/tv/genre/sci-fi-and-fantasy-10765/">Sci-Fi & Fantasy</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/tv/my-wife-has-no-emotion-250596">
+                    <img src="https://image.tmdb.org/t/p/w185/9xV3OFKoplDCc9DA87JvLEedZCs.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/tv/my-wife-has-no-emotion-250596" class="mt-2 hover:text-gray-300">My Wife Has No Emotion</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">0%</span>
+            <span class="ml-1">(2024)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/tv/genre/animation-16/">Animation</a>, <a fire href="/tv/genre/sci-fi-and-fantasy-10765/">Sci-Fi & Fantasy</a>, <a fire href="/tv/genre/drama-18/">Drama</a>, <a fire href="/tv/genre/comedy-35/">Comedy</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/tv/that-time-i-got-reincarnated-as-a-slime-82684">
+                    <img src="https://image.tmdb.org/t/p/w185/cujISgFwbIhZkvH9C1uOM5wv2Sa.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/tv/that-time-i-got-reincarnated-as-a-slime-82684" class="mt-2 hover:text-gray-300">That Time I Got Reincarnated as a Slime</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">86%</span>
+            <span class="ml-1">(2018)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/tv/genre/action-and-adventure-10759/">Action & Adventure</a>, <a fire href="/tv/genre/animation-16/">Animation</a>, <a fire href="/tv/genre/sci-fi-and-fantasy-10765/">Sci-Fi & Fantasy</a>, <a fire href="/tv/genre/comedy-35/">Comedy</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/tv/interview-with-the-vampire-128098">
+                    <img src="https://image.tmdb.org/t/p/w185/bERvgaWcySHr8mTrpScrbBAnGXh.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/tv/interview-with-the-vampire-128098" class="mt-2 hover:text-gray-300">Interview with the Vampire</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">73%</span>
+            <span class="ml-1">(2022)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/tv/genre/drama-18/">Drama</a></div>
+    </div>
+</div><div class="mt-8">
+    <a fire href="http://127.0.0.1:8080/tv/attack-on-titan-1429">
+                    <img src="https://image.tmdb.org/t/p/w185/hTP1DtLGFamjfu8WqjnuQdP1n4i.jpg" alt="poster" class="hover:opacity-75 w-full rounded-md transition ease-in-out duration-150">
+            </a>
+    <div class="mt-2">
+        <a fire href="http://127.0.0.1:8080/tv/attack-on-titan-1429" class="mt-2 hover:text-gray-300">Attack on Titan</a>
+        <div class="flex items-center text-gray-400 text-sm mt-1">
+            <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
+                <path d="M17.56 21a1 1 0 01-.46-.11L12 18.22l-5.1 2.67a1 1 0 01-1.45-1.06l1-5.63-4.12-4a1 1 0 01-.25-1 1 1 0 01.81-.68l5.7-.83 2.51-5.13a1 1 0 011.8 0l2.54 5.12 5.7.83a1 1 0 01.81.68 1 1 0 01-.25 1l-4.12 4 1 5.63a1 1 0 01-.4 1 1 1 0 01-.62.18z" data-name="star"></path>
+            </svg>
+            <span class="ml-1">87%</span>
+            <span class="ml-1">(2013)</span>
+        </div>
+        <div class="text-gray-400 mt-1 text-xs"><a fire href="/tv/genre/animation-16/">Animation</a>, <a fire href="/tv/genre/sci-fi-and-fantasy-10765/">Sci-Fi & Fantasy</a>, <a fire href="/tv/genre/action-and-adventure-10759/">Action & Adventure</a></div>
+    </div>
+</div>        </div>
+    </section>    <section class="mt-8">
+        <h2 class="font-semibold text-2xl border-amber-400 border-b-4 inline-block leading-10 mb-2">Popular People</h2>
+        <div class="mt-3 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+            <div class="mt-2 text-center">
+    <a fire href="/people/ana-de-armas-224513/">
+                    <img src="https://image.tmdb.org/t/p/w185/3vxvsmYLTf4jnr163SUlBIw51ee.jpg" alt="actor" class="mx-auto mb-1 hover:opacity-75 transition ease-in-out duration-150 rounded-full h-32 w-32 sm:h-40 sm:w-40 object-cover">
+                <small class="text-xs leading-3">Ana de Armas</small>
+    </a>
+</div><div class="mt-2 text-center">
+    <a fire href="/people/brad-pitt-287/">
+                    <img src="https://image.tmdb.org/t/p/w185/tJiSUYst4ddIaz1zge2LqCtu9tw.jpg" alt="actor" class="mx-auto mb-1 hover:opacity-75 transition ease-in-out duration-150 rounded-full h-32 w-32 sm:h-40 sm:w-40 object-cover">
+                <small class="text-xs leading-3">Brad Pitt</small>
+    </a>
+</div><div class="mt-2 text-center">
+    <a fire href="/people/shelley-duvall-10409/">
+                    <img src="https://image.tmdb.org/t/p/w185/mCNjpLeTDCUMFGLfe9BvHKM2ny7.jpg" alt="actor" class="mx-auto mb-1 hover:opacity-75 transition ease-in-out duration-150 rounded-full h-32 w-32 sm:h-40 sm:w-40 object-cover">
+                <small class="text-xs leading-3">Shelley Duvall</small>
+    </a>
+</div><div class="mt-2 text-center">
+    <a fire href="/people/jeremy-piven-12799/">
+                    <img src="https://image.tmdb.org/t/p/w185/pqdR8zqAWF87chGYlbdYr0YfC7g.jpg" alt="actor" class="mx-auto mb-1 hover:opacity-75 transition ease-in-out duration-150 rounded-full h-32 w-32 sm:h-40 sm:w-40 object-cover">
+                <small class="text-xs leading-3">Jeremy Piven</small>
+    </a>
+</div><div class="mt-2 text-center">
+    <a fire href="/people/kim-hee-jeong-2484644/">
+                    <img src="https://image.tmdb.org/t/p/w185/3GxSLhLzUa26ZffrJPOjsIBU7WW.jpg" alt="actor" class="mx-auto mb-1 hover:opacity-75 transition ease-in-out duration-150 rounded-full h-32 w-32 sm:h-40 sm:w-40 object-cover">
+                <small class="text-xs leading-3">Kim Hee-jeong</small>
+    </a>
+</div><div class="mt-2 text-center">
+    <a fire href="/people/frances-tomelty-184924/">
+                    <img src="https://image.tmdb.org/t/p/w185/nZPZijCmdr5HvpiprTDAEbpwtlU.jpg" alt="actor" class="mx-auto mb-1 hover:opacity-75 transition ease-in-out duration-150 rounded-full h-32 w-32 sm:h-40 sm:w-40 object-cover">
+                <small class="text-xs leading-3">Frances Tomelty</small>
+    </a>
+</div><div class="mt-2 text-center">
+    <a fire href="/people/kristen-bell-40462/">
+                    <img src="https://image.tmdb.org/t/p/w185/rP74dJXl7EjinGM0shQtUOlH5s2.jpg" alt="actor" class="mx-auto mb-1 hover:opacity-75 transition ease-in-out duration-150 rounded-full h-32 w-32 sm:h-40 sm:w-40 object-cover">
+                <small class="text-xs leading-3">Kristen Bell</small>
+    </a>
+</div><div class="mt-2 text-center">
+    <a fire href="/people/dakota-fanning-501/">
+                    <img src="https://image.tmdb.org/t/p/w185/x7yTFrlbKLXKuzpqMfcZFWSsgZQ.jpg" alt="actor" class="mx-auto mb-1 hover:opacity-75 transition ease-in-out duration-150 rounded-full h-32 w-32 sm:h-40 sm:w-40 object-cover">
+                <small class="text-xs leading-3">Dakota Fanning</small>
+    </a>
+</div><div class="mt-2 text-center">
+    <a fire href="/people/yoo-jung-2349944/">
+                    <img src="https://image.tmdb.org/t/p/w185/an05J38LZGz3sdDe0CxxXUIGHe9.jpg" alt="actor" class="mx-auto mb-1 hover:opacity-75 transition ease-in-out duration-150 rounded-full h-32 w-32 sm:h-40 sm:w-40 object-cover">
+                <small class="text-xs leading-3">Yoo Jung</small>
+    </a>
+</div><div class="mt-2 text-center">
+    <a fire href="/people/amparo-grisales-1003394/">
+                    <img src="https://image.tmdb.org/t/p/w185/tzbFaMKIVRxcvK23IpIR5MwrTEV.jpg" alt="actor" class="mx-auto mb-1 hover:opacity-75 transition ease-in-out duration-150 rounded-full h-32 w-32 sm:h-40 sm:w-40 object-cover">
+                <small class="text-xs leading-3">Amparo Grisales</small>
+    </a>
+</div><div class="mt-2 text-center">
+    <a fire href="/people/taylor-swift-212208/">
+                    <img src="https://image.tmdb.org/t/p/w185/1PJE0GMBJF0Ry3KjuOd1IRg1cir.jpg" alt="actor" class="mx-auto mb-1 hover:opacity-75 transition ease-in-out duration-150 rounded-full h-32 w-32 sm:h-40 sm:w-40 object-cover">
+                <small class="text-xs leading-3">Taylor Swift</small>
+    </a>
+</div><div class="mt-2 text-center">
+    <a fire href="/people/jack-lemmon-3151/">
+                    <img src="https://image.tmdb.org/t/p/w185/4yowflZgO62PGTPADoFzkYSrZv.jpg" alt="actor" class="mx-auto mb-1 hover:opacity-75 transition ease-in-out duration-150 rounded-full h-32 w-32 sm:h-40 sm:w-40 object-cover">
+                <small class="text-xs leading-3">Jack Lemmon</small>
+    </a>
+</div><div class="mt-2 text-center">
+    <a fire href="/people/martin-mull-80742/">
+                    <img src="https://image.tmdb.org/t/p/w185/wthyliVHLrgvKUIRI1WXfEw9pjL.jpg" alt="actor" class="mx-auto mb-1 hover:opacity-75 transition ease-in-out duration-150 rounded-full h-32 w-32 sm:h-40 sm:w-40 object-cover">
+                <small class="text-xs leading-3">Martin Mull</small>
+    </a>
+</div><div class="mt-2 text-center">
+    <a fire href="/people/keanu-reeves-6384/">
+                    <img src="https://image.tmdb.org/t/p/w185/4D0PpNI0kmP58hgrwGC3wCjxhnm.jpg" alt="actor" class="mx-auto mb-1 hover:opacity-75 transition ease-in-out duration-150 rounded-full h-32 w-32 sm:h-40 sm:w-40 object-cover">
+                <small class="text-xs leading-3">Keanu Reeves</small>
+    </a>
+</div><div class="mt-2 text-center">
+    <a fire href="/people/james-mark-2806067/">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="opacity-50 h-32 w-32 sm:h-40 sm:w-40 mx-auto" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M12 2C6.579 2 2 6.579 2 12s4.579 10 10 10 10-4.579 10-10S17.421 2 12 2zm0 5c1.727 0 3 1.272 3 3s-1.273 3-3 3c-1.726 0-3-1.272-3-3s1.274-3 3-3zm-5.106 9.772c.897-1.32 2.393-2.2 4.106-2.2h2c1.714 0 3.209.88 4.106 2.2C15.828 18.14 14.015 19 12 19s-3.828-.86-5.106-2.228z"></path>
+            </svg>
+                <small class="text-xs leading-3">James Mark</small>
+    </a>
+</div><div class="mt-2 text-center">
+    <a fire href="/people/seung-ha-2710789/">
+                    <img src="https://image.tmdb.org/t/p/w185/nvSJiHakYrDa3CedKSVOEsbLLX8.jpg" alt="actor" class="mx-auto mb-1 hover:opacity-75 transition ease-in-out duration-150 rounded-full h-32 w-32 sm:h-40 sm:w-40 object-cover">
+                <small class="text-xs leading-3">Seung Ha</small>
+    </a>
+</div><div class="mt-2 text-center">
+    <a fire href="/people/lee-chae-dam-1622390/">
+                    <img src="https://image.tmdb.org/t/p/w185/7wMyr6F3yzvbSpu2XMxSW3vObED.jpg" alt="actor" class="mx-auto mb-1 hover:opacity-75 transition ease-in-out duration-150 rounded-full h-32 w-32 sm:h-40 sm:w-40 object-cover">
+                <small class="text-xs leading-3">Lee Chae-dam</small>
+    </a>
+</div><div class="mt-2 text-center">
+    <a fire href="/people/andrew-weir-3250662/">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="opacity-50 h-32 w-32 sm:h-40 sm:w-40 mx-auto" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M12 2C6.579 2 2 6.579 2 12s4.579 10 10 10 10-4.579 10-10S17.421 2 12 2zm0 5c1.727 0 3 1.272 3 3s-1.273 3-3 3c-1.726 0-3-1.272-3-3s1.274-3 3-3zm-5.106 9.772c.897-1.32 2.393-2.2 4.106-2.2h2c1.714 0 3.209.88 4.106 2.2C15.828 18.14 14.015 19 12 19s-3.828-.86-5.106-2.228z"></path>
+            </svg>
+                <small class="text-xs leading-3">Andrew Weir</small>
+    </a>
+</div><div class="mt-2 text-center">
+    <a fire href="/people/will-smith-2888/">
+                    <img src="https://image.tmdb.org/t/p/w185/9QD9DvQUF5t8ZVKpeoW4k2sFZ4D.jpg" alt="actor" class="mx-auto mb-1 hover:opacity-75 transition ease-in-out duration-150 rounded-full h-32 w-32 sm:h-40 sm:w-40 object-cover">
+                <small class="text-xs leading-3">Will Smith</small>
+    </a>
+</div><div class="mt-2 text-center">
+    <a fire href="/people/lee-eun-mi-1647345/">
+                    <img src="https://image.tmdb.org/t/p/w185/dMKEjZYPAbATFSJfWaHoIW5hpOJ.jpg" alt="actor" class="mx-auto mb-1 hover:opacity-75 transition ease-in-out duration-150 rounded-full h-32 w-32 sm:h-40 sm:w-40 object-cover">
+                <small class="text-xs leading-3">Lee Eun-mi</small>
+    </a>
+</div>        </div>
+    </section>
+</main>
+    </div>
+
+    <div x-cloak x-show="isFireError" x-transition class="mx-auto w-8/12 sm:w-6/12 md:w-5/12 lg:w-4/12 xl:w-3/12 text-center my-10">
+        <h2 class="text-amber-400 text-6xl font-semibold mb-4">Oops!</h2>
+        <p class="text-xl text-gray-300 mb-4">Something Wen't Wrong, Please Try Again Later.</p>
+        <a @click.prevent="isFireError = false" href="#" class="text-amber-400">&larr; Go Back</a>
+    </div>
+
+    <footer class="container">
+    <div class="flex py-5 flex-col md:flex-row items-center justify-between">
+        <div class="text-sm">&copy; 2024 all right reserved.</div>
+        <a fire href="http://127.0.0.1:8080/" class="flex items-center justify-center text-amber-400 my-3 md:my-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M20 3H4c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zm.001 6c-.001 0-.001 0 0 0h-.465l-2.667-4H20l.001 4zM9.536 9 6.869 5h2.596l2.667 4H9.536zm5 0-2.667-4h2.596l2.667 4h-2.596zM4 5h.465l2.667 4H4V5zm0 14v-8h16l.002 8H4z"></path>
+                <path fill="currentColor" d="m10 18 5.5-3-5.5-3z"></path>
+            </svg>
+            <span class="font-semibold text-lg ml-2">CoPlay</span>
+        </a>
+        <p class="text-xs">
+            Powered by <a href="https://www.themoviedb.org/" class="underline hover:text-gray-300">TMDb API</a> & <a href="https://github.com/vulcanphp" class="underline hover:text-gray-300">VulcanPhp</a>        </p>
+    </div>
+    <div class="text-center mb-6">
+        <p class="text-xs text-gray-400 opacity-75">We does not host any files, it merely links to 3rd party services. CoPlay is not responsible for any media files shown by the video providers</p>
+    </div>
+</footer>
+    
+    <!-- Start Deque Mixer(js) -->
+	<!-- End Deque Mixer(js) -->
+</body>
+
+</html>

@@ -11,12 +11,12 @@ class HtmlDriver implements IViewDriver
     protected const EXTENSION = '.php', BASE_DIR = 'resources/views';
     protected IEngine $engine;
 
-    public function __construct()
+    public function __construct(?string $extension = null, ?string $baseDir = null)
     {
         $this->engine = new Html;
         $this->engine
-            ->resourceDir(self::BASE_DIR)
-            ->extension(self::EXTENSION);
+            ->extension($extension ?? self::EXTENSION)
+            ->resourceDir($baseDir ?? self::BASE_DIR);
     }
 
     public function dispatchView(string $template, array $parameters = []): string

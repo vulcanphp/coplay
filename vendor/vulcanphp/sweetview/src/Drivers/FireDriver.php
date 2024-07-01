@@ -11,11 +11,11 @@ class FireDriver implements IViewDriver
     protected const EXTENSION = '.fire.php', BASE_DIR = 'resources/views';
     protected IEngine $engine;
 
-    public function __construct()
+    public function __construct(?string $extension = null, ?string $baseDir = null)
     {
         $this->engine = new FireView(
-            self::BASE_DIR,
-            self::EXTENSION
+            $extension ?? self::BASE_DIR,
+            $baseDir ?? self::EXTENSION
         );
     }
 

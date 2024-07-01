@@ -45,6 +45,33 @@ class Callback
         exec('npx tailwindcss -i ./resources/assets/css/app.css -o ./resources/assets/dist/bundle.min.css --watch');
     }
 
+    public function tailwindInit()
+    {
+        $config = root_dir('tailwind.config.js');
+        if (file_put_contents($config, <<<EOT
+            /** @type {import('tailwindcss').Config} */
+            module.exports = {
+                content: [
+                    "./resources/views/**/*.{php,js,html}",
+                ],
+                theme: {
+                    container: {
+                        center: true,
+                        padding: '1rem',
+                        screens: {},
+                    },
+                    extend: {
+                        colors: {}
+                    },
+                },
+            }
+        EOT)) {
+            $this->log("Success, {$config} has been created.", 'success');
+        } else {
+            $this->log("Failed to create: {$config}", 'error');
+        }
+    }
+
     public function table($args)
     {
         $flags = $args['flags'] ?? [];

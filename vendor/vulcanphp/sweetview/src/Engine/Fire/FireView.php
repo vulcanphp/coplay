@@ -9,13 +9,11 @@ class FireView implements IEngine
 {
     protected Html $html;
 
-    public function __construct(
-        protected string $resourceDir,
-        protected string $extension
-    ) {
+    public function __construct(string $extension, string $resourceDir)
+    {
         $this->html = new Html();
-        $this->html->resourceDir($resourceDir);
         $this->html->extension($extension);
+        $this->html->resourceDir($resourceDir);
     }
 
     public function isFireAgent(): bool
@@ -30,11 +28,6 @@ class FireView implements IEngine
         }
 
         return $this->html->render($params);
-    }
-
-    public function getHtml(): Html
-    {
-        return $this->html;
     }
 
     public function getContent(string $path, array $params = []): string

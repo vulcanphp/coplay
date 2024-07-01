@@ -33,7 +33,7 @@ class Html implements IEngine
         return $this;
     }
 
-    public function template(?string $template): self
+    public function template(string $template): self
     {
         if (stripos($template, sweet_view_root_dir()) !== false) {
             $location = $this->directoryParse(str_replace('.', '/', $this->removeExtension($template)));

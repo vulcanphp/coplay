@@ -29,6 +29,7 @@ class SiteCache implements ISiteCache
             'minify'    => false,
             'limit'     => 100,
             'metadata'  => true,
+            'headers'   => true,
         ], $config);
     }
 
@@ -50,7 +51,9 @@ class SiteCache implements ISiteCache
             if (file_exists($filepath)) {
 
                 // Cache Header
-                $this->cacheHeaders($filepath);
+                if ($this->config['headers']) {
+                    $this->cacheHeaders($filepath);
+                }
 
                 ob_start();
 
@@ -269,7 +272,7 @@ class SiteCache implements ISiteCache
     protected function getCacheFile(): string
     {
         return $this->getTmpDir()
-            . sha1($_SERVER['REQUEST_URI'])
+            . sha1($_SERVER['REQUEST_URI'] . ($_SERVER['HTTP_CONTENT_AGENT'] ?? 'html'))
             . $this->config['extension'];
     }
 

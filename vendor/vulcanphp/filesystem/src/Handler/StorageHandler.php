@@ -176,7 +176,7 @@ class StorageHandler extends FolderHandler implements IStorageHandler
         }
 
         do {
-			if (file_exists($uploadPath)) {
+            if (file_exists($uploadPath)) {
                 $uploadPath = $this->getUploadPath(
                     sprintf('%s-%s.%s', pathinfo($file['name'], PATHINFO_FILENAME), ++$tried, $extension)
                 );
