@@ -29,14 +29,14 @@ return [
     // Security settings
     'app_key' => '4c5d44fb54e7830cb7b7f455514e408124f9f9372f071a9eeba2797386767bc2', // Application key for encryption and authentication
 
-    // TMDB API key
-    'TMDB_API_KEY' => '{PAST_YOUR_TMDB_API_HERE}', // Get your TMDB API key from https://www.themoviedb.org
-
     // Database connection settings
     'database' => [
         'driver' => 'sqlite', // Database driver
         'file' => __DIR__ . '/../storage/sqlite.db', // SQLite Database filepath 
     ],
+
+    // TMDB API key
+    'TMDB_API_KEY' => '{PAST_YOUR_TMDB_API_HERE}', // Get your TMDB API key from https://www.themoviedb.org
 
     // Site general settings
     'cms' => [
