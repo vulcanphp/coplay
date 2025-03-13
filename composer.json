@@ -1,0 +1,32 @@
+{
+    "name": "vulcanphp/hyper",
+    "type": "project",
+    "description": "Sweet and MVT Based Php Tiny Web Framework",
+    "keywords": ["vulcanphp", "hyper", "mvt", "web framework", "php framework"],
+    "license": "MIT",
+    "require": {
+        "php": ">=8.2",
+        "vulcanphp/hyper-core": "^1.0"
+    },
+    "authors": [
+        {
+            "name": "Shahin Moyshan",
+            "email": "shahin.moyshan2@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Models\\": "./app/Models",
+            "Views\\": "./app/Views",
+            "Middlewares\\": "./app/Middlewares",
+            "Lib\\": "./app/Lib",
+            "Providers\\": "./app/Providers"
+        },
+        "files": [
+            "./bootstrap/functions.php"
+        ]
+    },
+    "config": {
+        "optimize-autoloader": true
+    }
+}
