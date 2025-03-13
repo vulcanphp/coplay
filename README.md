@@ -35,6 +35,12 @@ CoPlay is a free PHP application that brings the world of movies, TV series, ani
 
 If you find this project helpful and would like to support its continued development, consider [buying me a coffee](https://www.buymeacoffee.com/vulcandev). Your contribution helps me maintain the project, and dedicate more time to enhancing its features.
 
+### Hire for Freelance Work:
+- [fiverr](https://www.fiverr.com/vulcanphp)
+- [Website](https://evolesoft.com/contact)
+- *WhatsApp*: +880 1969467747
+- *Email*: shahin.moyshan2@gmail.com
+
 ## Report an Issue
 
 For additional support, feel free to [open a new issue](https://github.com/vulcanphp/coplay/issues) with a detailed description of the problem you are facing. I will be happy to assist you.

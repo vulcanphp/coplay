@@ -30,7 +30,7 @@ return [
     'app_key' => '4c5d44fb54e7830cb7b7f455514e408124f9f9372f071a9eeba2797386767bc2', // Application key for encryption and authentication
 
     // TMDB API key
-    'TMDB_API_KEY' => 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyYWM4ZjQ0NDVlMTM1Y2JiZjI4MTFiODY2OGY0NDE2MSIsInN1YiI6IjVlODk3YTlmZDIwN2YzMDAxODk4NTI0MCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.OieB7DSDW6PSfynfmyS1BVGfIfwGtihvYTY2h2Wwd6U',
+    'TMDB_API_KEY' => '{PAST_YOUR_TMDB_API_HERE}', // Get your TMDB API key from https://www.themoviedb.org
 
     // Database connection settings
     'database' => [
@@ -49,6 +49,7 @@ return [
 
         // Color settings
         'color' => [
+            // available colors: https://tailwindcss.com/docs/colors
             'primary' => 'gray', // Primary color (Background and Text)
             'accent' => 'amber', // Accent/Brand color
         ],
