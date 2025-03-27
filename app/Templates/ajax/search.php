@@ -1,4 +1,4 @@
-<div class="bg-primary-900 p-2 rounded mt-2 max-h-[65vh] overflow-y-auto">
+<div class="bg-primary-900 p-2 rounded-sm mt-2 max-h-[65vh] overflow-y-auto">
     <?php
     if (!empty($results)) {
         foreach ($results as $index => $result) {

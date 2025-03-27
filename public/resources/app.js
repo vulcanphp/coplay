@@ -52,7 +52,7 @@ document.addEventListener('alpine:init', () => {
             isEnd: false,
             async init() {
                 await includeSwiperLibrary();
-    
+
                 this.$nextTick(() => {
                     slider = new Swiper(this.$el.querySelector('.swiper'), {
                         modules: SwiperModules,
@@ -71,14 +71,14 @@ document.addEventListener('alpine:init', () => {
             destroy() {
                 // Destroy the Swiper instance
                 slider.destroy();
-    
+
                 // Send it to the garbage collector
                 slider = undefined;
             },
             checkSlides(__Swiper) {
                 // Determine if there are multiple slides
                 this.hasSlides = __Swiper.slides.length > __Swiper.params.slidesPerView;
-    
+
                 // Check if the slider is at the beginning or end
                 this.updateNavigation(__Swiper);
             },
@@ -110,9 +110,9 @@ document.addEventListener('fireError', () => {
     window.FireLine.context.replaceHtml(
         `<div>
             <div class="mx-auto w-8/12 sm:w-6/12 md:w-5/12 lg:w-4/12 xl:w-3/12 text-center my-16">
-                <h2 class="text-amber-400 text-6xl font-semibold mb-4">Oops!</h2>
-                <p class="text-xl text-gray-300 mb-4">Something Wen\'t Wrong, Please Try Again Later.</p>
-                <button x-on:click="$fire.reload()" class="text-amber-400">&larr; Go Back</button>
+                <h2 style="color: --color-amber-400" class="text-6xl font-semibold mb-4">Oops!</h2>
+                <p style="color: --color-primary-300" class="text-xl mb-4">Something Wen\'t Wrong, Please Try Again Later.</p>
+                <button x-on:click="$fire.reload()" style="color: var(--color-amber-400)">&larr; Go Back</button>
             </div>
         </div>`
     );

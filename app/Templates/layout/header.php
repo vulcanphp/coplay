@@ -11,7 +11,7 @@ if (is_feature_enabled('api')) {
 }
 
 ?>
-<header class="fixed z-40 bg-primary-950 inset-x-0 top-0">
+<header class="fixed z-40 bg-primary-950/90 backdrop-blur-lg inset-x-0 top-0">
     <div class="container">
         <div class="h-14 md:h-16 flex items-center justify-between">
             <a href="<?= url() ?>" class="flex items-center text-accent-400">
@@ -37,7 +37,7 @@ if (is_feature_enabled('api')) {
                     }" x-on:input.debounce.500ms="fetchResult" x-model="search" x-on:focus="isOpen = true"
                     x-on:keydown="isOpen = true" x-on:keydown.escape.window="isOpen = false"
                     x-on:keydown.shift.tab="isOpen = false"
-                    class="bg-primary-900 text-sm rounded-full w-52 sm:w-60 md:w-64 px-4 pl-9 py-[6px] focus:outline-none focus:ring-2 ring-accent-500/75" />
+                    class="bg-primary-900/85 focus:bg-primary-900 text-sm rounded-full w-52 sm:w-60 md:w-64 px-4 pl-9 py-[6px] focus:outline-none focus:ring-2 ring-accent-500/75" />
                 <div class="absolute top-0">
                     <svg class="fill-current w-4 text-primary-500 mt-2 ml-3" viewBox="0 0 24 24">
                         <path

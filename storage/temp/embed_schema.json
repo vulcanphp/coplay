@@ -34,7 +34,7 @@
         "priority": 70,
         "name": "VidPro HD",
         "quality": "1080p (HD)",
-        "id": "vidpro"
+        "id": "embedflix"
     },
     "vidsrc": {
         "source": {

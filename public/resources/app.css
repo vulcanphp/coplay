@@ -4,14 +4,83 @@
  * This file contains the styles for the application UI. The styles
  * are written in CSS and are used to style the HTML components of the
  * application.
- *
- * @file app.css
- * @since 1.0.0
  */
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@source '../../app/Templates/**/*.php';
+@source '../**/*.js';
+
+@theme {
+    --color-accent-50: var(--color-accent-50);
+    --color-accent-100: var(--color-accent-100);
+    --color-accent-200: var(--color-accent-200);
+    --color-accent-300: var(--color-accent-300);
+    --color-accent-400: var(--color-accent-400);
+    --color-accent-500: var(--color-accent-500);
+    --color-accent-600: var(--color-accent-600);
+    --color-accent-700: var(--color-accent-700);
+    --color-accent-800: var(--color-accent-800);
+    --color-accent-900: var(--color-accent-900);
+    --color-accent-950: var(--color-accent-950);
+
+    --color-primary-50: var(--color-primary-50);
+    --color-primary-100: var(--color-primary-100);
+    --color-primary-200: var(--color-primary-200);
+    --color-primary-300: var(--color-primary-300);
+    --color-primary-400: var(--color-primary-400);
+    --color-primary-500: var(--color-primary-500);
+    --color-primary-600: var(--color-primary-600);
+    --color-primary-700: var(--color-primary-700);
+    --color-primary-800: var(--color-primary-800);
+    --color-primary-900: var(--color-primary-900);
+    --color-primary-950: var(--color-primary-950);
+}
+
+@utility container {
+    margin-inline: auto;
+    padding-inline: 1rem;
+    max-width: var(--container-5xl);
+}
+
+@layer base {
+    button:not(:disabled) {
+        @apply cursor-pointer;
+    }
+
+    button[disabled] {
+        @apply pointer-events-none opacity-50;
+    }
+
+    .pagination {
+        @apply flex items-center flex-wrap justify-center;
+    }
+
+    .pagination .page-item .page-link {
+        @apply text-primary-200 font-semibold text-lg hover:text-accent-400 inline-block p-1.5 my-0.5 mx-1;
+    }
+
+    .pagination .page-item.active .page-link {
+        @apply text-accent-400;
+    }
+
+    /* Make clicks pass-through */
+    #nprogress {
+        @apply pointer-events-none;
+    }
+
+    #nprogress .bar {
+        @apply bg-accent-600 fixed z-50 top-0 left-0 w-full h-0.5;
+    }
+
+    /* Fancy blur effect */
+    #nprogress .peg {
+        @apply block absolute right-0 h-full opacity-100;
+        width: 100px;
+        box-shadow: 0 0 10px rgb(var(--color-accent-500)), 0 0 5px rgb(var(--color-accent-600));
+        transform: rotate(3deg) translate(0px, -4px);
+    }
+}
 
 @layer utilities {
     .bx-shadow {
@@ -29,33 +98,4 @@
     .position-center {
         @apply absolute inset-0 m-auto w-max h-max;
     }
-}
-
-.pagination {
-    @apply flex items-center flex-wrap justify-center;
-}
-
-.pagination .page-item .page-link {
-    @apply text-primary-200 font-semibold text-lg hover:text-accent-400 inline-block p-1.5 my-0.5 mx-1;
-}
-
-.pagination .page-item.active .page-link {
-    @apply text-accent-400;
-}
-
-/* Make clicks pass-through */
-#nprogress {
-    @apply pointer-events-none;
-}
-
-#nprogress .bar {
-    @apply bg-accent-600 fixed z-50 top-0 left-0 w-full h-0.5;
-}
-
-/* Fancy blur effect */
-#nprogress .peg {
-    @apply block absolute right-0 h-full opacity-100;
-    width: 100px;
-    box-shadow: 0 0 10px rgb(var(--color-accent-500)), 0 0 5px rgb(var(--color-accent-600));
-    transform: rotate(3deg) translate(0px, -4px);
 }

@@ -2,6 +2,8 @@
 
 namespace Lib;
 
+use Hyper\Helpers\Vite;
+
 /**
  * Tailwind CSS helper class.
  *
@@ -9,6 +11,7 @@ namespace Lib;
  * and shade.
  *
  * @package Backpack\Lib
+ * @version 1.1 (for tailwind version 4)
  */
 class TailwindHelper
 {
@@ -17,28 +20,292 @@ class TailwindHelper
      * @reference  https://tailwindcss.com/docs/colors
      */
     private const COLOR_PLATTE = [
-        'red' => [50 => '254 242 242', 100 => '255 226 226', 200 => '255 201 201', 300 => '255 162 162', 400 => '255 100 103', 500 => '251 44 54', 600 => '231 0 11', 700 => '193 0 7', 800 => '159 7 18', 900 => '130 24 26', 950 => '70 8 9'],
-        'orange' => [50 => '255 247 237', 100 => '255 237 212', 200 => '255 215 168', 300 => '255 184 106', 400 => '255 137 4', 500 => '255 105 0', 600 => '245 74 0', 700 => '202 53 0', 800 => '159 45 0', 900 => '126 42 12', 950 => '68 19 6'],
-        'amber' => [50 => '255 251 235', 100 => '254 243 198', 200 => '254 230 133', 300 => '255 210 48', 400 => '255 185 0', 500 => '254 154 0', 600 => '225 113 0', 700 => '187 77 0', 800 => '151 60 0', 900 => '123 51 6', 950 => '70 25 1'],
-        'yellow' => [50 => '254 252 232', 100 => '254 249 194', 200 => '255 240 133', 300 => '255 223 32', 400 => '253 199 0', 500 => '240 177 0', 600 => '208 135 0', 700 => '166 95 0', 800 => '137 75 0', 900 => '115 62 10', 950 => '67 32 4'],
-        'lime' => [50 => '247 254 231', 100 => '236 252 202', 200 => '216 249 153', 300 => '187 244 81', 400 => '154 230 0', 500 => '124 207 0', 600 => '94 165 0', 700 => '73 125 0', 800 => '60 99 0', 900 => '53 83 14', 950 => '25 46 3'],
-        'green' => [50 => '240 253 244', 100 => '219 252 231', 200 => '185 248 207', 300 => '123 241 168', 400 => '5 223 114', 500 => '0 201 81', 600 => '0 166 62', 700 => '0 130 54', 800 => '1 102 48', 900 => '13 84 43', 950 => '3 46 21'],
-        'emerald' => [50 => '236 253 245', 100 => '208 250 229', 200 => '164 244 207', 300 => '94 233 181', 400 => '0 212 146', 500 => '0 188 125', 600 => '0 153 102', 700 => '0 122 85', 800 => '0 96 69', 900 => '0 79 59', 950 => '0 44 34'],
-        'teal' => [50 => '240 253 250', 100 => '203 251 241', 200 => '150 247 228', 300 => '70 237 213', 400 => '0 213 190', 500 => '0 187 167', 600 => '0 150 137', 700 => '0 120 111', 800 => '0 95 90', 900 => '11 79 74', 950 => '2 47 46'],
-        'cyan' => [50 => '236 254 255', 100 => '206 250 254', 200 => '162 244 253', 300 => '83 234 253', 400 => '0 211 243', 500 => '0 184 219', 600 => '0 146 184', 700 => '0 117 149', 800 => '0 95 120', 900 => '16 78 100', 950 => '5 51 69'],
-        'sky' => [50 => '240 249 255', 100 => '223 242 254', 200 => '184 230 254', 300 => '116 212 255', 400 => '0 188 255', 500 => '0 132 209', 600 => '0 132 209', 700 => '0 105 168', 800 => '0 89 138', 900 => '2 74 113', 950 => '5 47 74'],
-        'blue' => [50 => '239 246 255', 100 => '219 234 254', 200 => '190 219 255', 300 => '142 197 255', 400 => '81 162 255', 500 => '43 127 255', 600 => '21 93 252', 700 => '20 71 230', 800 => '25 60 184', 900 => '28 57 142', 950 => '22 37 86'],
-        'indigo' => [50 => '238 242 255', 100 => '224 231 255', 200 => '198 210 255', 300 => '163 179 255', 400 => '124 134 255', 500 => '97 95 255', 600 => '79 57 246', 700 => '67 45 215', 800 => '55 42 172', 900 => '49 44 133', 950 => '30 26 77'],
-        'violet' => [50 => '245 243 255', 100 => '237 233 254', 200 => '221 214 255', 300 => '196 180 255', 400 => '166 132 255', 500 => '142 81 255', 600 => '127 34 254', 700 => '112 8 231', 800 => '93 14 192', 900 => '77 23 154', 950 => '47 13 104'],
-        'purple' => [50 => '250 245 255', 100 => '243 232 255', 200 => '233 212 255', 300 => '218 178 255', 400 => '194 122 255', 500 => '173 70 255', 600 => '152 16 250', 700 => '130 0 219', 800 => '110 17 176', 900 => '89 22 139', 950 => '60 3 102'],
-        'fuchsia' => [50 => '253 244 255', 100 => '250 232 255', 200 => '246 207 255', 300 => '244 168 255', 400 => '237 107 255', 500 => '225 42 251', 600 => '200 0 222', 700 => '168 0 183', 800 => '138 1 148', 900 => '114 19 120', 950 => '75 0 79'],
-        'pink' => [50 => '253 242 248', 100 => '252 231 243', 200 => '252 206 232', 300 => '253 165 213', 400 => '251 100 182', 500 => '246 51 154', 600 => '230 0 118', 700 => '198 0 92', 800 => '163 0 76', 900 => '134 16 67', 950 => '81 4 36'],
-        'rose' => [50 => '255 241 242', 100 => '255 228 230', 200 => '255 204 211', 300 => '255 161 173', 400 => '255 99 126', 500 => '255 32 86', 600 => '236 0 63', 700 => '199 0 54', 800 => '165 0 54', 900 => '139 8 54', 950 => '77 2 24'],
-        'slate' => [50 => '248 250 252', 100 => '241 245 249', 200 => '226 232 240', 300 => '202 213 226', 400 => '144 161 185', 500 => '98 116 142', 600 => '69 85 108', 700 => '49 65 88', 800 => '29 41 61', 900 => '15 23 43', 950 => '2 6 24'],
-        'gray' => [50 => '249 250 251', 100 => '243 244 246', 200 => '229 231 235', 300 => '209 213 220', 400 => '153 161 175', 500 => '106 114 130', 600 => '74 85 101', 700 => '54 65 83', 800 => '30 41 57', 900 => '16 24 40', 950 => '3 7 18'],
-        'zinc' => [50 => '250 250 250', 100 => '244 244 245', 200 => '228 228 231', 300 => '212 212 216', 400 => '159 159 169', 500 => '113 113 123', 600 => '82 82 92', 700 => '63 63 71', 800 => '39 39 42', 900 => '24 24 27', 950 => '9 9 11'],
-        'neutral' => [50 => '250 250 250', 100 => '245 245 245', 200 => '229 229 229', 300 => '212 212 212', 400 => '161 161 161', 500 => '115 115 115', 600 => '82 82 82', 700 => '64 64 64', 800 => '38 38 38', 900 => '23 23 23', 950 => '10 10 10'],
-        'stone' => [50 => '250 250 249', 100 => '245 245 244', 200 => '231 229 228', 300 => '214 211 209', 400 => '166 160 155', 500 => '121 113 107', 600 => '87 83 77', 700 => '68 64 59', 800 => '41 37 36', 900 => '28 25 23', 950 => '12 10 9'],
+        'red' => [
+            50 => 'oklch(0.971 0.013 17.38)',
+            100 => 'oklch(0.936 0.032 17.717)',
+            200 => 'oklch(0.885 0.062 18.334)',
+            300 => 'oklch(0.808 0.114 19.571)',
+            400 => 'oklch(0.704 0.191 22.216)',
+            500 => 'oklch(0.637 0.237 25.331)',
+            600 => 'oklch(0.577 0.245 27.325)',
+            700 => 'oklch(0.505 0.213 27.518)',
+            800 => 'oklch(0.444 0.177 26.899)',
+            900 => 'oklch(0.396 0.141 25.723)',
+            950 => 'oklch(0.258 0.092 26.042)',
+        ],
+        'orange' => [
+            50 => 'oklch(0.98 0.016 73.684)',
+            100 => 'oklch(0.954 0.038 75.164)',
+            200 => 'oklch(0.901 0.076 70.697)',
+            300 => 'oklch(0.837 0.128 66.29)',
+            400 => 'oklch(0.75 0.183 55.934)',
+            500 => 'oklch(0.705 0.213 47.604)',
+            600 => 'oklch(0.646 0.222 41.116)',
+            700 => 'oklch(0.553 0.195 38.402)',
+            800 => 'oklch(0.47 0.157 37.304)',
+            900 => 'oklch(0.408 0.123 38.172)',
+            950 => 'oklch(0.266 0.079 36.259)',
+        ],
+        'amber' => [
+            50 => 'oklch(0.987 0.022 95.277)',
+            100 => 'oklch(0.962 0.059 95.617)',
+            200 => 'oklch(0.924 0.12 95.746)',
+            300 => 'oklch(0.879 0.169 91.605)',
+            400 => 'oklch(0.828 0.189 84.429)',
+            500 => 'oklch(0.769 0.188 70.08)',
+            600 => 'oklch(0.666 0.179 58.318)',
+            700 => 'oklch(0.555 0.163 48.998)',
+            800 => 'oklch(0.473 0.137 46.201)',
+            900 => 'oklch(0.414 0.112 45.904)',
+            950 => 'oklch(0.279 0.077 45.635)',
+        ],
+        'yellow' => [
+            50 => 'oklch(0.987 0.026 102.212)',
+            100 => 'oklch(0.973 0.071 103.193)',
+            200 => 'oklch(0.945 0.129 101.54)',
+            300 => 'oklch(0.905 0.182 98.111)',
+            400 => 'oklch(0.852 0.199 91.936)',
+            500 => 'oklch(0.795 0.184 86.047)',
+            600 => 'oklch(0.681 0.162 75.834)',
+            700 => 'oklch(0.554 0.135 66.442)',
+            800 => 'oklch(0.476 0.114 61.907)',
+            900 => 'oklch(0.421 0.095 57.708)',
+            950 => 'oklch(0.286 0.066 53.813)',
+        ],
+        'lime' => [
+            50 => 'oklch(0.986 0.031 120.757)',
+            100 => 'oklch(0.967 0.067 122.328)',
+            200 => 'oklch(0.938 0.127 124.321)',
+            300 => 'oklch(0.897 0.196 126.665)',
+            400 => 'oklch(0.841 0.238 128.85)',
+            500 => 'oklch(0.768 0.233 130.85)',
+            600 => 'oklch(0.648 0.2 131.684)',
+            700 => 'oklch(0.532 0.157 131.589)',
+            800 => 'oklch(0.453 0.124 130.933)',
+            900 => 'oklch(0.405 0.101 131.063)',
+            950 => 'oklch(0.274 0.072 132.109)',
+        ],
+        'green' => [
+            50 => 'oklch(0.982 0.018 155.826)',
+            100 => 'oklch(0.962 0.044 156.743)',
+            200 => 'oklch(0.925 0.084 155.995)',
+            300 => 'oklch(0.871 0.15 154.449)',
+            400 => 'oklch(0.792 0.209 151.711)',
+            500 => 'oklch(0.723 0.219 149.579)',
+            600 => 'oklch(0.627 0.194 149.214)',
+            700 => 'oklch(0.527 0.154 150.069)',
+            800 => 'oklch(0.448 0.119 151.328)',
+            900 => 'oklch(0.393 0.095 152.535)',
+            950 => 'oklch(0.266 0.065 152.934)',
+        ],
+        'emerald' => [
+            50 => 'oklch(0.979 0.021 166.113)',
+            100 => 'oklch(0.95 0.052 163.051)',
+            200 => 'oklch(0.905 0.093 164.15)',
+            300 => 'oklch(0.845 0.143 164.978)',
+            400 => 'oklch(0.765 0.177 163.223)',
+            500 => 'oklch(0.696 0.17 162.48)',
+            600 => 'oklch(0.596 0.145 163.225)',
+            700 => 'oklch(0.508 0.118 165.612)',
+            800 => 'oklch(0.432 0.095 166.913)',
+            900 => 'oklch(0.378 0.077 168.94)',
+            950 => 'oklch(0.262 0.051 172.552)',
+        ],
+        'teal' => [
+            50 => 'oklch(0.984 0.014 180.72)',
+            100 => 'oklch(0.953 0.051 180.801)',
+            200 => 'oklch(0.91 0.096 180.426)',
+            300 => 'oklch(0.855 0.138 181.071)',
+            400 => 'oklch(0.777 0.152 181.912)',
+            500 => 'oklch(0.704 0.14 182.503)',
+            600 => 'oklch(0.6 0.118 184.704)',
+            700 => 'oklch(0.511 0.096 186.391)',
+            800 => 'oklch(0.437 0.078 188.216)',
+            900 => 'oklch(0.386 0.063 188.416)',
+            950 => 'oklch(0.277 0.046 192.524)',
+        ],
+        'cyan' => [
+            50 => 'oklch(0.984 0.019 200.873)',
+            100 => 'oklch(0.956 0.045 203.388)',
+            200 => 'oklch(0.917 0.08 205.041)',
+            300 => 'oklch(0.865 0.127 207.078)',
+            400 => 'oklch(0.789 0.154 211.53)',
+            500 => 'oklch(0.715 0.143 215.221)',
+            600 => 'oklch(0.609 0.126 221.723)',
+            700 => 'oklch(0.52 0.105 223.128)',
+            800 => 'oklch(0.45 0.085 224.283)',
+            900 => 'oklch(0.398 0.07 227.392)',
+            950 => 'oklch(0.302 0.056 229.695)',
+        ],
+        'sky' => [
+            50 => 'oklch(0.977 0.013 236.62)',
+            100 => 'oklch(0.951 0.026 236.824)',
+            200 => 'oklch(0.901 0.058 230.902)',
+            300 => 'oklch(0.828 0.111 230.318)',
+            400 => 'oklch(0.746 0.16 232.661)',
+            500 => 'oklch(0.685 0.169 237.323)',
+            600 => 'oklch(0.588 0.158 241.966)',
+            700 => 'oklch(0.5 0.134 242.749)',
+            800 => 'oklch(0.443 0.11 240.79)',
+            900 => 'oklch(0.391 0.09 240.876)',
+            950 => 'oklch(0.293 0.066 243.157)',
+        ],
+        'blue' => [
+            50 => 'oklch(0.97 0.014 254.604)',
+            100 => 'oklch(0.932 0.032 255.585)',
+            200 => 'oklch(0.882 0.059 254.128)',
+            300 => 'oklch(0.809 0.105 251.813)',
+            400 => 'oklch(0.707 0.165 254.624)',
+            500 => 'oklch(0.623 0.214 259.815)',
+            600 => 'oklch(0.546 0.245 262.881)',
+            700 => 'oklch(0.488 0.243 264.376)',
+            800 => 'oklch(0.424 0.199 265.638)',
+            900 => 'oklch(0.379 0.146 265.522)',
+            950 => 'oklch(0.282 0.091 267.935)',
+        ],
+        'indigo' => [
+            50 => 'oklch(0.962 0.018 272.314)',
+            100 => 'oklch(0.93 0.034 272.788)',
+            200 => 'oklch(0.87 0.065 274.039)',
+            300 => 'oklch(0.785 0.115 274.713)',
+            400 => 'oklch(0.673 0.182 276.935)',
+            500 => 'oklch(0.585 0.233 277.117)',
+            600 => 'oklch(0.511 0.262 276.966)',
+            700 => 'oklch(0.457 0.24 277.023)',
+            800 => 'oklch(0.398 0.195 277.366)',
+            900 => 'oklch(0.359 0.144 278.697)',
+            950 => 'oklch(0.257 0.09 281.288)',
+        ],
+        'violet' => [
+            50 => 'oklch(0.969 0.016 293.756)',
+            100 => 'oklch(0.943 0.029 294.588)',
+            200 => 'oklch(0.894 0.057 293.283)',
+            300 => 'oklch(0.811 0.111 293.571)',
+            400 => 'oklch(0.702 0.183 293.541)',
+            500 => 'oklch(0.606 0.25 292.717)',
+            600 => 'oklch(0.541 0.281 293.009)',
+            700 => 'oklch(0.491 0.27 292.581)',
+            800 => 'oklch(0.432 0.232 292.759)',
+            900 => 'oklch(0.38 0.189 293.745)',
+            950 => 'oklch(0.283 0.141 291.089)',
+        ],
+        'purple' => [
+            50 => 'oklch(0.977 0.014 308.299)',
+            100 => 'oklch(0.946 0.033 307.174)',
+            200 => 'oklch(0.902 0.063 306.703)',
+            300 => 'oklch(0.827 0.119 306.383)',
+            400 => 'oklch(0.714 0.203 305.504)',
+            500 => 'oklch(0.627 0.265 303.9)',
+            600 => 'oklch(0.558 0.288 302.321)',
+            700 => 'oklch(0.496 0.265 301.924)',
+            800 => 'oklch(0.438 0.218 303.724)',
+            900 => 'oklch(0.381 0.176 304.987)',
+            950 => 'oklch(0.291 0.149 302.717)',
+        ],
+        'fuchsia' => [
+            50 => 'oklch(0.977 0.017 320.058)',
+            100 => 'oklch(0.952 0.037 318.852)',
+            200 => 'oklch(0.903 0.076 319.62)',
+            300 => 'oklch(0.833 0.145 321.434)',
+            400 => 'oklch(0.74 0.238 322.16)',
+            500 => 'oklch(0.667 0.295 322.15)',
+            600 => 'oklch(0.591 0.293 322.896)',
+            700 => 'oklch(0.518 0.253 323.949)',
+            800 => 'oklch(0.452 0.211 324.591)',
+            900 => 'oklch(0.401 0.17 325.612)',
+            950 => 'oklch(0.293 0.136 325.661)',
+        ],
+        'pink' => [
+            50 => 'oklch(0.971 0.014 343.198)',
+            100 => 'oklch(0.948 0.028 342.258)',
+            200 => 'oklch(0.899 0.061 343.231)',
+            300 => 'oklch(0.823 0.12 346.018)',
+            400 => 'oklch(0.718 0.202 349.761)',
+            500 => 'oklch(0.656 0.241 354.308)',
+            600 => 'oklch(0.592 0.249 0.584)',
+            700 => 'oklch(0.525 0.223 3.958)',
+            800 => 'oklch(0.459 0.187 3.815)',
+            900 => 'oklch(0.408 0.153 2.432)',
+            950 => 'oklch(0.284 0.109 3.907)',
+        ],
+        'rose' => [
+            50 => 'oklch(0.969 0.015 12.422)',
+            100 => 'oklch(0.941 0.03 12.58)',
+            200 => 'oklch(0.892 0.058 10.001)',
+            300 => 'oklch(0.81 0.117 11.638)',
+            400 => 'oklch(0.712 0.194 13.428)',
+            500 => 'oklch(0.645 0.246 16.439)',
+            600 => 'oklch(0.586 0.253 17.585)',
+            700 => 'oklch(0.514 0.222 16.935)',
+            800 => 'oklch(0.455 0.188 13.697)',
+            900 => 'oklch(0.41 0.159 10.272)',
+            950 => 'oklch(0.271 0.105 12.094)',
+        ],
+        'slate' => [
+            50 => 'oklch(0.984 0.003 247.858)',
+            100 => 'oklch(0.968 0.007 247.896)',
+            200 => 'oklch(0.929 0.013 255.508)',
+            300 => 'oklch(0.869 0.022 252.894)',
+            400 => 'oklch(0.704 0.04 256.788)',
+            500 => 'oklch(0.554 0.046 257.417)',
+            600 => 'oklch(0.446 0.043 257.281)',
+            700 => 'oklch(0.372 0.044 257.287)',
+            800 => 'oklch(0.279 0.041 260.031)',
+            900 => 'oklch(0.208 0.042 265.755)',
+            950 => 'oklch(0.129 0.042 264.695)',
+        ],
+        'gray' => [
+            50 => 'oklch(0.985 0.002 247.839)',
+            100 => 'oklch(0.967 0.003 264.542)',
+            200 => 'oklch(0.928 0.006 264.531)',
+            300 => 'oklch(0.872 0.01 258.338)',
+            400 => 'oklch(0.707 0.022 261.325)',
+            500 => 'oklch(0.551 0.027 264.364)',
+            600 => 'oklch(0.446 0.03 256.802)',
+            700 => 'oklch(0.373 0.034 259.733)',
+            800 => 'oklch(0.278 0.033 256.848)',
+            900 => 'oklch(0.21 0.034 264.665)',
+            950 => 'oklch(0.13 0.028 261.692)',
+        ],
+        'zinc' => [
+            50 => 'oklch(0.985 0 0)',
+            100 => 'oklch(0.967 0.001 286.375)',
+            200 => 'oklch(0.92 0.004 286.32)',
+            300 => 'oklch(0.871 0.006 286.286)',
+            400 => 'oklch(0.705 0.015 286.067)',
+            500 => 'oklch(0.552 0.016 285.938)',
+            600 => 'oklch(0.442 0.017 285.786)',
+            700 => 'oklch(0.37 0.013 285.805)',
+            800 => 'oklch(0.274 0.006 286.033)',
+            900 => 'oklch(0.21 0.006 285.885)',
+            950 => 'oklch(0.141 0.005 285.823)',
+        ],
+        'neutral' => [
+            50 => 'oklch(0.985 0 0)',
+            100 => 'oklch(0.97 0 0)',
+            200 => 'oklch(0.922 0 0)',
+            300 => 'oklch(0.87 0 0)',
+            400 => 'oklch(0.708 0 0)',
+            500 => 'oklch(0.556 0 0)',
+            600 => 'oklch(0.439 0 0)',
+            700 => 'oklch(0.371 0 0)',
+            800 => 'oklch(0.269 0 0)',
+            900 => 'oklch(0.205 0 0)',
+            950 => 'oklch(0.145 0 0)',
+        ],
+        'stone' => [
+            50 => 'oklch(0.985 0.001 106.423)',
+            100 => 'oklch(0.97 0.001 106.424)',
+            200 => 'oklch(0.923 0.003 48.717)',
+            300 => 'oklch(0.869 0.005 56.366)',
+            400 => 'oklch(0.709 0.01 56.259)',
+            500 => 'oklch(0.553 0.013 58.071)',
+            600 => 'oklch(0.444 0.011 73.639)',
+            700 => 'oklch(0.374 0.01 67.558)',
+            800 => 'oklch(0.268 0.007 34.298)',
+            900 => 'oklch(0.216 0.006 56.043)',
+            950 => 'oklch(0.147 0.004 49.25)',
+        ],
     ];
 
     /**
@@ -55,10 +322,13 @@ class TailwindHelper
                 'accent' => 'blue',
                 'primary' => 'gray',
             ],
-            'fonts' => [
-                'primary' => 'Inter',
-            ],
-            'assets' => []
+            'fonts' => ['primary' => 'Inter'],
+            'assets' => [],
+            'root' => '',
+            'style' => '',
+            'script' => '',
+            'preloader' => [],
+            'vite' => vite()
         ], $config);
     }
 
@@ -66,11 +336,11 @@ class TailwindHelper
      * Adds an asset to the configuration.
      *
      * @param string $type The type of asset to add (e.g. "css", "js").
-     * @param string $url The URL of the asset to add.
+     * @param string $asset The URL or array of script with attributes to add.
      */
-    public function addAsset(string $type, string $url): void
+    public function addAsset(string $type, array|string $asset): void
     {
-        $this->config['assets'][$type][] = $url;
+        $this->config['assets'][$type][] = $asset;
     }
 
     /**
@@ -78,16 +348,72 @@ class TailwindHelper
      *
      * @param string $id The ID of the font to add (e.g. "primary", "secondary").
      * @param string $name The name of the font to add (e.g. "Inter", "Roboto").
-     * @param string|null $fontUrl The URL of the font to add (only required if the font is not a system font).
+     * @param string|array|null $fontPath The URL of the font to add (only required if the font is not a system font).
      */
-    public function addFont(string $id, string $name, ?string $fontUrl = null): void
+    public function addFont(string $id, string $name, null|array|string $fontPath = null): void
     {
         $this->config['fonts'][$id] = $name;
 
         // If a font URL is provided, add it to the CSS assets.
-        if ($fontUrl) {
-            $this->addAsset('style', $fontUrl);
+        if ($fontPath) {
+            $this->addAsset('style', $fontPath);
         }
+    }
+
+    /**
+     * Sets the preloader configuration.
+     *
+     * @param array $preloader The preloader configuration array.
+     * @return void
+     */
+    public function setPreloader(array $preloader): void
+    {
+        $this->config['preloader'] = $preloader;
+    }
+
+    /**
+     * Retrieves the preloader element as a string.
+     *
+     * @return string The preloader element HTML or an empty string if not set.
+     */
+    public function getPreloaderElement(): string
+    {
+        return sprintf('<div id="preloader">%s</div>', $this->config['preloader']['element'] ?? '');
+    }
+
+    /**
+     * Appends a style to the configuration.
+     *
+     * @param string $style The CSS style string to append.
+     * @return void
+     */
+    public function addStyle(string $style): void
+    {
+        $this->config['style'] .= $style;
+    }
+
+    /**
+     * Appends a CSS root variable to the configuration.
+     *
+     * @param string $variable The name of the CSS variable to add.
+     * @param string $value The value of the CSS variable.
+     * @return void
+     */
+    public function addRoot(string $variable, string $value): void
+    {
+        // Append the CSS variable to the root configuration string
+        $this->config['root'] .= "--$variable: $value;";
+    }
+
+    /**
+     * Appends a script to the configuration.
+     *
+     * @param string $script The JavaScript code to append.
+     * @return void
+     */
+    public function addScript(string $script): void
+    {
+        $this->config['script'] .= $script;
     }
 
     /**
@@ -123,10 +449,10 @@ class TailwindHelper
      */
     public function getColor(string $name, int $shade, int $opacity = 100): string
     {
-        return sprintf(
-            'rgb(%s / %s)',
-            ...[self::COLOR_PLATTE[$this->config['colors'][$name]][$shade], $opacity / 100]
-        );
+        $color = self::COLOR_PLATTE[$this->config['colors'][$name]][$shade];
+        return $opacity != 100
+            ? str_replace(')', sprintf(' / %.2f)', $opacity / 100), $color)
+            : $color;
     }
 
     /**
@@ -166,7 +492,7 @@ class TailwindHelper
     public function getRoot(): string
     {
         // Initialize the root CSS string
-        $root = '';
+        $root = $this->config['root'] ?? '';
 
         // Add color variables to the root string
         foreach ($this->config['colors'] ?? [] as $name => $color) {
@@ -211,7 +537,7 @@ class TailwindHelper
 
         // Return JavaScript code as a string
         return sprintf(
-            'window.$colors = %s; window.$color = (name, opacity = 100) => `rgb(${window.$colors[name]} / ${opacity / 100})`; window.$fonts = %s;',
+            'window.$colors = %s; window.$color = (name, opacity = 100) => opacity != 100 ? window.$colors[name].replace(")", ` / ${opacity / 100})`) : window.$colors[name]; window.$fonts = %s;',
             ...[$encode($colors), $encode($fonts)]
         );
     }
@@ -225,23 +551,45 @@ class TailwindHelper
     {
         $assets = '';
 
+        $buildAttribues = fn(array $attrs) => implode(
+            ' ',
+            array_map(
+                fn($key, $value) => $key ? sprintf('%s="%s"', $key, $value) : $value,
+                array_keys($attrs),
+                $attrs
+            )
+        );
+
         // Add links to custom CSS stylesheets
         foreach ($this->config['assets']['style'] ?? [] as $styleLink) {
-            $assets .= sprintf(
-                '<link rel="stylesheet" href="%s">',
-                $styleLink
-            );
+            if (is_string($styleLink)) {
+                $styleLink = ['rel' => 'stylesheet', 'href' => $styleLink];
+            }
+
+            $assets .= sprintf('<link %s>', $buildAttribues($styleLink));
         }
 
         // Add links to custom JavaScript files
         foreach ($this->config['assets']['script'] ?? [] as $scriptLink) {
-            $assets .= sprintf(
-                '<script src="%s" type="text/javascript"></script>',
-                $scriptLink
-            );
+            if (is_string($scriptLink)) {
+                $scriptLink = ['src' => $scriptLink, 'type' => 'text/javascript'];
+            }
+
+            $assets .= sprintf('<script %s></script>', $buildAttribues($scriptLink));
         }
 
         return $assets;
+    }
+
+    /**
+     * Retrieve the Vite instance from the configuration.
+     *
+     * @return Vite The Vite instance.
+     */
+    public function getVite(): Vite
+    {
+        // Return the Vite configuration instance
+        return $this->config['vite'];
     }
 
     /**
@@ -251,9 +599,17 @@ class TailwindHelper
      */
     public function __toString(): string
     {
+        $style = $this->config['style'] ?? '';
+        $script = $this->config['script'] ?? '';
+
+        if (isset($this->config['preloader'])) {
+            $style .= $this->config['preloader']['style'] ?? '';
+            $script .= "window.addEventListener('load', () => {const preloader = document.getElementById('preloader'); preloader && preloader.remove()});";
+        }
+
         return sprintf(
-            '%s<style>[x-cloak] { display: none !important; } :root { %s }</style><script>%s</script>',
-            ...[$this->getAssets(), $this->getRoot(), $this->getJs()]
+            '%s<style>[x-cloak] { display: none !important; } :root { %s } %s</style><script>%s%s</script>%s',
+            ...[$this->getAssets(), $this->getRoot(), $style, $this->getJs(), $script, $this->getVite()]
         );
     }
 }

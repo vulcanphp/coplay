@@ -22,7 +22,7 @@
                 <button clip="<?= _e($clip['key']) ?>">
                     <div class="relative group">
                         <img src="http://i3.ytimg.com/vi/<?= _e($clip['key']) ?>/hqdefault.jpg" alt="image"
-                            class="rounded hover:opacity-75 transition ease-in-out duration-150">
+                            class="rounded-sm hover:opacity-75 transition ease-in-out duration-150">
                         <span class="hidden group-hover:block px-2 rounded-md position-center bg-primary-900 z-10">
                             <svg xmlns="http://www.w3.org/2000/svg" class="text-accent-400" width="28" height="28"
                                 viewBox="0 0 24 24">

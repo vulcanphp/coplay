@@ -11,7 +11,7 @@
             pauseOnMouseEnter: true,
         },
     })" class="-mx-4 sm:mx-auto">
-        <div class="swiper h-[40vh] md:h-[50vh] group mb-8 rounded-sm overflow-hidden relative">
+        <div class="swiper h-[40vh] md:h-[50vh] group mb-8 rounded-xs overflow-hidden relative">
             <div class="swiper-wrapper">
                 <?php foreach ($sliderItems as $sliderItem):
                     $isTv = isset($sliderItem['name']) && isset($sliderItem['first_air_date']);
@@ -106,7 +106,7 @@
             <!-- Navigation -->
             <div class="hidden md:flex flex-col absolute right-2 bottom-4 z-30 gap-1.5">
                 <button x-on:click="slider().slideNext()"
-                    class="bg-primary-800/65 p-1 rounded hover:bg-primary-800 transition">
+                    class="bg-primary-800/65 p-1 rounded-sm hover:bg-primary-800 transition">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-6">
                         <path fill-rule="evenodd"
                             d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z"
@@ -114,7 +114,7 @@
                     </svg>
                 </button>
                 <button x-on:click="slider().slidePrev()"
-                    class="bg-primary-800/65 p-1 rounded hover:bg-primary-800 transition">
+                    class="bg-primary-800/65 p-1 rounded-sm hover:bg-primary-800 transition">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-6">
                         <path fill-rule="evenodd"
                             d="M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z"

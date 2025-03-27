@@ -1,6 +1,6 @@
 <section class="flex flex-row flex-wrap mt-4">
     <div class="w-full md:w-6/12">
-        <div class="md:mr-3 px-2 py-3 flex rounded bg-primary-900 text-primary-300">
+        <div class="md:mr-3 px-2 py-3 flex rounded-sm bg-primary-900 text-primary-300">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-3/12 pr-2 fill-current text-accent-400"
                 viewBox="0 0 24 24">
                 <path
@@ -17,7 +17,7 @@
         </div>
     </div>
     <div class="w-full md:w-6/12 mt-6 md:mt-0">
-        <div class="md:ml-3 px-2 py-3 flex rounded bg-primary-900 text-primary-300">
+        <div class="md:ml-3 px-2 py-3 flex rounded-sm bg-primary-900 text-primary-300">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-3/12 pr-2 fill-current text-accent-400"
                 viewBox="0 0 24 24">
                 <path d="M12 16c1.671 0 3-1.331 3-3s-1.329-3-3-3-3 1.331-3 3 1.329 3 3 3z"></path>

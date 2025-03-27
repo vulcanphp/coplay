@@ -59,7 +59,7 @@
                 </div>
                 <div class="hidden md:block">
                     <div class="relative hidden group-hover/ep:block">
-                        <img class="rounded-sm opacity-75" alt="episode"
+                        <img class="rounded-xs opacity-75" alt="episode"
                             :src="'https://image.tmdb.org/t/p/w154/' + (prevEp.still_path ?? video_backdrop)">
                         <span
                             class="uppercase text-primary-200 flex items-center justify-center bg-primary-900/50 w-full h-full md:text-lg absolute inset-0"
@@ -81,7 +81,7 @@
                 </div>
                 <div class="hidden md:block">
                     <div class="relative hidden group-hover/ep:block">
-                        <img class="rounded-sm opacity-75" alt="episode"
+                        <img class="rounded-xs opacity-75" alt="episode"
                             :src="'https://image.tmdb.org/t/p/w154/' + (nextEp.still_path ?? video_backdrop)">
                         <span
                             class="uppercase text-primary-200 flex items-center justify-center bg-primary-900/50 w-full h-full md:text-lg absolute inset-0"

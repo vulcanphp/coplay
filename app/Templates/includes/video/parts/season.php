@@ -4,7 +4,7 @@
             <p class="text-primary-400 uppercase mb-1"><?= $season['name'] ?></p>
             <?php if (isset($season['poster_path'])): ?>
                 <img src="<?= $video->getImageUrl('w154') . $season['poster_path'] ?>" alt="image1"
-                    class="mb-1 rounded mx-auto sm:mx-0">
+                    class="mb-1 rounded-sm mx-auto sm:mx-0">
             <?php endif ?>
             <?php if (isset($season['air_date'])): ?>
                 <p class="mb-1"><?= date('d M, Y', strtotime($season['air_date'])) ?></p>

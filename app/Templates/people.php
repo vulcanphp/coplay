@@ -50,8 +50,8 @@ $template->layout('layout/master')
             <?php if (isset($info['also_known_as'])): ?>
                 <h4 class="font-semibold mt-8"><?= __e('Also Known As:') ?></h4>
                 <p class="text-sm ml-[-0.25rem]">
-                    <span class="px-1 bg-primary-900 inline-block rounded m-1">
-                        <?= join('</span><span class="px-1 bg-primary-900 inline-block rounded m-1">', $info['also_known_as'] ?? []) ?>
+                    <span class="px-1 bg-primary-900 inline-block rounded-sm m-1">
+                        <?= join('</span><span class="px-1 bg-primary-900 inline-block rounded-sm m-1">', $info['also_known_as'] ?? []) ?>
                     </span>
                 </p>
             <?php endif; ?>

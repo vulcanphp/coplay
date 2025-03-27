@@ -54,7 +54,7 @@ class AutoUpdate implements IAutoUpdate
                 );
 
                 // Decode the JSON response
-                $json = json_decode($response['body'] ?? '', true);
+                $json = $response['body'] ?? '';
 
                 // Check if the response was successful and if the JSON is valid
                 if ($response['status'] === 200 && !empty($json)) {
