@@ -1,5 +1,5 @@
-/vendor
-/node_modules
-/.vscode
-/composer.lock
-/sqlite.db
+.vscode
+vendor
+node_modules
+composer.lock
+package-lock.json
