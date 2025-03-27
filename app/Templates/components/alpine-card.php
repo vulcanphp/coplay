@@ -15,5 +15,5 @@
 </a>
 <div class="mt-2">
     <a :href="video.type + '/-' + video.id" class="mt-2 hover:text-primary-300"
-        x-text="video.title + ' ('+ (video.type == 'movie' ? 'Movie' : 'Tv') +')'"></a>
+        x-html="video.title + ' ('+ (video.type == 'movie' ? 'Movie' : 'Tv') +')'"></a>
 </div>

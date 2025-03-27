@@ -12,28 +12,9 @@ $year = date('Y', strtotime(strval($video->release_date ?? $video->first_air_dat
     <title>Watch <?= $video->title ?? $video->name ?> (<?= $year ?>) Free Online in <?= cms('title', 'CoPlay') ?>
     </title>
     <?= tailwind() ?>
-    <style>
-        #preloader {
-            position: fixed;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            background: rgb(var(--color-primary-900) / 100);
-            z-index: 99999;
-        }
-    </style>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const preloader = document.getElementById('preloader');
-            preloader.remove();
-        });
-    </script>
-    <?= vite(['running' => false]) ?>
 </head>
 
 <body class="bg-primary-900 group text-primary-50 font-sans relative w-full min-h-screen" x-data="emberManager()">
-
-    <div id="preloader"></div>
 
     <?php
 

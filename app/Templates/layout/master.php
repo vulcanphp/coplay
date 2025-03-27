@@ -29,13 +29,13 @@ if (!$isAjax) {
         <?= tailwind()->getPreloaderElement() ?>
 
         <?= $template->include('layout/header') ?>
-    <?php } ?>
+        <div id="app">
+        <?php } ?>
 
-    <div id="app">
         <div><?= $content ?></div>
-    </div>
 
-    <?php if (!$isAjax) { ?>
+        <?php if (!$isAjax) { ?>
+        </div>
 
         <?= $template->include('layout/footer') ?>
     </body>

@@ -1,42 +1,6 @@
 <?php
 
 use Lib\TailwindHelper;
-use Hyper\Response;
-use Hyper\Template;
-
-/**
- * Renders a template with the given context.
- *
- * This function will render a template with the given context using the
- * Template engine. If the request accepts JSON, it will return a JSON
- * response with the rendered HTML and title. Otherwise, it will return a
- * regular HTTP response with the rendered HTML.
- *
- * @param string $template The path to the template file to render.
- * @param array $context An associative array of variables to pass to the template.
- * @return Response The response object after writing the rendered content.
- */
-function hyper_template(string $template, array $context = []): Response
-{
-    // Check if the request accepts JSON
-    if (request()->accept('application/json')) {
-        // Get the template engine
-        $engine = get(Template::class);
-
-        // Render the template and get the rendered HTML and title
-        $html = $engine->render($template, $context);
-        $title = $engine->getContext()['title'] ?? null;
-
-        // Return a JSON response with the rendered HTML and title
-        return response()->json([
-            'html' => $html,
-            'title' => $title,
-        ]);
-    }
-
-    // Otherwise, return a regular HTTP response with the rendered HTML
-    return template($template, $context);
-}
 
 /**
  * Retrieves an instance of the TailwindHelper class.
@@ -111,7 +75,7 @@ function slugify(?string $string, string $separator = '-'): string
  */
 function page_not_found(): void
 {
-    hyper_template('errors/404')
+    fireline('errors/404')
         ->setStatusCode(404)
         ->send();
     exit;

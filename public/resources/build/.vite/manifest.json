@@ -50,7 +50,7 @@
     "name": "utils"
   },
   "app.js": {
-    "file": "assets/app-KVA-2bPt.js",
+    "file": "assets/app-BPCgyYm9.js",
     "name": "app",
     "src": "app.js",
     "isEntry": true,
@@ -61,7 +61,7 @@
       "../../node_modules/swiper/modules/parallax.css"
     ],
     "css": [
-      "assets/app-CikHEXJC.css"
+      "assets/app-BLDHyfzN.css"
     ]
   }
 }

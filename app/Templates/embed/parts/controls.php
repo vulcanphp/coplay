@@ -40,7 +40,7 @@
 <!-- @headline: video title -->
 <div class="absolute select-none top-12 md:top-14 inset-x-0 w-10/12 text-center mx-auto hidden group-hover:block z-40">
     <h2 class="text-sm sm:text-base md:text-lg whitespace-nowrap overflow-hidden text-ellipsis text-accent-400 font-semibold"
-        x-text="title + ' ('+ year +')' + (isTv ? ' S' + season + ' E' + episode : '')"></h2>
+        x-html="title + ' ('+ year +')' + (isTv ? ' S' + season + ' E' + episode : '')"></h2>
 </div>
 
 <!-- @Left & Right Buttons for Next and prev episode -->

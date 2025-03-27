@@ -155,7 +155,7 @@ class Explore
 
         // Return a response containing the rendered view with the explored content.
         // The title of the page is set to the title parameter.
-        return hyper_template('explore', [
+        return fireline('explore', [
             'heading' => __('Explore:') . ' <u>' . $title . '</u> ' . __($type == 'movie' ? 'Movies' : 'TV Series'),
             'paginator' => $pagination
         ]);
@@ -198,6 +198,6 @@ class Explore
         unset($result['combined_credits']);
 
         // Return a response containing the rendered view with the person's information and filmography.
-        return hyper_template('people', ['info' => $result, 'collection' => $viewModel->toArray()]);
+        return fireline('people', ['info' => $result, 'collection' => $viewModel->toArray()]);
     }
 }

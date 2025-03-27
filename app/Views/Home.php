@@ -89,7 +89,7 @@ class Home
             ->all();
 
         // Return the view
-        return hyper_template('videos', [
+        return fireline('videos', [
             'people' => $viewModel->cut('people'),
             'collection' => $viewModel->toArray(),
             'sliderItems' => $sliderItems
@@ -133,7 +133,7 @@ class Home
             );
 
             // Render the video template with the movie and similar movies
-            return hyper_template('video', [
+            return fireline('video', [
                 'video' => $movie,
                 'similar' => $viewModel->cut('similar')
             ]);
@@ -146,7 +146,7 @@ class Home
             ->addToCollection('toprated', $cache->load('toprated', fn() => $tmdb->getTopRated(), '12 hours'));
 
         // Render the videos template with the top rated movies and the view model
-        return hyper_template('videos', [
+        return fireline('videos', [
             'top' => $viewModel->cut('toprated'),
             'collection' => $viewModel->toArray(),
         ]);
@@ -190,7 +190,7 @@ class Home
             );
 
             // Render the video template with the TV show and similar TV shows
-            return hyper_template('video', [
+            return fireline('video', [
                 'video' => $tv,
                 'similar' => $viewModel->cut('similar')
             ]);
@@ -204,7 +204,7 @@ class Home
             ->addToCollection('toprated', $cache->load('toprated', fn() => $tmdb->getTopRated(), '12 hours'));
 
         // Render the videos template with the top rated TV shows and the view model
-        return hyper_template('videos', [
+        return fireline('videos', [
             'top' => $viewModel->cut('toprated'),
             'collection' => $viewModel->toArray(),
         ]);
@@ -270,7 +270,7 @@ class Home
      */
     public function watchlater()
     {
-        return hyper_template('watchlater');
+        return fireline('watchlater');
     }
 
     /**
@@ -288,7 +288,7 @@ class Home
         }
 
         // Render the API page if the API feature is enabled
-        return hyper_template('api');
+        return fireline('api');
     }
 
     /**
@@ -371,6 +371,6 @@ class Home
         }
 
         // Render the search result page
-        return hyper_template('ajax/search', ['results' => $results, 'keyword' => $keyword]);
+        return fireline('ajax/search', ['results' => $results, 'keyword' => $keyword]);
     }
 }
