@@ -25,14 +25,14 @@
         "id": "dradplay",
         "disabled": true
     },
-    "vidpro": {
+    "embedflix": {
         "source": {
-            "url": "https://2embed.stream/embed/",
+            "url": "https://www.embedflix.win/embed/",
             "movie": "movie/{tmdb}",
             "tv": "tv/{tmdb}/{season}/{episode}"
         },
         "priority": 70,
-        "name": "VidPro",
+        "name": "VidPro HD",
         "quality": "1080p (HD)",
         "id": "vidpro"
     },
@@ -114,13 +114,24 @@
         "quality": "720p",
         "id": "embed2"
     },
+    "vidpro": {
+        "source": {
+            "url": "https://2embed.stream/embed/",
+            "movie": "movie/{tmdb}",
+            "tv": "tv/{tmdb}/{season}/{episode}"
+        },
+        "priority": 47,
+        "name": "VidPro",
+        "quality": "7200p",
+        "id": "vidpro"
+    },
     "gomo": {
         "source": {
             "url": "https://gomo.to/",
             "movie": "movie/{imdb}",
             "tv": "show/{imdb}/{zero|season}-{zero|episode}"
         },
-        "priority": 47,
+        "priority": 40,
         "name": "GoMo",
         "quality": "720p",
         "id": "gomo"
