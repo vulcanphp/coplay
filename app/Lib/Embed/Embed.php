@@ -1,12 +1,11 @@
 <?php
 
-namespace Lib\Embed;
+namespace App\Lib\Embed;
 
-use Hyper\Utils\Hash;
-use Lib\Embed\Includes\AutoUpdate;
-use Lib\Embed\Includes\EmbedConfigurator;
-use Lib\Embed\Exceptions\EmbedException;
-use Lib\Embed\Interfaces\IEmbed;
+use App\Lib\Embed\Includes\AutoUpdate;
+use App\Lib\Embed\Includes\EmbedConfigurator;
+use App\Lib\Embed\Exceptions\EmbedException;
+use App\Lib\Embed\Interfaces\IEmbed;
 
 /**
  * This is a Class which Embed Movies, TV Series, Anime, Drama from various websites or server
@@ -116,7 +115,7 @@ class Embed implements IEmbed
 
         // Sort the embeds by priority in descending order
         return collect($embeds)
-            ->multiSort('priority', true)
+            ->sortByDesc('priority')
             ->all();
     }
 
@@ -171,7 +170,7 @@ class Embed implements IEmbed
         }
 
         // Encrypt the parameters with the hash class
-        $encryptedParams = get(Hash::class)->encrypt(
+        $encryptedParams = hashing()->encrypt(
             json_encode(['id' => $id, 'type' => $type, 'segment' => $segment])
         );
 

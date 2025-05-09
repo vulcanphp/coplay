@@ -1,20 +1,20 @@
 <?php
 
-namespace Lib\Embed\Interfaces;
+namespace App\Lib\Embed\Interfaces;
 
-use Hyper\Response;
+use Spark\Http\Response;
 
 /**
  * Interface IEmbedFallback
  * 
- * @package Lib\Embed\Interfaces
+ * @package App\Lib\Embed\Interfaces
  */
 interface IEmbedFallback
 {
     /**
      * Trigger the fallback logic.
      *
-     * @return Response
+     * @return \Spark\Http\Response
      */
     public function trigger(): Response;
 

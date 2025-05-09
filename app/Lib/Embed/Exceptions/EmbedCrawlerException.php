@@ -1,6 +1,6 @@
 <?php
 
-namespace Lib\Embed\Exceptions;
+namespace App\Lib\Embed\Exceptions;
 
 use Exception;
 
@@ -9,7 +9,7 @@ use Exception;
  * 
  * This class is used to handle exceptions in the EmbedCrawler class.
  * 
- * @package Lib\Embed\Exceptions
+ * @package App\Lib\Embed\Exceptions
  */
 class EmbedCrawlerException extends Exception
 {

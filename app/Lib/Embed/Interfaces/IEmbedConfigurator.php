@@ -1,11 +1,11 @@
 <?php
 
-namespace Lib\Embed\Interfaces;
+namespace App\Lib\Embed\Interfaces;
 
 /**
  * Interface IEmbedConfigurator
  * 
- * @package Lib\Embed\Interfaces
+ * @package App\Lib\Embed\Interfaces
  */
 interface IEmbedConfigurator
 {

@@ -15,5 +15,5 @@
 
 return [
     // Application service provider for registering and bootstrapping services
-    \Providers\AppServiceProvider::class,
+    \App\Providers\AppServiceProvider::class,
 ];

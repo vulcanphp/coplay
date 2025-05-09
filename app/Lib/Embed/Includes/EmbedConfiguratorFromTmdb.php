@@ -1,14 +1,15 @@
 <?php
 
-namespace Lib\Embed\Includes;
+namespace App\Lib\Embed\Includes;
 
-use Lib\Tmdb\Model\TmdbContent;
+use App\Lib\Tmdb\Model\TmdbContent;
+use Spark\Support\Str;
 
 /**
  * Class EmbedConfiguratorFromTmdb
  * An EmbedConfigurator that uses a TmdbContent instance as input
  *
- * @package Lib\Embed\Includes
+ * @package App\Lib\Embed\Includes
  */
 class EmbedConfiguratorFromTmdb extends EmbedConfigurator
 {
@@ -35,11 +36,11 @@ class EmbedConfiguratorFromTmdb extends EmbedConfigurator
             // The title of the content
             'title' => $content->title ?? $content->name,
             // The slug of the content
-            'slug' => slugify($content->title ?? $content->name),
+            'slug' => Str::slug($content->title ?? $content->name),
             // The original title of the content
             'original_title' => $content->original_title ?? ($content->original_name ?? ''),
             // The slug of the original title
-            'original_slug' => slugify($content->original_title ?? ($content->original_name ?? '')),
+            'original_slug' => Str::slug($content->original_title ?? ($content->original_name ?? '')),
             // The year of the content
             'year' => date('Y', strtotime($content->release_date ?? ($content->first_air_date ?? ''))),
             // The date of the content

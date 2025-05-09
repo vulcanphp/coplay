@@ -1,22 +1,22 @@
 <?php
 
-namespace Lib\Tmdb\Model;
+namespace App\Lib\Tmdb\Model;
 
-use Hyper\Utils\Collect;
+use Spark\Support\Collection;
 
 /**
  * Class GenreCollection
  *
  * A collection of genres that are associated with a movie or TV show.
  *
- * @package Lib\Tmdb\Model
+ * @package App\Lib\Tmdb\Model
  */
 class GenreCollection
 {
     /**
-     * @var Collect The collection of genres.
+     * @var Collection The collection of genres.
      */
-    private Collect $genres;
+    private Collection $genres;
 
     /**
      * GenreCollection constructor.
@@ -29,7 +29,7 @@ class GenreCollection
     {
         // Convert the genres array to a collection and map each genre ID to its name.
         $this->genres = collect($genres)
-            ->mapK(fn($genre) => [$genre['id'] => $genre['name']]);
+            ->mapWithKeys(fn($genre) => [$genre['id'] => $genre['name']]);
     }
 
     /**

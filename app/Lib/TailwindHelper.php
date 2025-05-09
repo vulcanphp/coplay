@@ -1,8 +1,8 @@
 <?php
 
-namespace Lib;
+namespace App\Lib;
 
-use Hyper\Helpers\Vite;
+use Spark\Utils\Vite;
 
 /**
  * Tailwind CSS helper class.
@@ -10,7 +10,7 @@ use Hyper\Helpers\Vite;
  * Provides static methods for generating Tailwind CSS classes from a given color
  * and shade.
  *
- * @package Backpack\Lib
+ * @package TinyPack\Lib
  * @version 1.1 (for tailwind version 4)
  */
 class TailwindHelper
@@ -322,7 +322,7 @@ class TailwindHelper
                 'accent' => 'blue',
                 'primary' => 'gray',
             ],
-            'fonts' => ['primary' => 'Inter'],
+            'fonts' => ['primary' => 'ui-sans-serif'],
             'assets' => [],
             'root' => '',
             'style' => '',

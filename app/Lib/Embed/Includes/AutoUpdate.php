@@ -1,10 +1,10 @@
 <?php
 
-namespace Lib\Embed\Includes;
+namespace App\Lib\Embed\Includes;
 
 use Exception;
-use Hyper\Utils\Ping;
-use Lib\Embed\Interfaces\IAutoUpdate;
+use App\Lib\Embed\Interfaces\IAutoUpdate;
+use Spark\Utils\Http;
 use Throwable;
 
 /**
@@ -14,7 +14,7 @@ use Throwable;
  * It implements the IAutoUpdate interface and provides methods to check
  * if an update is needed and to perform the update process.
  * 
- * @package Lib\Embed\Includes
+ * @package App\Lib\Embed\Includes
  */
 class AutoUpdate implements IAutoUpdate
 {
@@ -49,7 +49,7 @@ class AutoUpdate implements IAutoUpdate
         if ($force || !file_exists($this->getSchemaLocation()) || $this->isExpired()) {
             try {
                 // Get the latest schema from GitHub
-                $response = Ping::get(
+                $response = Http::get(
                     'https://raw.githubusercontent.com/vulcanphp/coplay/main/storage/temp/embed_schema.json'
                 );
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Lib\Embed\Includes;
+namespace App\Lib\Embed\Includes;
 
-use Hyper\Response;
-use Lib\Embed\Interfaces\IEmbedFallback;
+use App\Lib\Embed\Interfaces\IEmbedFallback;
+use Spark\Http\Response;
 
 /**
  * Class EmbedFallback
@@ -11,7 +11,7 @@ use Lib\Embed\Interfaces\IEmbedFallback;
  * This class provides a fallback implementation for the IEmbedFallback interface.
  * It is used when no other implementation is available.
  *
- * @package Lib\Embed\Includes
+ * @package App\Lib\Embed\Includes
  */
 class EmbedFallback implements IEmbedFallback
 {
@@ -48,7 +48,7 @@ class EmbedFallback implements IEmbedFallback
     /**
      * Triggers the fallback logic.
      *
-     * @return Response The response after executing the fallback logic.
+     * @return \Spark\Http\Response The response after executing the fallback logic.
      */
     public function trigger(): Response
     {
@@ -56,7 +56,7 @@ class EmbedFallback implements IEmbedFallback
             redirect($this->server);
         }
 
-        return template('embed/fallback', ['config' => $this->config]);
+        return view('embed/fallback', ['config' => $this->config]);
     }
 }
 

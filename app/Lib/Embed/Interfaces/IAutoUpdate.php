@@ -1,13 +1,13 @@
 <?php
 
-namespace Lib\Embed\Interfaces;
+namespace App\Lib\Embed\Interfaces;
 
 /**
  * Interface for auto update.
  * 
  * Any class that implements this interface should provide methods to check for updates.
  * 
- * @package Lib\Embed\Interfaces
+ * @package App\Lib\Embed\Interfaces
  */
 interface IAutoUpdate
 {

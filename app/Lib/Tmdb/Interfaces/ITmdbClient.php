@@ -1,10 +1,10 @@
 <?php
 
-namespace Lib\Tmdb\Interfaces;
+namespace App\Lib\Tmdb\Interfaces;
 
 /**
  * Interface ITmdbClient
- * @package Lib\Tmdb\Interfaces
+ * @package App\Lib\Tmdb\Interfaces
  */
 interface ITmdbClient
 {

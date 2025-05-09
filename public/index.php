@@ -6,7 +6,6 @@
  * the application environment, loads the Composer autoloader, and
  * runs the bootstrap process.
  * 
- * @package hyper
  * @return void
  */
 

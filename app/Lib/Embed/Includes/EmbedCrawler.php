@@ -1,11 +1,10 @@
 <?php
 
-namespace Lib\Embed\Includes;
+namespace App\Lib\Embed\Includes;
 
-use Hyper\Response;
-use Hyper\Utils\Hash;
-use Lib\Embed\Exceptions\EmbedCrawlerException;
-use Lib\Embed\Interfaces\IEmbedCrawler;
+use App\Lib\Embed\Exceptions\EmbedCrawlerException;
+use App\Lib\Embed\Interfaces\IEmbedCrawler;
+use Spark\Http\Response;
 
 /**
  * The EmbedCrawler class implements the IEmbedCrawler interface and provides
@@ -15,7 +14,7 @@ use Lib\Embed\Interfaces\IEmbedCrawler;
  * link. It uses the application's hash service to decrypt the token and then
  * calls the callback function associated with the decrypted token's key.
  * 
- * @package Lib\Embed\Includes
+ * @package App\Lib\Embed\Includes
  * @version 1.0.0
  */
 class EmbedCrawler implements IEmbedCrawler
@@ -89,19 +88,19 @@ class EmbedCrawler implements IEmbedCrawler
      * Resolve a given token to a playable link.
      *
      * @param  string  $token
-     * @return Response
+     * @return \Spark\Http\Response
      */
     public function resolve(string $token): Response
     {
         // decrypt the token
         $token = json_decode(
             // use the application's hash service to decrypt the token
-            get(Hash::class)->decrypt($token),
+            hashing()->decrypt($token),
             true
         );
 
         // if the token is not a valid array
-        if (!is_array($token) && env('debug')) {
+        if (!is_array($token) && config('debug')) {
             // throw an exception
             throw new EmbedCrawlerException('Invalid Playback Token');
         }
@@ -117,12 +116,12 @@ class EmbedCrawler implements IEmbedCrawler
      * Resolves the given token to a playable link by calling the associated crawler.
      *
      * @param  array  $token The token to resolve.
-     * @return Response The response from the crawler.
+     * @return \Spark\Http\Response The response from the crawler.
      */
     private function resolveCrawler(array $token): Response
     {
         // if the token does not have a matching crawler
-        if (!$this->hasCrawler($token['id']) && env('debug')) {
+        if (!$this->hasCrawler($token['id']) && config('debug')) {
             // throw an exception
             throw new EmbedCrawlerException('Callback does not exists for (' . $token['id'] . ')');
         }

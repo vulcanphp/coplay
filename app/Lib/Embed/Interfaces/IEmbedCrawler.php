@@ -1,13 +1,13 @@
 <?php
 
-namespace Lib\Embed\Interfaces;
+namespace App\Lib\Embed\Interfaces;
 
-use Hyper\Response;
+use Spark\Http\Response;
 
 /**
  * Interface for embed crawlers
  * 
- * @package Lib\Embed\Interfaces
+ * @package App\Lib\Embed\Interfaces
  */
 interface IEmbedCrawler
 {
@@ -23,7 +23,7 @@ interface IEmbedCrawler
      * Resolve the given token and return the response
      * 
      * @param string $token The token to resolve
-     * @return Response The response after resolving the token
+     * @return \Spark\Http\Response The response after resolving the token
      */
     public function resolve(string $token): Response;
 }

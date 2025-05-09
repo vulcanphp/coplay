@@ -1,14 +1,14 @@
 <?php
 
-namespace Lib\Tmdb;
+namespace App\Lib\Tmdb;
 
-use Hyper\Utils\Ping;
-use Lib\Tmdb\Exceptions\TmdbClientException;
-use Lib\Tmdb\Interfaces\ITmdbClient;
+use App\Lib\Tmdb\Exceptions\TmdbClientException;
+use App\Lib\Tmdb\Interfaces\ITmdbClient;
+use Spark\Utils\Http;
 
 /**
  * This is a Helper Class to help fetch data from TMDB
- * this class used by Hyper\Utils\Ping package to perform http request
+ * this class used by Spark\Utils\Http package to perform http request
  * 
  * @reference https://developer.themoviedb.org/reference/intro/getting-started
  * @author Shahin Moyshan <https://github.com/vulcanphp>
@@ -296,13 +296,13 @@ class TmdbClient implements ITmdbClient
      */
     public function send(string $endpoint, array $params = []): array
     {
-        $resp = get(Ping::class)
+        $resp = get(Http::class)
             // Set the Accept header to JSON
             ->header('Accept', 'application/json')
             // Set the Content-Type header to JSON
             ->header('Content-Type', 'application/json;charset=utf-8')
             // Set the Authorization header with the API key
-            ->header('Authorization', sprintf('Bearer %s', env('TMDB_API_KEY')))
+            ->header('Authorization', sprintf('Bearer %s', config('TMDB_API_KEY')))
             // Make the request to the TMDB API
             ->get('http://api.themoviedb.org/3/' . trim($endpoint, '/'), $params);
 

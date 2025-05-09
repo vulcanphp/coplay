@@ -1,6 +1,6 @@
 <?php
 
-namespace Lib\Tmdb\Model;
+namespace App\Lib\Tmdb\Model;
 
 /**
  * A class to represent data from the The Movie Database (TMDB) API.
@@ -10,7 +10,7 @@ namespace Lib\Tmdb\Model;
  * the data as an array, as individual properties, and as
  * an iterable.
  *
- * @package Lib\Tmdb\Model
+ * @package App\Lib\Tmdb\Model
  */
 class TmdbContent
 {

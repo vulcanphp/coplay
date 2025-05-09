@@ -1,16 +1,15 @@
 <?php
 
+use Spark\Container;
+use Spark\Foundation\Application;
+use Spark\Http\Middleware;
+
 /**
  * This file is the entry point of the web application.
  *
- * It uses the Hyper framework to create the application instance, register
+ * It uses the tinymvc framework to create the application instance, register
  * service providers, middleware, and routes.
  */
-
-use Hyper\Application;
-use Hyper\Container;
-use Hyper\Middleware;
-use Hyper\Router;
 
 /**
  * Create the application instance.
@@ -20,7 +19,7 @@ use Hyper\Router;
  * @param array $env
  *   The environment settings of the application.
  */
-return Application::make(path: dirname(__DIR__), env: require __DIR__ . '/env.php')
+return Application::make(path: dirname(__DIR__), env: require __DIR__ . '/../env.php')
     /**
      * Register service providers in the application container.
      *
@@ -44,8 +43,7 @@ return Application::make(path: dirname(__DIR__), env: require __DIR__ . '/env.ph
      * @return void
      */
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->merge(require __DIR__ . '/middlewares.php')
-            ->queue(['csrf']);
+        $middleware->merge(require __DIR__ . '/middlewares.php');
     })
 
     /**
@@ -56,8 +54,6 @@ return Application::make(path: dirname(__DIR__), env: require __DIR__ . '/env.ph
      *
      * @return void
      */
-    ->withRouter(function (Router $router) {
-        foreach (require __DIR__ . '/routes.php' as $route) {
-            $router->add(...$route);
-        }
+    ->withRouter(function () {
+        require __DIR__ . '/../routes/web.php'; // Load web routes
     });

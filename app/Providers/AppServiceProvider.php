@@ -1,9 +1,9 @@
 <?php
 
-namespace Providers;
+namespace App\Providers;
 
-use Lib\TailwindHelper;
-use Hyper\Container;
+use App\Lib\TailwindHelper;
+use Spark\Container;
 
 /**
  * This file contains the service providers for the web application.
@@ -28,9 +28,9 @@ class AppServiceProvider
      */
     public function register(Container $container)
     {
-        // Create the Tailwind helper service
+        // Add TailwindHelper Service in Container
         $container->singleton(TailwindHelper::class, function () {
-            $colors = env('cms', [])['color'] ?? [];
+            $colors = config('cms.color', []);
 
             // Get the colors from the environment variable
             $accent = $colors['accent'] ?? 'amber';

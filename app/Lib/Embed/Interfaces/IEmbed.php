@@ -1,6 +1,6 @@
 <?php
 
-namespace Lib\Embed\Interfaces;
+namespace App\Lib\Embed\Interfaces;
 
 /**
  * Interface for Embed classes.
@@ -8,7 +8,7 @@ namespace Lib\Embed\Interfaces;
  * Any class that implements this interface should provide methods to get the
  * links for the embed player and the auto update object.
  * 
- * @package Lib\Embed\Interfaces
+ * @package App\Lib\Embed\Interfaces
  */
 interface IEmbed
 {

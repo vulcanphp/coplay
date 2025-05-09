@@ -1,13 +1,13 @@
 <?php
 
-namespace Lib\Tmdb\Interfaces;
+namespace App\Lib\Tmdb\Interfaces;
 
-use Lib\Tmdb\Model\GenreCollection;
+use App\Lib\Tmdb\Model\GenreCollection;
 
 /**
  * Interface for a collection of content items from The Movie Database (TMDB).
  *
- * @package Lib\Tmdb\Interfaces
+ * @package App\Lib\Tmdb\Interfaces
  */
 interface ITmdbCollection
 {

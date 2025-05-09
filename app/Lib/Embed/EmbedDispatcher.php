@@ -1,17 +1,17 @@
 <?php
 
-namespace Lib\Embed;
+namespace App\Lib\Embed;
 
-use Hyper\Request;
-use Hyper\Response;
-use Lib\Embed\Embed;
-use Lib\Tmdb\TmdbClient;
-use Lib\Tmdb\Model\TmdbContent;
-use Lib\Embed\Includes\EmbedCrawler;
-use Lib\Embed\Includes\EmbedFallback;
-use Lib\Embed\Interfaces\IEmbedController;
-use Lib\Tmdb\Exceptions\TmdbClientException;
-use Lib\Embed\Includes\EmbedConfiguratorFromTmdb;
+use App\Lib\Embed\Embed;
+use App\Lib\Tmdb\TmdbClient;
+use App\Lib\Tmdb\Model\TmdbContent;
+use App\Lib\Embed\Includes\EmbedCrawler;
+use App\Lib\Embed\Includes\EmbedFallback;
+use App\Lib\Embed\Interfaces\IEmbedController;
+use App\Lib\Tmdb\Exceptions\TmdbClientException;
+use App\Lib\Embed\Includes\EmbedConfiguratorFromTmdb;
+use Spark\Http\Request;
+use Spark\Http\Response;
 
 /**
  * Class EmbedDispatcher
@@ -19,7 +19,7 @@ use Lib\Embed\Includes\EmbedConfiguratorFromTmdb;
  * This class is an implementation of the IEmbedController interface.
  * It provides a way to dispatch requests to the embed controller.
  *
- * @package Lib\Embed
+ * @package App\Lib\Embed
  */
 class EmbedDispatcher implements IEmbedController
 {
@@ -57,8 +57,8 @@ class EmbedDispatcher implements IEmbedController
      * such as episodes for TV series and links for video playback. It also
      * incorporates an auto-embed feature if enabled.
      *
-     * @param Request $request The incoming HTTP request.
-     * @return Response The HTTP response containing the embedded video content or a fallback.
+     * @param \Spark\Http\Request $request The incoming HTTP request.
+     * @return \Spark\Http\Response The HTTP response containing the embedded video content or a fallback.
      */
     public function dispatch(Request $request): Response
     {
@@ -123,10 +123,13 @@ class EmbedDispatcher implements IEmbedController
             $video->seasons = collect($video->seasons)
                 ->filter(fn($se) => ($se['season_number'] ?? 0) > 0 && isset($se['air_date']) && strtotime($se['air_date']) <= time())
                 ->map(function ($se) {
-                    $se['name'] = str_replace(['"', "'"], '', $se['name']);
-                    return $se;
+                    return [
+                        'name' => e($se['name']),
+                        'air_date' => $se['air_date'],
+                        'season_number' => $se['season_number'],
+                        'poster_path' => $se['poster_path'],
+                    ];
                 })
-                ->only(['name', 'air_date', 'season_number', 'poster_path'])
                 ->all();
 
             if (!empty($video->seasons)) {
@@ -150,8 +153,6 @@ class EmbedDispatcher implements IEmbedController
                     ->filter(
                         fn($ep) => !isset($video->current_episode) || (isset($video->current_episode) && $ep['episode_number'] <= $video->current_episode)
                     )
-                    ->only(['air_date', 'episode_number', 'season_number', 'name', 'still_path', 'links'])
-                    ->except(['crew', 'guest_stars'])
                     ->map(function ($episode) use ($embed) {
 
                         $links = [];
@@ -171,10 +172,14 @@ class EmbedDispatcher implements IEmbedController
                             return null;
                         }
 
-                        $episode['name'] = _e($episode['name']);
-                        $episode['links'] = $links;
-
-                        return $episode;
+                        return [
+                            'air_date' => $episode['air_date'],
+                            'episode_number' => $episode['episode_number'],
+                            'season_number' => $episode['season_number'],
+                            'name' => e($episode['name']),
+                            'still_path' => $episode['still_path'],
+                            'links' => $links,
+                        ];
                     })
                     ->filter(fn($ep) => !empty($ep))
                     ->all();
@@ -185,9 +190,10 @@ class EmbedDispatcher implements IEmbedController
                     // get episode number from client or set latest
                     $video->episode = $request->query('episode', $video->episodes[0]['episode_number']);
                     $episode = collect($video->episodes)
-                        ->find(
+                        ->filter(
                             fn($ep) => $ep['episode_number'] == intval($video->episode)
-                        );
+                        )
+                        ->first();
                     $video->links = !empty($episode) ? $episode['links'] : [];
                 }
             }
@@ -206,7 +212,7 @@ class EmbedDispatcher implements IEmbedController
 
         // if the video has links return the embed
         if (isset($video->links) && !empty($video->links)) {
-            return template('embed/index', ['video' => $video]);
+            return view('embed/index', ['video' => $video]);
         }
 
         // if the video is does not have any links, trigger the fallback
@@ -216,7 +222,7 @@ class EmbedDispatcher implements IEmbedController
     /**
      * Checks if the request origin is allowed.
      *
-     * @param Request $request
+     * @param \Spark\Http\Request $request
      * @return self
      */
     public function checkOrigin(Request $request): self
@@ -229,7 +235,7 @@ class EmbedDispatcher implements IEmbedController
         // Check if the request origin is allowed
         if ($request->header('http-sec-fetch-site') === 'cross-site') {
             // If the request origin is not allowed, return a 404 page
-            page_not_found();
+            abort(404);
         }
 
         return $this;

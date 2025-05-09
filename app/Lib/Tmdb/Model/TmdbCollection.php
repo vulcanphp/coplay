@@ -1,15 +1,15 @@
 <?php
 
-namespace Lib\Tmdb\Model;
+namespace App\Lib\Tmdb\Model;
 
-use Lib\Tmdb\Interfaces\ITmdbCollection;
+use App\Lib\Tmdb\Interfaces\ITmdbCollection;
 
 /**
  * Class TmdbCollection
  *
  * A collection of content items (movies, TV shows, etc.) grouped by a specific key.
  *
- * @package Lib\Tmdb\Model
+ * @package App\Lib\Tmdb\Model
  */
 class TmdbCollection implements ITmdbCollection
 {
@@ -44,22 +44,26 @@ class TmdbCollection implements ITmdbCollection
     public function addToCollection(string $key, array $data): self
     {
         // Map each movie in the data array to a TmdbContent instance
-        $this->collection[$key] = array_map(fn($movie) => new TmdbContent(
-            // Convert the movie array into a collection for manipulation
-            collect($movie)
-                // Add a 'genres' key to the movie with genre names from genre IDs
-                ->add(
-                    'genres',
-                    collect($movie['genre_ids'] ?? [])
-                        // Map genre IDs to genre names using the genre collection
-                        ->mapK(fn($genre) => [$genre => $this->getGenres()->get($genre)])
-                        ->all()
-                )
-                // Remove the 'genre_ids' key from the movie collection
-                ->remove('genre_ids')
-                // Convert the modified collection back to an array
-                ->all()
-        ), $data);
+        $this->collection[$key] = array_map(function ($movie) {
+            $collect = collect($movie);
+
+            $collect->offsetSet(
+                'genres',
+                collect($movie['genre_ids'] ?? [])
+                    // Map genre IDs to genre names using the genre collection
+                    ->mapWithKeys(fn($genre) => [$genre => $this->getGenres()->get($genre)])
+                    ->all()
+            );
+
+            return new TmdbContent(
+                // Convert the movie array into a collection for manipulation
+                $collect
+                    // Remove the 'genre_ids' key from the movie collection
+                    ->except('genre_ids')
+                    // Convert the modified collection back to an array
+                    ->all()
+            );
+        }, $data);
 
         return $this; // Return the current instance for method chaining
     }

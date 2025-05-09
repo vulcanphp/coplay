@@ -1,8 +1,8 @@
 <?php
 
-namespace Lib\Embed\Includes;
+namespace App\Lib\Embed\Includes;
 
-use Lib\Embed\Interfaces\IEmbedConfigurator;
+use App\Lib\Embed\Interfaces\IEmbedConfigurator;
 
 /**
  * Class EmbedConfigurator
@@ -10,7 +10,7 @@ use Lib\Embed\Interfaces\IEmbedConfigurator;
  * This class is an implementation of the IEmbedConfigurator interface.
  * It provides methods to get, set, and parse the configuration array for the embed.
  *
- * @package Lib\Embed\Includes
+ * @package App\Lib\Embed\Includes
  */
 class EmbedConfigurator implements IEmbedConfigurator
 {

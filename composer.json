@@ -1,12 +1,14 @@
 {
-    "name": "vulcanphp/hyper",
+    "name": "tinymvc/tinymvc",
     "type": "project",
-    "description": "Sweet and MVT Based Php Tiny Web Framework",
-    "keywords": ["vulcanphp", "hyper", "mvt", "web framework", "php framework"],
+    "description": "TinyMvc is a minimalist PHP framework to craft blazing-fast RESTful APIs and modern web apps.",
+    "keywords": ["shahinmoyshan", "tinymvc", "tinycore", "mvc", "web framework", "php framework", "framework"],
     "license": "MIT",
     "require": {
         "php": ">=8.2",
-        "vulcanphp/hyper-core": "^1.0"
+        "phpmailer/phpmailer": "^6.9",
+        "tinymvc/tinycore": "^1.0",
+        "voku/portable-ascii": "^2.0"
     },
     "authors": [
         {
@@ -16,14 +18,18 @@
     ],
     "autoload": {
         "psr-4": {
-            "Models\\": "./app/Models",
-            "Views\\": "./app/Views",
-            "Middlewares\\": "./app/Middlewares",
-            "Lib\\": "./app/Lib",
-            "Providers\\": "./app/Providers"
+            "App\\": "./app"
         },
         "files": [
-            "./bootstrap/functions.php"
+            "./app/helpers.php"
+        ]
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "@php -r \"file_exists('env.php') || copy('env.example.php', 'env.php');\""
+        ],
+        "post-create-project-cmd": [
+            "@php spark key:generate"
         ]
     },
     "config": {

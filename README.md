@@ -16,66 +16,32 @@ CoPlay is a free PHP application that brings the world of movies, TV series, ani
 - **User-Friendly Interface:** Navigate effortlessly with our super slim, intuitive and user-friendly interface.
 - **Free Access:** No subscriptions, no hidden fees – CoPlay provides free and unlimited access to a treasure trove of entertainment.
 
-## Getting Started
 
+## Getting Started
 1. **Download CoPlay:** [CoPlay Latest Version](https://github.com/vulcanphp/coplay/releases/latest)
 2. **Unzip:** After downloading the CoPlay zip extract the source files on you project root directory.
-3. **Configure:** Go to *bootstrap/env.php* and modify these following configuration. 
+3. **Install:** Run the following spark commands to create a *env.php* file and generate a app key. 
     ```php
-    # bootstrap/env.php
-    return [
-        // TMDB API key
-        'TMDB_API_KEY' => '{PAST_YOUR_TMDB_API_HERE}', // Get your TMDB API key from https://www.themoviedb.org
+    // create a env.php file
+    php spark config:copy
 
-        // Site general settings
-        'cms' => [
-            'title' => '{YOUR_SITE_TITLE}', // Site title
-            'tagline' => '{YOUR_SITE_TAGLINE}', // Site tagline
-            'intro' => '{YOUR_SITE_INTRO_HEADING}', // Site intro
-            'description' => '{YOUR_SITE_DESCRIPTION}', // Site description
-            'disclaimer' => '{YOUR_FOOTER_DISCLAIMER_TEXT}', // Site disclaimer notice
-            'copyright' => '{YOUR_COPYRIGHT_TEXT}', // Site copyright text
-
-            // Color settings
-            'color' => [
-                // available colors: https://tailwindcss.com/docs/colors
-                'primary' => 'gray', // Primary color (Background and Text)
-                'accent' => 'amber', // Accent/Brand color
-            ],
-
-            // Site Features
-            'features' => [
-                'auto_embed' => true, // Enable Auto Embeds support
-                'auto_embed_update' => true, // Enable Auto Embeds Update
-                'api' => true, // Enable Public API support
-            ],
-        ],
-    ];
+    // generate application encryption key
+    php spark key:generate
    ```
-4. **Start the Application:**
+4. **Configuation:** open env.php file and replace TMDB Api Key and also theme and CMS settings.
+5. **Start the Application:**
     - **Production Server:** For Apache Server Just Hit your domain and it will open the CoPlay Application.
     - **Development Server:**
     ```bash
     # root directory
 
-    php -S localhost:8080 -t public
+    php spark serve
    ```
-   [learn more](https://github.com/vulcanphp/hyper)
+   [learn more about the core](https://tinymvc.github.io)
 
-**Note:** For Non-Apache Production Server, Make Sure Your Server Redirect all Http Request to public/index.php file.
-
-## Support CoPlay
-
-If you find this project helpful and would like to support its continued development, consider [buying me a coffee](https://www.buymeacoffee.com/vulcandev). Your contribution helps me maintain the project, and dedicate more time to enhancing its features.
-
-### Hire for Freelance Work:
-- [Fiverr](https://www.fiverr.com/vulcanphp)
-- [Website](https://evolesoft.com/contact)
-- *WhatsApp*: +880 1969467747
-- *Email*: shahin.moyshan2@gmail.com
+**Note:** For Non-Apache Production Server, Make Sure Your Server Redirect all Http Request to public folder.
 
 ## Report an Issue
-
 For additional support, feel free to [open a new issue](https://github.com/vulcanphp/coplay/issues) with a detailed description of the problem you are facing. I will be happy to assist you.
 
 Enjoy your entertainment journey with CoPlay!

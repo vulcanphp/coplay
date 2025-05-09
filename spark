@@ -1,0 +1,23 @@
+#!/usr/bin/env php
+<?php
+
+// Load the composer autoloader
+require __DIR__ . '/vendor/autoload.php';
+
+use Spark\Container;
+use Spark\Foundation\Providers\CommandsServiceProvider;
+
+/** @var \Spark\Foundation\Application $app */
+$app = require_once __DIR__ . '/bootstrap/app.php';
+
+$app->withContainer(function (Container $container) {
+    $container->addServiceProvider(new CommandsServiceProvider);
+});
+
+$app->withCommands(function () {
+    require __DIR__ . '/routes/commands.php';
+});
+
+$app->handleCommand(); // Run the application
+
+exit;
