@@ -125,7 +125,7 @@ class HomeController
 
         // If a slug is provided, render a single movie page
         if ($slug !== null) {
-            $id = substr($slug, strrpos($slug, '-') + 1);
+            $id = Str::afterLast($slug, '-');
             $movie = $this->findOrFail($id, 'movie');
             // Add similar movies to the view model
             $viewModel->addToCollection(
@@ -182,7 +182,7 @@ class HomeController
 
         // If a slug is provided, render a specific TV show page
         if ($slug !== null) {
-            $id = substr($slug, strrpos($slug, '-') + 1);
+            $id = Str::afterLast($slug, '-');
             $tv = $this->findOrFail($id, 'tv');
             // Add similar TV shows to the view model
             $viewModel->addToCollection(

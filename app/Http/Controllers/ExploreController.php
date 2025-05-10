@@ -30,9 +30,9 @@ class ExploreController
     {
         return $this->explore(
             $type,
-            ['with_genres' => substr($slug, strrpos($slug, '-') + 1)],
+            ['with_genres' => Str::afterLast($slug, '-')],
             Str::headline(
-                substr($slug, 0, strrpos($slug, '-'))
+                Str::beforeLast($slug, '-')
             )
         );
     }
@@ -46,7 +46,7 @@ class ExploreController
      */
     public function language($type, $language)
     {
-        $code = substr($language, strrpos($language, '-') + 1);
+        $code = Str::afterLast($language, '-');
 
         return $this->explore(
             $type,
@@ -66,7 +66,7 @@ class ExploreController
      */
     public function country($type, $country)
     {
-        $code = substr($country, strrpos($country, '-') + 1);
+        $code = Str::afterLast($country, '-');
 
         return $this->explore(
             $type,
@@ -88,9 +88,9 @@ class ExploreController
     {
         return $this->explore(
             $type,
-            ['with_companies' => substr($slug, strrpos($slug, '-') + 1)],
+            ['with_companies' => Str::afterLast($slug, '-')],
             Str::headline(
-                substr($slug, 0, strrpos($slug, '-'))
+                Str::beforeLast($slug, '-')
             )
         );
     }
@@ -106,9 +106,9 @@ class ExploreController
     {
         return $this->explore(
             $type,
-            ['with_networks' => substr($slug, strrpos($slug, '-') + 1)],
+            ['with_networks' => Str::afterLast($slug, '-')],
             Str::headline(
-                substr($slug, 0, strrpos($slug, '-'))
+                Str::beforeLast($slug, '-')
             )
         );
     }
@@ -173,7 +173,7 @@ class ExploreController
         // Retrieve the person's information with their combined credits.
         $cache = cache('tmdb.home');
         $client = TmdbClient::create('movie');
-        $result = $client->request('person/' . substr($slug, strrpos($slug, '-') + 1), ['append_to_response' => 'combined_credits']);
+        $result = $client->request('person/' . Str::afterLast($slug, '-'), ['append_to_response' => 'combined_credits']);
 
         // Create a new TmdbCollection with the movie genre data cached by the home page.
         $viewModel = new TmdbCollection(

@@ -22,6 +22,9 @@ CoPlay is a free PHP application that brings the world of movies, TV series, ani
 2. **Unzip:** After downloading the CoPlay zip extract the source files on you project root directory.
 3. **Install:** Run the following spark commands to create a *env.php* file and generate a app key. 
     ```php
+    // Install dependencies 
+    composer install
+
     // create a env.php file
     php spark config:copy
 

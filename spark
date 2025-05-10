@@ -14,10 +14,6 @@ $app->withContainer(function (Container $container) {
     $container->addServiceProvider(new CommandsServiceProvider);
 });
 
-$app->withCommands(function () {
-    require __DIR__ . '/routes/commands.php';
-});
-
 $app->handleCommand(); // Run the application
 
 exit;

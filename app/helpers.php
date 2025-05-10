@@ -27,6 +27,11 @@ function cms(string $key, $default = null)
     return $cms[$key] ?? $default;
 }
 
+/**
+ * Return the Tailwind Css Helper Class from Container.
+ * 
+ * @return \App\Lib\TailwindHelper
+ */
 function tailwind()
 {
     return get(TailwindHelper::class);

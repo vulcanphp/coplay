@@ -12,5 +12,4 @@
 return [
     // CSRF protection middleware
     'csrf' => \App\Http\Middlewares\CsrfProtectionMiddleware::class,
-    'cors' => \App\Http\Middlewares\CorsControlMiddleware::class,
 ];
