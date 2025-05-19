@@ -2,6 +2,8 @@
 
 namespace App\Lib\Tmdb\Interfaces;
 
+use ArrayAccess;
+
 /**
  * Interface ITmdbClient
  * @package App\Lib\Tmdb\Interfaces
@@ -55,9 +57,9 @@ interface ITmdbClient
      *
      * @param string $endpoint The endpoint to request.
      * @param array $params Optional parameters to refine the search.
-     * @return array The search results as an array.
+     * @return ArrayAccess The search results as an array.
      */
-    public function send(string $endpoint, array $params = []): array;
+    public function send(string $endpoint, array $params = []): ArrayAccess;
 
     /**
      * Get the genres.

@@ -4,6 +4,7 @@ namespace App\Lib\Tmdb;
 
 use App\Lib\Tmdb\Exceptions\TmdbClientException;
 use App\Lib\Tmdb\Interfaces\ITmdbClient;
+use ArrayAccess;
 use Spark\Utils\Http;
 
 /**
@@ -87,7 +88,7 @@ class TmdbClient implements ITmdbClient
         return $this->send(
             sprintf('/search/%s', $this->type),
             $args
-        )['body'];
+        )->json();
     }
 
     /**
@@ -102,7 +103,7 @@ class TmdbClient implements ITmdbClient
         return $this->send(
             sprintf('/discover/%s', $this->type),
             $args
-        )['body'];
+        )->json();
     }
 
     /**
@@ -115,7 +116,7 @@ class TmdbClient implements ITmdbClient
     {
         return $this->send(
             sprintf('/find/%s?external_source=imdb_id', $id)
-        )['body']["{$this->type}_results"][0]['id'] ?? null;
+        )->json()["{$this->type}_results"][0]['id'] ?? null;
     }
 
     /**
@@ -131,7 +132,7 @@ class TmdbClient implements ITmdbClient
         return $this->send(
             sprintf('/%s', $path),
             $args
-        )['body'];
+        )->json();
     }
 
     /**
@@ -265,7 +266,7 @@ class TmdbClient implements ITmdbClient
         return $this->send(
             sprintf('/%s/%s', $this->type, $id),
             $args
-        )['body'];
+        )->json();
     }
 
     /**
@@ -281,7 +282,7 @@ class TmdbClient implements ITmdbClient
     {
         return $this->send(
             sprintf('/%s/%s/season/%s', $this->type, $id, $season)
-        )['body']['episodes'] ?? [];
+        )->json()['episodes'] ?? [];
     }
 
     /**
@@ -289,12 +290,12 @@ class TmdbClient implements ITmdbClient
      *
      * @param string $endpoint The endpoint to request.
      * @param array $params The optional parameters to pass with the request.
-     * @return array The response as an array with the following keys:
+     * @return ArrayAccess The response as an array with the following keys:
      *     - status: The HTTP status code of the response.
      *     - body: The response body as an array.
      * @throws TmdbClientException If the request fails.
      */
-    public function send(string $endpoint, array $params = []): array
+    public function send(string $endpoint, array $params = []): ArrayAccess
     {
         $resp = get(Http::class)
             // Set the Accept header to JSON
@@ -307,12 +308,9 @@ class TmdbClient implements ITmdbClient
             ->get('http://api.themoviedb.org/3/' . trim($endpoint, '/'), $params);
 
         // If the request failed, throw an exception
-        if ($resp['status'] !== 200) {
-            throw new TmdbClientException('Tmdb Client Error: ' . $resp['body'], $resp['status']);
+        if (!$resp->isSuccess()) {
+            throw new TmdbClientException('Tmdb Client Error: ' . $resp->text(), $resp->status);
         }
-
-        // Decode the response body as JSON
-        $resp['body'] = json_decode($resp['body'], true);
 
         // Return the response
         return $resp;
